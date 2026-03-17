@@ -3710,7 +3710,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 <!-- Register Service Worker -->
 <script type='text/javascript'>
 //<![CDATA[
-"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("https://ilmualam.github.io/pwa/sw.js",{scope:"/"}).then(e=>console.log("✅ SW scope:",e.scope)).catch(e=>console.error("❌ SW failed:",e))},{once:!0,passive:!0});
+"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("https://ilmualam.pages.dev/sw.js",{scope:"/"}).then(e=>console.log("✅ SW scope:",e.scope)).catch(e=>console.error("❌ SW failed:",e))},{once:!0,passive:!0});
 //]]>
 </script>
 <script>
@@ -3738,14 +3738,16 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
   function getCache(key){try{const v=localStorage.getItem(cacheKey(key));if(!v) return null;const d=JSON.parse(v);if(Date.now()-d.ts>QuranCacheTTL) return null;return d.v;}catch(e){return null;}}
   function setCache(key,val){try{localStorage.setItem(cacheKey(key),JSON.stringify({ts:Date.now(),v:val}));}catch(e){}}
   async function fetchJson(url){const res=await fetch(url);if(!res.ok) throw new Error(res.statusText);return res.json();}
-  async function getSurah(number,reciter){const edition=QuranReciters[reciter]||QuranReciters.alafasy;const key=`surah_${number}_${edition}`;const cached=getCache(key);if(cached) return cached;const data=await fetchJson(`${QuranAPI}/surah/${number}/${edition}`);setCache(key,data);return data;}
+  async function getSurah(number,reciter){const edition=QuranReciters[reciter]||QuranReciters.alafasy;const key=`surah_${number}_${edition}`;const cached=getCache(key);if(cached) return cached;try{const data=await fetchJson(`${QuranAPI}/surah/${number}/${edition}`);setCache(key,data);return data;}catch(e){console.warn("Al Quran Cloud failed, trying Tanzil fallback:",e);const fallbackUrl=`https://cdn.jsdelivr.net/npm/tanzil@latest/quran/uthmani/${number}.json`;const fallbackData=await fetchJson(fallbackUrl);const data={data:{ayahs:fallbackData.ayahs.map((a,i)=>({numberInSurah:i+1,text:a}))}};setCache(key,data);return data;}}
   async function getAyah(number,ayah,reciter){const data=await getSurah(number,reciter);return data.data.ayahs.find(a=>a.numberInSurah==ayah);}
   async function playAyah(number,ayah,reciter){try{const ayahData=await getAyah(number,ayah,reciter);if(!ayahData||!ayahData.audio) throw new Error("Audio not found");let audio=document.getElementById("quran-audio-player");if(!audio){audio=document.createElement("audio");audio.id="quran-audio-player";audio.controls=true;audio.style.display="none";document.body.appendChild(audio);}audio.src=ayahData.audio;await audio.play();return audio;}catch(e){console.warn("Quran audio error:",e);throw e;}}
   function renderSurah(number,container,reciter){const el=typeof container==="string"?document.querySelector(container):container;if(!el) return;getSurah(number,reciter).then(data=>{const html=data.data.ayahs.map(a=>`<div class="quran-ayah" data-surah="${number}" data-ayah="${a.numberInSurah}"><div class="quran-ayah-number">${a.numberInSurah}</div><div class="quran-ayah-text">${a.text}</div></div>`).join("");el.innerHTML=html;}).catch(()=>{if(el) el.innerHTML='<div class="quran-error">Tidak dapat memuat Al-Quran. Sila cuba lagi.</div>';});}
-  window.Quran={reciters:QuranReciters,getSurah,getAyah,playAyah,renderSurah};
+  function createPlayer(container,surah,ayah){const el=typeof container==="string"?document.querySelector(container):container;if(!el) return;const html=`<div class="quran-player"><select class="quran-reciter"><option value="alafasy">Mishary Rashid Alafasy</option><option value="maher">Maher Al Mueaqly</option><option value="mishary">Mishary Rashid (Alt)</option><option value="minshawi">Minshawi</option><option value="ayyub">Ayyub</option></select><button class="quran-play-btn btn">Play Ayah ${ayah}</button></div>`;el.innerHTML=html;const select=el.querySelector('.quran-reciter'),btn=el.querySelector('.quran-play-btn');btn.onclick=()=>playAyah(surah,ayah,select.value).catch(e=>alert('Audio error: '+e.message));}
+  window.Quran={reciters:QuranReciters,getSurah,getAyah,playAyah,renderSurah,createPlayer};
   window.getAyah=async function(number,ayah,reciter){return window.Quran.getAyah(number,ayah,reciter);};
   window.playAyah=async function(number,ayah,reciter){return window.Quran.playAyah(number,ayah,reciter);};
   window.renderSurah=window.Quran.renderSurah;
+  window.createQuranPlayer=window.Quran.createPlayer;
 })();
 //]]>
 </script>
