@@ -1112,6 +1112,22 @@ ins.adsbygoogle-noablate[data-anchor-shown="true"]{z-index:990!important}
 .post-body img {aspect-ratio:auto; max-width:100%; height:auto; content-visibility:auto;}
 .thumbnail {contain:layout style paint; content-visibility:auto; contain-intrinsic-size:72px 72px;}
 .is-single .entry-thumbnail .thumbnail, .is-post .post-body img:first-of-type {fetchpriority:high;}
+/* --- CLS Prevention for Sulvo/Ad units --- */
+.demand-supply{display:block;min-height:100px;width:100%}
+.rr-container .demand-supply{min-height:280px}
+ins.adsbygoogle[data-ad-format="auto"]{display:block;min-height:100px}
+ins.adsbygoogle[data-ad-slot]{display:block}
+/* --- Reading Time display --- */
+.ia-reading-time{display:inline-flex;align-items:center;gap:0.25rem;font-size:0.75rem;color:var(--meta-color)}
+.ia-reading-time:before{content:"\f64b";font-family:"bootstrap-icons";font-size:0.8rem}
+/* --- Visual Breadcrumb --- */
+.ia-breadcrumb{padding:0.75rem 0 0.5rem;font-size:0.8rem}
+.ia-breadcrumb__list{display:flex;flex-wrap:wrap;align-items:center;gap:0.25rem 0.375rem;list-style:none;padding:0;margin:0}
+.ia-breadcrumb__item{display:flex;align-items:center;gap:0.375rem;color:var(--meta-color)}
+.ia-breadcrumb__item:not(:last-child):after{content:"/";opacity:.5}
+.ia-breadcrumb__link{color:var(--meta-color)}
+.ia-breadcrumb__link:hover{color:var(--accent-color)}
+.ia-breadcrumb__item--current{color:var(--title-color);font-weight:500}
 ]]></b:skin>
 </b:if>
 <b:if cond='data:view.isLayoutMode'>
@@ -1238,7 +1254,7 @@ body#layout #hidden{display:none!important}
       <meta expr:content='&quot;text/html; charset=&quot; + data:blog.encoding' http-equiv='Content-Type'/>
       <meta content='width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover' name='viewport'/>
       <b:if cond='!data:isFeed'>
-        <!-- DNS Prefetch -->
+        <!-- DNS Prefetch &amp; Preconnect -->
     		<link href='//fonts.googleapis.com' rel='preconnect'/>
     		<link crossorigin='anonymous' href='//fonts.gstatic.com' rel='preconnect'/>
     		<link crossorigin='anonymous' href='//cdnjs.cloudflare.com' rel='preconnect'/>
@@ -1248,6 +1264,11 @@ body#layout #hidden{display:none!important}
     		<link href='//3.bp.blogspot.com' rel='dns-prefetch'/>
     		<link href='//4.bp.blogspot.com' rel='dns-prefetch'/>
     		<link href='//www.blogger.com' rel='dns-prefetch'/>
+    		<link href='//cdn.jsdelivr.net' rel='dns-prefetch'/>
+    		<link href='//api.alquran.cloud' rel='dns-prefetch'/>
+    		<link href='//server8.mp3quran.net' rel='dns-prefetch'/>
+    		<link href='//pagead2.googlesyndication.com' rel='dns-prefetch'/>
+    		<link href='//www.googletagmanager.com' rel='dns-prefetch'/>
   		</b:if>
       <!-- Site Info -->
 		<title>
@@ -1290,6 +1311,13 @@ body#layout #hidden{display:none!important}
         <!-- Bootstrap Icons -->
         <link as='style' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css' onload='this.onload=null;this.rel=&apos;stylesheet&apos;' rel='preload'/>
         <noscript><link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css' rel='stylesheet'/></noscript>
+        <!-- Pagination SEO: rel next/prev -->
+        <b:if cond='data:navigation.hasOlderPageUrl'>
+          <link expr:href='data:navigation.olderPageUrl' rel='next'/>
+        </b:if>
+        <b:if cond='data:navigation.hasNewerPageUrl'>
+          <link expr:href='data:navigation.newerPageUrl' rel='prev'/>
+        </b:if>
         <!-- Site Styles -->
       </b:if>
     </b:includable>
@@ -1330,7 +1358,7 @@ body#layout #hidden{display:none!important}
         <b:tag name='script' type='text/javascript'>const noThumbnail = &quot;<b:eval expr='resizeImage(data:sourceUrl, 72, &quot;1:1&quot;)'/>&quot;;</b:tag>
         <b:elseif cond='data:widget.sectionId == &quot;main-logo&quot;'/>
         <a class='logo-img' expr:href='data:blog.homepageUrl.canonical' rel='home'>
-          <img expr:alt='data:blog.title' expr:data-src='data:sourceUrl' expr:height='data:height' expr:src='data:sourceUrl' expr:width='data:width' loading='lazy'>
+          <img expr:alt='data:blog.title' expr:data-src='data:sourceUrl' expr:height='data:height' expr:src='data:sourceUrl' expr:width='data:width' fetchpriority='high' loading='eager'>
             <b:attr cond='data:link and (data:link contains &quot;googleusercontent.com&quot;)' expr:value='data:link' name='data-dark-src'/>
           </img>
           <b:if cond='data:view.isMultipleItems'><h1 id='h1-off'><data:blog.title/></h1></b:if>
@@ -1854,6 +1882,7 @@ body#layout #hidden{display:none!important}
             <div class='entry-byline'>
               <b:include cond='data:allBylineItems.author' data='post' name='postAuthor'/>
               <b:include cond='data:allBylineItems.timestamp' data='post' name='postTimestamp'/>
+              <b:if cond='data:view.isPost'><span aria-label='Masa bacaan' class='ia-reading-time'/></b:if>
             </div>
           </div>
           <b:if cond='data:allBylineItems.share'>
@@ -1958,8 +1987,30 @@ body#layout #hidden{display:none!important}
     </b:includable>
     <b:includable id='postBodySnippet' var='post'/>
     <b:includable id='postBreadcrumbs' var='post'>
-      <!-- Post Breadcrumbs -->
-      <nav id='breadcrumb'><a class='home' expr:href='data:blog.homepageUrl.canonical'><data:messages.home/></a><b:if cond='data:post.labels'><i class='sep'/><a class='label' expr:href='data:post.labels.first.url.canonical'><data:post.labels.first.name/></a></b:if></nav>
+      <!-- Post Breadcrumbs with Microdata -->
+      <nav aria-label='Breadcrumb' class='ia-breadcrumb' itemscope='itemscope' itemtype='https://schema.org/BreadcrumbList'>
+        <ol class='ia-breadcrumb__list'>
+          <li class='ia-breadcrumb__item' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+            <a class='ia-breadcrumb__link' expr:href='data:blog.homepageUrl.canonical' itemprop='item'><span itemprop='name'><data:messages.home/></span></a>
+            <meta content='1' itemprop='position'/>
+          </li>
+          <b:if cond='data:post.labels'>
+            <li class='ia-breadcrumb__item' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+              <a class='ia-breadcrumb__link' expr:href='data:post.labels.first.url.canonical' itemprop='item'><span itemprop='name'><data:post.labels.first.name/></span></a>
+              <meta content='2' itemprop='position'/>
+            </li>
+            <li class='ia-breadcrumb__item ia-breadcrumb__item--current' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+              <span itemprop='name'><data:post.title/></span>
+              <meta content='3' itemprop='position'/>
+            </li>
+          <b:else/>
+            <li class='ia-breadcrumb__item ia-breadcrumb__item--current' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+              <span itemprop='name'><data:post.title/></span>
+              <meta content='2' itemprop='position'/>
+            </li>
+          </b:if>
+        </ol>
+      </nav>
     </b:includable>
     <b:includable id='postCategory' var='post'>
       <!-- Post Category -->
@@ -2052,19 +2103,6 @@ body#layout #hidden{display:none!important}
 				<data:post.labels.first.url.canonical.jsonEscaped/>&quot; }, { &quot;@type&quot;: &quot;ListItem&quot;, &quot;position&quot;: 3, &quot;name&quot;: &quot;
 				<data:post.title.jsonEscaped/>&quot; } <b:else/>, { &quot;@type&quot;: &quot;ListItem&quot;, &quot;position&quot;: 2, &quot;name&quot;: &quot;
 				<data:post.title.jsonEscaped/>&quot; } </b:if> ] } ] } </script>
-	</b:if>
-	<b:if cond='data:blog.searchLabel'>
-		<script type='application/ld+json'> { &quot;@context&quot;: &quot;https://schema.org&quot;, &quot;@type&quot;: &quot;CollectionPage&quot;, &quot;@id&quot;: &quot;
-			<data:blog.url.canonical.jsonEscaped/>&quot;, &quot;name&quot;: &quot;Artikel
-			<data:blog.searchLabel.jsonEscaped/> - Ilmu Alam&quot;, &quot;description&quot;: &quot;Koleksi artikel kategori
-			<data:blog.searchLabel.jsonEscaped/> dari Ilmu Alam&quot;, &quot;url&quot;: &quot;
-			<data:blog.url.canonical.jsonEscaped/>&quot;, &quot;isPartOf&quot;: { &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot; }, &quot;inLanguage&quot;: &quot;ms-MY&quot;, &quot;mainEntity&quot;: { &quot;@type&quot;: &quot;ItemList&quot;, &quot;itemListOrder&quot;: &quot;https://schema.org/ItemListOrderDescending&quot;, &quot;numberOfItems&quot;:
-			<data:posts.size/>, &quot;itemListElement&quot;: [
-			<b:loop values='data:posts' var='post'> { &quot;@type&quot;: &quot;ListItem&quot;, &quot;position&quot;: <b:eval expr='data:i + 1'/>, &quot;url&quot;: &quot;
-				<data:post.url.canonical.jsonEscaped/>&quot;, &quot;name&quot;: &quot;
-				<data:post.title.jsonEscaped/>&quot; }
-				<b:if cond='not data:post.isLast'>,</b:if>
-			</b:loop> ] } } </script>
 	</b:if>
 </b:includable>
     <b:includable id='postMetadataJSONImage'/>
@@ -2856,6 +2894,7 @@ body#layout #hidden{display:none!important}
             <div class='entry-byline'>
               <b:include cond='data:allBylineItems.author' data='post' name='postAuthor'/>
               <b:include cond='data:allBylineItems.timestamp' data='post' name='postTimestamp'/>
+              <b:if cond='data:view.isPost'><span aria-label='Masa bacaan' class='ia-reading-time'/></b:if>
             </div>
           </div>
           <b:if cond='data:allBylineItems.share'>
@@ -2960,8 +2999,30 @@ body#layout #hidden{display:none!important}
     </b:includable>
               <b:includable id='postBodySnippet' var='post'/>
               <b:includable id='postBreadcrumbs' var='post'>
-      <!-- Post Breadcrumbs -->
-      <nav id='breadcrumb'><a class='home' expr:href='data:blog.homepageUrl.canonical'><data:messages.home/></a><b:if cond='data:post.labels'><i class='sep'/><a class='label' expr:href='data:post.labels.first.url.canonical'><data:post.labels.first.name/></a></b:if></nav>
+      <!-- Post Breadcrumbs with Microdata -->
+      <nav aria-label='Breadcrumb' class='ia-breadcrumb' itemscope='itemscope' itemtype='https://schema.org/BreadcrumbList'>
+        <ol class='ia-breadcrumb__list'>
+          <li class='ia-breadcrumb__item' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+            <a class='ia-breadcrumb__link' expr:href='data:blog.homepageUrl.canonical' itemprop='item'><span itemprop='name'><data:messages.home/></span></a>
+            <meta content='1' itemprop='position'/>
+          </li>
+          <b:if cond='data:post.labels'>
+            <li class='ia-breadcrumb__item' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+              <a class='ia-breadcrumb__link' expr:href='data:post.labels.first.url.canonical' itemprop='item'><span itemprop='name'><data:post.labels.first.name/></span></a>
+              <meta content='2' itemprop='position'/>
+            </li>
+            <li class='ia-breadcrumb__item ia-breadcrumb__item--current' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+              <span itemprop='name'><data:post.title/></span>
+              <meta content='3' itemprop='position'/>
+            </li>
+          <b:else/>
+            <li class='ia-breadcrumb__item ia-breadcrumb__item--current' itemprop='itemListElement' itemscope='itemscope' itemtype='https://schema.org/ListItem'>
+              <span itemprop='name'><data:post.title/></span>
+              <meta content='2' itemprop='position'/>
+            </li>
+          </b:if>
+        </ol>
+      </nav>
     </b:includable>
               <b:includable id='postCategory' var='post'>
       <!-- Post Category -->
@@ -3747,6 +3808,24 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 </script>
 <div class='demand-supply' data-ad='ilmualam.com_sticky_mobile_bottom_mobfloat' data-devices='m:1,t:0,d:0'/>
 <div class='demand-supply' data-ad='ilmualam.com_728x90_sticky_display_bottom_desktop' data-devices='m:0,t:1,d:1'/>
+<!-- Reading Time: auto-inject estimated reading duration on post pages -->
+<script type='text/javascript'>
+//<![CDATA[
+(function(){
+  "use strict";
+  function injectReadingTime(){
+    var body=document.querySelector(".post-body");
+    var el=document.querySelector(".ia-reading-time");
+    if(!body||!el) return;
+    var words=(body.innerText||body.textContent||"").trim().split(/\s+/).filter(function(w){return w.length>0;}).length;
+    var mins=Math.max(1,Math.ceil(words/200));
+    el.textContent=mins+(mins===1?" minit bacaan":" minit bacaan");
+  }
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",injectReadingTime,{once:true,passive:true});}
+  else{injectReadingTime();}
+})();
+//]]>
+</script>
 </body>
 <b:if cond='data:isFeed'>
   <b:eval expr='&quot;--&gt;&lt;/body&gt;&quot;'/>
