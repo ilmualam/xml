@@ -543,14 +543,21 @@
      * Display specific page of posts
      */
     function displayPage(posts, page) {
-        cache.currentPage = page;
+        if (!Array.isArray(posts)) {
+            posts = [];
+        }
+
+        const totalPages = Math.max(1, Math.ceil(posts.length / CONFIG.postsPerPage));
+        const currentPage = Math.min(Math.max(1, Number(page) || 1), totalPages);
+
+        cache.currentPage = currentPage;
         
-        const startIndex = (page - 1) * CONFIG.postsPerPage;
+        const startIndex = (currentPage - 1) * CONFIG.postsPerPage;
         const endIndex = startIndex + CONFIG.postsPerPage;
         const pagePosts = posts.slice(startIndex, endIndex);
 
         renderPosts(pagePosts);
-        renderPagination(posts.length, page);
+        renderPagination(posts.length, currentPage);
 
         // Scroll to top of container
         const container = document.getElementById(CONFIG.containerId);
@@ -566,8 +573,14 @@
         const posts = cache.currentLabel 
             ? cache.posts[cache.currentLabel] 
             : cache.allPosts;
-        
-        displayPage(posts, page);
+        const totalPages = Math.max(1, Math.ceil(posts.length / CONFIG.postsPerPage));
+        const pageNumber = Math.min(Math.max(1, Number(page) || 1), totalPages);
+
+        if (pageNumber === cache.currentPage) {
+            return;
+        }
+
+        displayPage(posts, pageNumber);
     }
 
     // ═══════════════════════════════════════════════════════════════════
