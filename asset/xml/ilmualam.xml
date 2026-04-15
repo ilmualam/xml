@@ -1532,7 +1532,7 @@ body#layout #hidden{display:none!important}
       </b:if>
     </b:includable>
     <b:includable id='post-thumbnail'>
-<b:if cond='not data:view.isSingleItem'>
+<b:if cond='not data:post.url.canonical contains &quot;.html&quot;'>
 	<b:tag class='entry-thumbnail' expr:name='data:hasLink == false ? &quot;div&quot; : &quot;a&quot;'> <b:attr cond='data:hasLink != false' expr:value='data:post.url.canonical' name='href'/> <b:include cond='data:showCategory == true' name='post-category'/>
 		<b:if cond='data:showCounter == true'> <span class='entry-count'><b:eval expr='data:i + 1'/></span> </b:if>
 		<div class='thumbnail' expr:aria-label='data:post.title.escaped' expr:data-alt='data:post.title.escaped' expr:data-src='data:post.featuredImage ? (data:post.featuredImage.isYouTube ? resizeImage(data:post.featuredImage.youtubeMaxResDefaultUrl.jsonEscaped, 72, &quot;1:1&quot;) : resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;)) : &quot;https://resources.blogblog.com/img/blank.gif&quot;' role='img'/> <b:tag cond='data:post.featuredImage.isYouTube and data:showIcon != false' expr:class='data:iconSize ? (&quot;yt-img:x&quot; + data:iconSize) : &quot;yt-img&quot;' name='div'/> </b:tag>
