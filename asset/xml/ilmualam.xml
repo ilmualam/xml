@@ -1695,12 +1695,12 @@ body#layout #hidden{display:none!important}
             <ul class='share-b social color'>
               <li class='facebook'><a class='bi-facebook window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:shareUrl' rel='nofollow noopener' title='Facebook'/></li>
               <li class='twitter'><a class='bi-twitter window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:shareUrl + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='X (Twitter)'/></li>
-              <li class='whatsapp'><a class='bi-whatsapp window-open' expr:href='&quot;https://wa.me/?text=&quot; + data:shareTitle.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='WhatsApp'/></li>
-              <li class='telegram'><a class='bi-telegram window-open' expr:href='&quot;https://t.me/share/url?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='Telegram'/></li>
+              <li class='whatsapp'><a class='bi-whatsapp' expr:href='&quot;https://wa.me/?text=&quot; + data:shareTitle.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'/></li>
+              <li class='telegram'><a class='bi-telegram' expr:href='&quot;https://t.me/share/url?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' target='_blank' title='Telegram'/></li>
               <li class='linkedin'><a class='bi-linkedin window-open' expr:href='&quot;https://www.linkedin.com/shareArticle?mini=true&amp;url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;title=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='LinkedIn'/></li>
               <li class='reddit'><a class='bi-reddit window-open' expr:href='&quot;https://reddit.com/submit?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;title=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='Reddit'/></li>
               <li class='bluesky'><a class='bi-bluesky window-open' expr:href='&quot;https://bsky.app/intent/compose?text=&quot; + data:shareTitle.urlEscaped + &quot;%20&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Bluesky'/></li>
-              <li class='email'><a class='bi-email window-open' expr:href='&quot;mailto:?subject=&quot; + data:shareTitle.urlEscaped + &quot;&amp;body=&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+              <li class='email'><a class='bi-email' expr:href='&quot;mailto:?subject=&quot; + data:shareTitle.urlEscaped + &quot;&amp;body=&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Email'/></li>
             </ul>
           </b:with>
           <div class='modal-footer'>
@@ -2151,8 +2151,8 @@ body#layout #hidden{display:none!important}
           <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
           <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
           <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
-          <li class='whatsapp has-span'><a class='bi-whatsapp sl window-open' expr:href='&quot;https://wa.me/?text=&quot; + data:post.title.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='WhatsApp'><span>WhatsApp</span></a></li>
-          <li class='email'><a class='bi-email sl window-open' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.title.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
+          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
           <li class='show-more'><button class='sl' expr:aria-label='data:messages.showMore'/></li>
         </ul>
       </div>
@@ -3240,8 +3240,8 @@ body#layout #hidden{display:none!important}
           <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
           <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
           <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
-          <li class='whatsapp has-span'><a class='bi-whatsapp sl window-open' expr:href='&quot;https://wa.me/?text=&quot; + data:post.title.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='WhatsApp'><span>WhatsApp</span></a></li>
-          <li class='email'><a class='bi-email sl window-open' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.title.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
+          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
           <li class='show-more'><button class='sl' expr:aria-label='data:messages.showMore'/></li>
         </ul>
       </div>
@@ -3869,6 +3869,96 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 })();
 //]]>
 </script>
+<!-- Live Search: JSONP override using official Blogger feed API -->
+<script type='text/javascript'>
+//<![CDATA[
+(function($){
+  "use strict";
+  $(function(){
+    var $modal=$(".main-search");
+    if(!$modal.length) return;
+    var $input=$modal.find("input[name='q'],input.input");
+    var $results=$modal.find(".search-results");
+    var $sc=$results.parent();
+    var $va=$("#search-view-all");
+    var timer,lastQ,cbCount=0;
+
+    // Replace input handler set by main script
+    $input.off("input").on("input",function(){
+      clearTimeout(timer);
+      var q=$input.val().trim();
+      if(!q){
+        lastQ="";
+        $results.html("").removeClass("scroll");
+        $sc.removeClass("visible");
+        $modal.removeClass("loading");
+        $va.attr("href","/search").text("Lihat semua hasil");
+        return;
+      }
+      $va.attr("href","/search?q="+encodeURIComponent(q))
+         .text("Lihat semua hasil untuk “"+q+"”");
+      timer=setTimeout(function(){iaSearch(q);},500);
+    });
+
+    function iaSearch(q){
+      if(q===lastQ) return;
+      lastQ=q;
+      $results.removeClass("scroll");
+      $modal.addClass("loading");
+      $sc.addClass("visible");
+
+      var cbName="ia_srch_"+Date.now()+(++cbCount);
+      var s=document.createElement("script");
+      var done=false;
+
+      function cleanup(){
+        if(s.parentNode) s.parentNode.removeChild(s);
+        delete window[cbName];
+      }
+
+      window[cbName]=function(data){
+        done=true;
+        cleanup();
+        $modal.removeClass("loading");
+        var entries=(data.feed&&data.feed.entry)||[];
+        if(!entries.length){
+          $results.html("<span class='error-msg'>"+(typeof pbt!=="undefined"?pbt.noResults:"Tiada hasil ditemui")+"</span>").addClass("scroll");
+          return;
+        }
+        var html="<div class='search-items'>";
+        entries.slice(0,12).forEach(function(en){
+          var title=en.title.$t;
+          var url="";
+          (en.link||[]).forEach(function(l){if(l.rel==="alternate") url=l.href;});
+          var thumb="";
+          if(en.media$thumbnail) thumb=en.media$thumbnail.url.replace(/\/s[0-9]+-c/,"/s160-c");
+          var date="";
+          if(en.published) date=en.published.$t.slice(0,10);
+          html+="<div class='post flex-sb'>";
+          if(thumb) html+="<a class='thumbnail sm' href='"+url+"'><img class='lazy' data-src='"+thumb+"' alt='' height='80' loading='lazy' width='80'/></a>";
+          html+="<div class='post-info flex-col'><a class='entry-title' href='"+url+"'>"+title+"</a>";
+          if(date) html+="<time class='entry-date'>"+date+"</time>";
+          html+="</div></div>";
+        });
+        html+="</div>";
+        $results.html(html).addClass("scroll");
+        if(typeof $.fn.pbtLazy==="function") $results.find(".lazy").pbtLazy({onScroll:false});
+      };
+
+      s.onerror=function(){
+        if(done) return;
+        cleanup();
+        $modal.removeClass("loading");
+        $results.html("<span class='error-msg'>"+(typeof pbt!=="undefined"?pbt.noResults:"Tiada hasil ditemui")+"</span>").addClass("scroll");
+      };
+
+      s.src="/feeds/posts/summary?q="+encodeURIComponent(q)+"&max-results=12&alt=json-in-script&callback="+cbName;
+      document.head.appendChild(s);
+    }
+  });
+})(jQuery);
+//]]>
+</script>
 <!-- Sitemap Engine: auto-activates when #ia-sitemap-posts exists on the page -->
 <script type='text/javascript'>
 //<![CDATA[
@@ -3891,7 +3981,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 
   function getTotalCount(){
     container.innerHTML="<p style='text-align:center;padding:2rem;color:var(--meta-color)'>Memuatkan sitemap...</p>";
-    loadScript(BLOG+"/feeds/posts/summary?max-results=1&alt=json&callback=ia_sm_init");
+    loadScript(BLOG+"/feeds/posts/summary?max-results=1&alt=json-in-script&callback=ia_sm_init");
   }
 
   window.ia_sm_init=function(d){
@@ -3902,7 +3992,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
   function renderPage(p){
     current=p;
     var start=((p-1)*PER_PAGE)+1;
-    loadScript(BLOG+"/feeds/posts/summary?start-index="+start+"&max-results="+PER_PAGE+"&alt=json&callback=ia_sm_render");
+    loadScript(BLOG+"/feeds/posts/summary?start-index="+start+"&max-results="+PER_PAGE+"&alt=json-in-script&callback=ia_sm_render");
   }
 
   window.ia_sm_render=function(d){
