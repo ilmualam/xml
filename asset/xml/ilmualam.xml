@@ -2004,7 +2004,6 @@ body#layout #hidden{display:none!important}
       </b:if>
       <!-- Post Body -->
       <div class='post-body' id='post-body'>
-        <b:attr cond='data:view.isPost and data:post.featuredImage' expr:value='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' name='data-featured-image'/>
         <data:post.body/>
       </div>
       <b:if cond='data:post.body contains &quot;nextPage&quot;'>
@@ -2085,7 +2084,7 @@ body#layout #hidden{display:none!important}
     <b:includable id='postHeader' var='post'>
       <b:if cond='data:view.isPost and data:post.featuredImage'>
         <div class='post-hero'>
-          <img class='post-hero__img' expr:alt='data:post.title' expr:data-featured-image='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
+          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
         </div>
       </b:if>
       <div class='post-info flex-col'>
@@ -2114,10 +2113,102 @@ body#layout #hidden{display:none!important}
     </b:includable>
     <b:includable id='postLocation'/>
 <b:includable id='postMeta' var='post'>
-	<b:if cond='data:view.isPost'>
-		<script type='application/ld+json'>{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@graph&quot;:[{&quot;@type&quot;:&quot;Article&quot;,&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>#article&quot;,&quot;isPartOf&quot;:{&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>&quot;},&quot;headline&quot;:&quot;<data:post.title.jsonEscaped/>&quot;,&quot;description&quot;:&quot;<data:post.snippets.short.jsonEscaped/>&quot;,&quot;image&quot;:{&quot;@type&quot;:&quot;ImageObject&quot;,&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>#primaryimage&quot;,<b:if cond='data:post.featuredImage.isResizable'>&quot;url&quot;:&quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;).jsonEscaped'/>&quot;,&quot;width&quot;:1200,&quot;height&quot;:630<b:else/>&quot;url&quot;:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;,&quot;width&quot;:500,&quot;height&quot;:500</b:if>},&quot;author&quot;:{&quot;@type&quot;:&quot;Person&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#author&quot;,&quot;name&quot;:&quot;<data:post.author.name.jsonEscaped/>&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com/p/about.html&quot;,&quot;jobTitle&quot;:&quot;Islamic Content Creator&quot;},&quot;publisher&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;},&quot;datePublished&quot;:&quot;<data:post.date.iso8601.jsonEscaped/>&quot;,&quot;dateModified&quot;:&quot;<b:eval expr='data:post.lastUpdated.iso8601 ?: data:post.date.iso8601'/>&quot;,&quot;mainEntityOfPage&quot;:{&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>&quot;},&quot;inLanguage&quot;:&quot;ms-MY&quot;<b:if cond='data:post.labels'>,&quot;articleSection&quot;:&quot;<data:post.labels.first.name.jsonEscaped/>&quot;</b:if>},{&quot;@type&quot;:&quot;WebPage&quot;,&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>&quot;,&quot;url&quot;:&quot;<data:post.url.canonical.jsonEscaped/>&quot;,&quot;name&quot;:&quot;<data:post.title.jsonEscaped/>&quot;,&quot;isPartOf&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#website&quot;},&quot;primaryImageOfPage&quot;:{&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>#primaryimage&quot;},&quot;datePublished&quot;:&quot;<data:post.date.iso8601.jsonEscaped/>&quot;,&quot;dateModified&quot;:&quot;<b:eval expr='data:post.lastUpdated.iso8601 ?: data:post.date.iso8601'/>&quot;,&quot;breadcrumb&quot;:{&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>#breadcrumb&quot;},&quot;inLanguage&quot;:&quot;ms-MY&quot;},{&quot;@type&quot;:&quot;BreadcrumbList&quot;,&quot;@id&quot;:&quot;<data:post.url.canonical.jsonEscaped/>#breadcrumb&quot;,&quot;itemListElement&quot;:[{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:1,&quot;name&quot;:&quot;Laman Utama&quot;,&quot;item&quot;:&quot;https://www.ilmualam.com/&quot;}<b:if cond='data:post.labels'>,{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:2,&quot;name&quot;:&quot;<data:post.labels.first.name.jsonEscaped/>&quot;,&quot;item&quot;:&quot;<data:post.labels.first.url.canonical.jsonEscaped/>&quot;},{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:3,&quot;name&quot;:&quot;<data:post.title.jsonEscaped/>&quot;}<b:else/>,{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:2,&quot;name&quot;:&quot;<data:post.title.jsonEscaped/>&quot;}</b:if>]}]}</script>
-	</b:if>
-</b:includable>
+      <b:if cond='data:view.isPost'>
+        <script type='application/ld+json'>
+{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@graph&quot;: [
+    {
+      &quot;@type&quot;: &quot;Article&quot;,
+      &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#article&quot;,
+      &quot;mainEntityOfPage&quot;: {
+        &quot;@type&quot;: &quot;WebPage&quot;,
+        &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;
+      },
+      &quot;headline&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
+      &quot;description&quot;: &quot;<data:post.snippets.short.jsonEscaped/>&quot;,
+      &quot;image&quot;: {
+        &quot;@type&quot;: &quot;ImageObject&quot;,
+        &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#primaryimage&quot;,
+        <b:if cond='data:post.featuredImage.isResizable'>
+        &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;).jsonEscaped'/>&quot;,
+        &quot;width&quot;: 1200,
+        &quot;height&quot;: 630,
+        <b:else/>
+        &quot;url&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;,
+        &quot;width&quot;: 500,
+        &quot;height&quot;: 500,
+        </b:if>
+        &quot;caption&quot;: &quot;<data:post.title.jsonEscaped/>&quot;
+      },
+      &quot;author&quot;: {
+        &quot;@type&quot;: &quot;Person&quot;,
+        &quot;@id&quot;: &quot;https://www.ilmualam.com/#founder&quot;,
+        &quot;name&quot;: &quot;<data:post.author.name.jsonEscaped/>&quot;,
+        &quot;url&quot;: &quot;<data:post.author.profileUrl.jsonEscaped/>&quot;,
+        <b:if cond='data:post.author.authorPhoto.image'>
+        &quot;image&quot;: {
+          &quot;@type&quot;: &quot;ImageObject&quot;,
+          &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.author.authorPhoto.image, 200, &quot;1:1&quot;).jsonEscaped'/>&quot;,
+          &quot;caption&quot;: &quot;<data:post.author.name.jsonEscaped/>&quot;
+        },
+        </b:if>
+        &quot;jobTitle&quot;: &quot;Islamic Content Creator&quot;
+      },
+      &quot;publisher&quot;: {
+        &quot;@id&quot;: &quot;https://www.ilmualam.com/#organization&quot;
+      },
+      &quot;datePublished&quot;: &quot;<data:post.date.iso8601.jsonEscaped/>&quot;,
+      &quot;dateModified&quot;: &quot;<data:post.lastUpdated.iso8601.jsonEscaped/>&quot;,
+      &quot;inLanguage&quot;: &quot;ms-MY&quot;,
+      &quot;isPartOf&quot;: {
+        &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot;
+      },
+      <b:if cond='data:post.labels'>
+      &quot;articleSection&quot;: &quot;<data:post.labels.first.name.jsonEscaped/>&quot;,
+      </b:if>
+      &quot;speakable&quot;: {
+        &quot;@type&quot;: &quot;SpeakableSpecification&quot;,
+        &quot;cssSelector&quot;: [&quot;.post-body p&quot;, &quot;.post-body h2&quot;, &quot;.entry-title&quot;],
+        &quot;xpath&quot;: [
+          &quot;/html/head/title&quot;,
+          &quot;/html/body//article//h1&quot;,
+          &quot;/html/body//article//p[position() &lt; 5]&quot;
+        ]
+      }
+    }
+  ]
+}
+</script>
+      </b:if>
+      <b:if cond='data:blog.searchLabel'>
+<script type='application/ld+json'>
+{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;ItemList&quot;,
+  &quot;name&quot;: &quot;Artikel <data:blog.searchLabel.jsonEscaped/> - Ilmu Alam&quot;,
+  &quot;description&quot;: &quot;Koleksi artikel kategori <data:blog.searchLabel.jsonEscaped/> dari Ilmu Alam&quot;,
+  &quot;url&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>&quot;,
+  &quot;numberOfItems&quot;: <data:posts.size/>,
+  &quot;itemListElement&quot;: [
+    <b:loop values='data:posts' var='post'>
+    {
+      &quot;@type&quot;: &quot;ListItem&quot;,
+      &quot;position&quot;: <b:eval expr='data:i + 1'/>,
+      &quot;url&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;,
+      &quot;name&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
+      <b:if cond='data:post.featuredImage.isResizable'>
+      &quot;image&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 720, &quot;16:9&quot;).jsonEscaped'/>&quot;
+      <b:else/>
+      &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
+      </b:if>
+    }<b:if cond='not data:post.isLast'>,</b:if>
+    </b:loop>
+  ]
+}
+</script>
+</b:if>         
+    </b:includable>
     <b:includable id='postMetadataJSONImage'/>
     <b:includable id='postMetadataJSONPublisher'/>
     <b:includable id='postPagination'/>
@@ -3002,7 +3093,6 @@ body#layout #hidden{display:none!important}
       </b:if>
       <!-- Post Body -->
       <div class='post-body' id='post-body'>
-        <b:attr cond='data:view.isPost and data:post.featuredImage' expr:value='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' name='data-featured-image'/>
         <data:post.body/>
       </div>
       <b:if cond='data:post.body contains &quot;nextPage&quot;'>
@@ -3083,7 +3173,7 @@ body#layout #hidden{display:none!important}
               <b:includable id='postHeader' var='post'>
       <b:if cond='data:view.isPost and data:post.featuredImage'>
         <div class='post-hero'>
-          <img class='post-hero__img' expr:alt='data:post.title' expr:data-featured-image='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
+          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
         </div>
       </b:if>
       <div class='post-info flex-col'>
@@ -3797,7 +3887,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 </script>
 <script type='text/javascript'>
 //<![CDATA[
-!function(){"use strict";function e(e){return(e||"").replace(/^https?:/,"").replace(/\/(?:s\d+(?:-[a-z]+)?|w\d+-h\d+(?:-[a-z]+)?|w\d+-rw|w\d+|s\d+)-[^\/?#]*/g,"").replace(/[?#].*$/,"")}function t(){var t=document.querySelector(".post-hero__img"),i=document.querySelector(".post-body");if(!t||!i) return;var r=t.getAttribute("data-featured-image")||t.getAttribute("src"),o=i.getAttribute("data-featured-image")||r,n=i.querySelector("img");if(!n) return;var a=e(r||o),c=e(n.currentSrc||n.src);if(!a||!c||a!==c) return;var d=n.closest(".separator,figure,p");d&&d.textContent.trim()===n.alt.trim()?d.remove():n.remove()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t,{once:!0,passive:!0}):t()}();
+!function(){"use strict";function e(e){return(e||"").replace(/^https?:/,"").replace(/\/(?:s\d+(?:-[a-z]+)?|w\d+-h\d+(?:-[a-z]+)?|w\d+-rw|w\d+|s\d+)-[^\/?#]*/g,"").replace(/[?#].*$/,"")}function t(){var t=document.querySelector(".post-hero__img"),i=document.querySelector(".post-body img");if(!t||!i) return;var r=e(t.currentSrc||t.src),o=e(i.currentSrc||i.src);if(!r||!o||r!==o) return;var n=i.closest(".separator,figure,p");n&&n.textContent.trim()===i.alt.trim()?n.remove():i.remove()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t,{once:!0,passive:!0}):t()}();
 //]]>
 </script>
 <script type='text/javascript'>
