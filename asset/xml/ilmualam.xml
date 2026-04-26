@@ -2159,7 +2159,7 @@ body#layout #hidden{display:none!important}
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#organization&quot;
       },
       &quot;datePublished&quot;: &quot;<data:post.date.iso8601.jsonEscaped/>&quot;,
-      &quot;dateModified&quot;: &quot;<data:post.lastUpdated.iso8601.jsonEscaped/>&quot;,
+      &quot;dateModified&quot;: &quot;<b:eval expr='data:post.lastUpdated.iso8601 ?: data:post.date.iso8601'/>&quot;,
       &quot;inLanguage&quot;: &quot;ms-MY&quot;,
       &quot;isPartOf&quot;: {
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot;
@@ -2191,7 +2191,7 @@ body#layout #hidden{display:none!important}
   &quot;url&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>&quot;,
   &quot;numberOfItems&quot;: <data:posts.size/>,
   &quot;itemListElement&quot;: [
-    <b:loop values='data:posts' var='post'>
+    <b:loop values='data:posts' var='post' index='i'>
     {
       &quot;@type&quot;: &quot;ListItem&quot;,
       &quot;position&quot;: <b:eval expr='data:i + 1'/>,
@@ -2207,7 +2207,7 @@ body#layout #hidden{display:none!important}
   ]
 }
 </script>
-</b:if>         
+</b:if>
     </b:includable>
     <b:includable id='postMetadataJSONImage'/>
     <b:includable id='postMetadataJSONPublisher'/>
@@ -3248,7 +3248,7 @@ body#layout #hidden{display:none!important}
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#organization&quot;
       },
       &quot;datePublished&quot;: &quot;<data:post.date.iso8601.jsonEscaped/>&quot;,
-      &quot;dateModified&quot;: &quot;<data:post.lastUpdated.iso8601.jsonEscaped/>&quot;,
+      &quot;dateModified&quot;: &quot;<b:eval expr='data:post.lastUpdated.iso8601 ?: data:post.date.iso8601'/>&quot;,
       &quot;inLanguage&quot;: &quot;ms-MY&quot;,
       &quot;isPartOf&quot;: {
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot;
@@ -3270,7 +3270,7 @@ body#layout #hidden{display:none!important}
 }
 </script>
       </b:if>
-      <b:if cond='data:blog.searchLabel'>
+      <b:if cond='data:blog.searchLabel and data:post.id == data:posts.first.id'>
 <script type='application/ld+json'>
 {
   &quot;@context&quot;: &quot;https://schema.org&quot;,
@@ -3280,7 +3280,7 @@ body#layout #hidden{display:none!important}
   &quot;url&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>&quot;,
   &quot;numberOfItems&quot;: <data:posts.size/>,
   &quot;itemListElement&quot;: [
-    <b:loop values='data:posts' var='post'>
+    <b:loop index='i' values='data:posts' var='post'><b:if cond='data:i != 0'>,</b:if>
     {
       &quot;@type&quot;: &quot;ListItem&quot;,
       &quot;position&quot;: <b:eval expr='data:i + 1'/>,
@@ -3291,7 +3291,7 @@ body#layout #hidden{display:none!important}
       <b:else/>
       &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
       </b:if>
-    }<b:if cond='not data:post.isLast'>,</b:if>
+    }
     </b:loop>
   ]
 }
@@ -3887,7 +3887,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 </script>
 <script type='text/javascript'>
 //<![CDATA[
-!function(){"use strict";function e(e){return(e||"").replace(/^https?:/,"").replace(/\/(?:s\d+(?:-[a-z]+)?|w\d+-h\d+(?:-[a-z]+)?|w\d+-rw|w\d+|s\d+)-[^\/?#]*/g,"").replace(/[?#].*$/,"")}function t(){var t=document.querySelector(".post-hero__img"),i=document.querySelector(".post-body img");if(!t||!i) return;var r=e(t.currentSrc||t.src),o=e(i.currentSrc||i.src);if(!r||!o||r!==o) return;var n=i.closest(".separator,figure,p");n&&n.textContent.trim()===i.alt.trim()?n.remove():i.remove()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t,{once:!0,passive:!0}):t()}();
+!function(){"use strict";function e(e){return(e||"").replace(/^https?:/,"").replace(/\/(s\d+(?:-[a-zA-Z0-9]+)*|w\d+(?:-h\d+)?(?:-[a-zA-Z0-9]+)*)(?=\/|$)/g,"").replace(/[?#].*$/,"")}function t(){var t=document.querySelector(".post-hero__img"),i=document.querySelector(".post-body img");if(!t||!i)return;var r=e(t.currentSrc||t.src),o=e(i.currentSrc||i.src);if(!r||!o||r!==o)return;var n=i.closest(".separator,figure,p");n&&n.textContent.trim()===i.alt.trim()?n.remove():i.remove()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t,{once:!0,passive:!0}):t()}();
 //]]>
 </script>
 <script type='text/javascript'>
