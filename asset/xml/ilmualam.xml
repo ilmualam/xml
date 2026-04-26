@@ -3248,7 +3248,7 @@ body#layout #hidden{display:none!important}
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#organization&quot;
       },
       &quot;datePublished&quot;: &quot;<data:post.date.iso8601.jsonEscaped/>&quot;,
-      &quot;dateModified&quot;: &quot;<data:post.lastUpdated.iso8601.jsonEscaped/>&quot;,
+      &quot;dateModified&quot;: &quot;<b:eval expr='data:post.lastUpdated.iso8601 ?: data:post.date.iso8601'/>&quot;,
       &quot;inLanguage&quot;: &quot;ms-MY&quot;,
       &quot;isPartOf&quot;: {
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot;
@@ -3270,7 +3270,7 @@ body#layout #hidden{display:none!important}
 }
 </script>
       </b:if>
-      <b:if cond='data:blog.searchLabel'>
+      <b:if cond='data:blog.searchLabel and data:post.id == data:posts.first.id'>
 <script type='application/ld+json'>
 {
   &quot;@context&quot;: &quot;https://schema.org&quot;,
@@ -3280,7 +3280,7 @@ body#layout #hidden{display:none!important}
   &quot;url&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>&quot;,
   &quot;numberOfItems&quot;: <data:posts.size/>,
   &quot;itemListElement&quot;: [
-    <b:loop values='data:posts' var='post'>
+    <b:loop index='i' values='data:posts' var='post'><b:if cond='data:i != 0'>,</b:if>
     {
       &quot;@type&quot;: &quot;ListItem&quot;,
       &quot;position&quot;: <b:eval expr='data:i + 1'/>,
@@ -3291,7 +3291,7 @@ body#layout #hidden{display:none!important}
       <b:else/>
       &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
       </b:if>
-    }<b:if cond='not data:post.isLast'>,</b:if>
+    }
     </b:loop>
   ]
 }
