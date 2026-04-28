@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html b:css='false' b:defaultwidgetversion='2' b:js='false' b:layoutsVersion='3' b:responsive='true' b:templateVersion='2.2.0' expr:class='data:blog.languageDirection' expr:dir='data:blog.languageDirection' expr:lang='data:blog.localeUnderscoreDelimited' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <b:with value='data:view.isSearch and (data:blog.view == &quot;json&quot;)' var='isFeed'>
@@ -1128,7 +1128,7 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .ia-breadcrumb__link{color:var(--meta-color)}
 .ia-breadcrumb__link:hover{color:var(--accent-color)}
 .ia-breadcrumb__item--current{color:var(--title-color);font-weight:500}
-/* --- Post Hero Image (LCP element — single post pages) --- */
+/* --- Post Hero Image (LCP element â€” single post pages) --- */
 .post-hero{width:100%;margin-bottom:1.5rem;border-radius:var(--rounded);overflow:hidden;background:var(--border-color)}
 .post-hero__img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;max-height:500px}
 /* --- Sidebar Search Form --- */
@@ -1242,7 +1242,7 @@ body#layout #hidden{display:none!important}
 	<meta expr:content='data:blog.title.escaped' property='og:site_name'/>
 	<meta expr:content='data:view.url.canonical' property='og:url'/>
 	<meta expr:content='data:view.title.escaped' property='og:title'/>
-	<meta expr:content='data:view.description.escaped' property='og:description'/>
+	<meta expr:content='(data:view.description ?: data:blog.metaDescription).escaped' property='og:description'/>
 	<b:if cond='data:view.isHomepage'>
 		<meta content='website' property='og:type'/> <b:elseif cond='data:view.isPost'/>
 		<meta content='article' property='og:type'/>
@@ -1270,7 +1270,7 @@ body#layout #hidden{display:none!important}
 	<meta content='@ilmualam' name='twitter:site'/>
 	<meta content='@ilmualam' name='twitter:creator'/>
 	<meta expr:content='data:view.title.escaped' name='twitter:title'/>
-	<meta expr:content='data:view.description.escaped' name='twitter:description'/>
+	<meta expr:content='(data:view.description ?: data:blog.metaDescription).escaped' name='twitter:description'/>
 	<b:if cond='data:view.featuredImage'>
 		<meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' name='twitter:image'/> <b:elseif cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage'/>
 		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' name='twitter:image'/> <b:else/>
@@ -1742,7 +1742,7 @@ body#layout #hidden{display:none!important}
       </div>
     </b:includable>
     <b:includable id='pbt-messages'>
-      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga Más<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>تحميل المزيد<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
+      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga MÃ¡s<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ø²ÙŠØ¯<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
     </b:includable>
     <b:includable id='pbt-var'>
       <b:tag name='script' type='text/javascript'>const pbt={blogView:<b:if cond='data:blog.view'>&quot;<data:blog.view/>&quot;<b:else/>false</b:if>,isRTL:<b:eval expr='data:blog.languageDirection == &quot;rtl&quot; ? &quot;true&quot; : &quot;false&quot;'/>,isHome:<b:eval expr='data:view.isHomepage ? &quot;true&quot; : &quot;false&quot;'/>,isMultiple:<b:eval expr='data:view.isMultipleItems ? &quot;true&quot; : &quot;false&quot;'/>,isSingle:<b:eval expr='data:view.isSingleItem ? &quot;true&quot; : &quot;false&quot;'/>,isPost:<b:eval expr='data:view.isPost ? &quot;true&quot; : &quot;false&quot;'/>,isPage:<b:eval expr='data:view.isPage ? &quot;true&quot; : &quot;false&quot;'/>,isDark:<b:eval expr='data:skin.vars.darkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,userDarkMode:<b:eval expr='data:skin.vars.userDarkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,stickyMenu:<b:eval expr='data:skin.vars.stickyMenu == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,hasCookie:<b:eval expr='data:widgets.Text any w =&gt; w.sectionId == &quot;cookie&quot; ? &quot;true&quot; : &quot;false&quot;'/>,postAuthor:<b:eval expr='data:widgets.Blog.first.allBylineItems.author ? &quot;true&quot; : &quot;false&quot;'/>,postDate:<b:eval expr='data:widgets.Blog.first.allBylineItems.timestamp ? &quot;true&quot; : &quot;false&quot;'/>,postSummary:&quot;<b:eval expr='data:skin.vars.postSummary == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>&quot;,showMore:&quot;<data:messages.showMore/>&quot;,viewAll:&quot;<data:messages.viewAll/>&quot;,noResults:&quot;<data:messages.noResultsFound/>&quot;,noTitle:&quot;<data:messages.noTitle/>&quot;,noThumb:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG9GA0058_fE7q8dUjkpL56fvlwSQs-DyuNjRG1C3oYBoWDR2PYrDa0SKVYt6iEJ8pssbajfAujp0g51-SQimyZNawn0waVgbe8cwgMzSXRURuiG7bqguOahIkTzTgPOn67eoasTMjKkxPfqXg1ytQ4NMjLEAGpp3zKKtpo-PVacHSnidorgbmaOFlyQ/w72-h72-p-k-no-nu/ptb-nth.webp&quot;}</b:tag>
@@ -2080,11 +2080,6 @@ body#layout #hidden{display:none!important}
       </div>
     </b:includable>
     <b:includable id='postHeader' var='post'>
-      <b:if cond='data:view.isPost and data:post.featuredImage'>
-        <div class='post-hero'>
-          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage and data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
-        </div>
-      </b:if>
       <div class='post-info flex-col'>
         <b:include cond='data:view.isPost and (data:skin.vars.postBreadcrumb == &quot;1px&quot;)' data='post' name='postBreadcrumbs'/>
         <b:include data='{ hasLink: false, tagName: &quot;h1&quot; }' name='post-title'/>
@@ -2782,15 +2777,15 @@ body#layout #hidden{display:none!important}
               <b:widget-setting name='content'><![CDATA[<section class="hero-ia" lang="ms" dir="ltr">
   <div class="hero-ia__inner">
     <h1>Ilmu Islam Moden: Mudah, Sahih, Pantas</h1>
-    <p class="lead">Baca Al-Qur’an, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
+    <p class="lead">Baca Al-Qurâ€™an, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
 
     <form class="site-search" action="/search" method="get">
-      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik…" aria-label="Cari ilmu"/>
+      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topikâ€¦" aria-label="Cari ilmu"/>
       <button type="submit">Cari</button>
     </form>
 
     <div class="hero-ia__cta">
-      <a class="btn" href="/p/quran.html">Baca Al-Qur’an</a>
+      <a class="btn" href="/p/quran.html">Baca Al-Qurâ€™an</a>
       <a class="btn ghost" href="/p/asmaul-husna.html">Asmaul Husna</a>
       <a class="btn ghost" href="/search/label/Doa%20%26%20Zikir">Doa & Zikir</a>
     </div>
@@ -3169,11 +3164,6 @@ body#layout #hidden{display:none!important}
       </div>
     </b:includable>
               <b:includable id='postHeader' var='post'>
-      <b:if cond='data:view.isPost and data:post.featuredImage'>
-        <div class='post-hero'>
-          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage and data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
-        </div>
-      </b:if>
       <div class='post-info flex-col'>
         <b:include cond='data:view.isPost and (data:skin.vars.postBreadcrumb == &quot;1px&quot;)' data='post' name='postBreadcrumbs'/>
         <b:include data='{ hasLink: false, tagName: &quot;h1&quot; }' name='post-title'/>
@@ -3632,7 +3622,7 @@ body#layout #hidden{display:none!important}
                     <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
                     <b:widget-setting name='displayWidth'>436</b:widget-setting>
                     <b:widget-setting name='link'>https://www.ilmualam.com</b:widget-setting>
-                    <b:widget-setting name='caption'>Ilmu Tanpa Sempadan, Amal Tanpa Batasan, Akhirat Jua Pengakhiran! 🕌</b:widget-setting>
+                    <b:widget-setting name='caption'>Ilmu Tanpa Sempadan, Amal Tanpa Batasan, Akhirat Jua Pengakhiran! ðŸ•Œ</b:widget-setting>
                   </b:widget-settings>
                   <b:includable id='main' var='this'>
       <b:include name='widget-title'/>
@@ -3799,7 +3789,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 <!-- Register Service Worker -->
 <script type='text/javascript'>
 //<![CDATA[
-"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("https://ilmualam.pages.dev/sw.js",{scope:"/"}).then(e=>console.log("✅ SW scope:",e.scope)).catch(e=>console.error("❌ SW failed:",e))},{once:!0,passive:!0});
+"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("https://ilmualam.pages.dev/sw.js",{scope:"/"}).then(e=>console.log("âœ… SW scope:",e.scope)).catch(e=>console.error("âŒ SW failed:",e))},{once:!0,passive:!0});
 //]]>
 </script>
 <script>
@@ -3808,11 +3798,6 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 <script type='text/javascript'>
 //<![CDATA[
 !function(){"use strict";function e(){if("IntersectionObserver"in window){var e=new IntersectionObserver(function(e,t){e.forEach(function(e){if(e.isIntersecting){var r=e.target,o="https:"+r.getAttribute("data-src"),a=document.createElement("iframe");a.src=o,a.setAttribute("frameborder","0"),a.setAttribute("allowfullscreen","true"),a.setAttribute("allow","accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"),a.setAttribute("loading","lazy"),r.parentNode.replaceChild(a,r),t.unobserve(r)}})},{rootMargin:"200px 0px",threshold:0});document.querySelectorAll(".video-youtube[data-src]").forEach(function(t){e.observe(t)})}else for(var t=document.querySelectorAll(".video-youtube[data-src]"),r=0;r<t.length;r++){var o=t[r],a="https:"+o.getAttribute("data-src"),i=document.createElement("iframe");i.src=a,i.setAttribute("frameborder","0"),i.setAttribute("allowfullscreen","true"),i.setAttribute("allow","accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"),o.parentNode.replaceChild(i,o)}}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0,passive:!0}):requestAnimationFrame(e)}();
-//]]>
-</script>
-<script type='text/javascript'>
-//<![CDATA[
-!function(){"use strict";function e(e){return(e||"").replace(/^https?:/,"").replace(/\/(s\d+(?:-[a-zA-Z0-9]+)*|w\d+(?:-h\d+)?(?:-[a-zA-Z0-9]+)*)(?=\/|$)/g,"").replace(/[?#].*$/,"")}function t(){var t=document.querySelector(".post-hero__img"),i=document.querySelector(".post-body img");if(!t||!i)return;var r=e(t.currentSrc||t.src),o=e(i.currentSrc||i.src);if(!r||!o||r!==o)return;var n=i.closest(".separator,figure,p");n&&n.textContent.trim()===i.alt.trim()?n.remove():i.remove()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t,{once:!0,passive:!0}):t()}();
 //]]>
 </script>
 <script type='text/javascript'>
@@ -3892,7 +3877,7 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
         return;
       }
       $va.attr("href","/search?q="+encodeURIComponent(q))
-         .text("Lihat semua hasil untuk “"+q+"”");
+         .text("Lihat semua hasil untuk â€œ"+q+"â€");
       timer=setTimeout(function(){iaSearch(q);},500);
     });
 
