@@ -2084,7 +2084,7 @@ body#layout #hidden{display:none!important}
     <b:includable id='postHeader' var='post'>
       <b:if cond='data:view.isPost and data:post.featuredImage'>
         <div class='post-hero'>
-          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
+          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage and data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
         </div>
       </b:if>
       <div class='post-info flex-col'>
@@ -2126,11 +2126,11 @@ body#layout #hidden{display:none!important}
         &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;
       },
       &quot;headline&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
-      &quot;description&quot;: &quot;<data:post.snippets.short.jsonEscaped/>&quot;,
+      &quot;description&quot;: &quot;<b:eval expr='data:post.snippets.short ? data:post.snippets.short.jsonEscaped : data:blog.metaDescription.jsonEscaped'/>&quot;,
       &quot;image&quot;: {
         &quot;@type&quot;: &quot;ImageObject&quot;,
         &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#primaryimage&quot;,
-        <b:if cond='data:post.featuredImage.isResizable'>
+        <b:if cond='data:post.featuredImage and data:post.featuredImage.isResizable'>
         &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;).jsonEscaped'/>&quot;,
         &quot;width&quot;: 1200,
         &quot;height&quot;: 630,
@@ -2145,7 +2145,7 @@ body#layout #hidden{display:none!important}
         &quot;@type&quot;: &quot;Person&quot;,
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#founder&quot;,
         &quot;name&quot;: &quot;<data:post.author.name.jsonEscaped/>&quot;,
-        &quot;url&quot;: &quot;<data:post.author.profileUrl.jsonEscaped/>&quot;,
+        &quot;url&quot;: &quot;https://www.ilmualam.com/p/about.html&quot;,
         <b:if cond='data:post.author.authorPhoto.image'>
         &quot;image&quot;: {
           &quot;@type&quot;: &quot;ImageObject&quot;,
@@ -2197,7 +2197,7 @@ body#layout #hidden{display:none!important}
       &quot;position&quot;: <b:eval expr='data:i + 1'/>,
       &quot;url&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;,
       &quot;name&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
-      <b:if cond='data:post.featuredImage.isResizable'>
+      <b:if cond='data:post.featuredImage and data:post.featuredImage.isResizable'>
       &quot;image&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 720, &quot;16:9&quot;).jsonEscaped'/>&quot;
       <b:else/>
       &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
@@ -3173,7 +3173,7 @@ body#layout #hidden{display:none!important}
               <b:includable id='postHeader' var='post'>
       <b:if cond='data:view.isPost and data:post.featuredImage'>
         <div class='post-hero'>
-          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
+          <img class='post-hero__img' expr:alt='data:post.title' fetchpriority='high' height='630' loading='eager' expr:src='data:post.featuredImage and data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;) : data:post.featuredImage' width='1200'/>
         </div>
       </b:if>
       <div class='post-info flex-col'>
@@ -3215,11 +3215,11 @@ body#layout #hidden{display:none!important}
         &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;
       },
       &quot;headline&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
-      &quot;description&quot;: &quot;<data:post.snippets.short.jsonEscaped/>&quot;,
+      &quot;description&quot;: &quot;<b:eval expr='data:post.snippets.short ? data:post.snippets.short.jsonEscaped : data:blog.metaDescription.jsonEscaped'/>&quot;,
       &quot;image&quot;: {
         &quot;@type&quot;: &quot;ImageObject&quot;,
         &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#primaryimage&quot;,
-        <b:if cond='data:post.featuredImage.isResizable'>
+        <b:if cond='data:post.featuredImage and data:post.featuredImage.isResizable'>
         &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;).jsonEscaped'/>&quot;,
         &quot;width&quot;: 1200,
         &quot;height&quot;: 630,
@@ -3234,7 +3234,7 @@ body#layout #hidden{display:none!important}
         &quot;@type&quot;: &quot;Person&quot;,
         &quot;@id&quot;: &quot;https://www.ilmualam.com/#founder&quot;,
         &quot;name&quot;: &quot;<data:post.author.name.jsonEscaped/>&quot;,
-        &quot;url&quot;: &quot;<data:post.author.profileUrl.jsonEscaped/>&quot;,
+        &quot;url&quot;: &quot;https://www.ilmualam.com/p/about.html&quot;,
         <b:if cond='data:post.author.authorPhoto.image'>
         &quot;image&quot;: {
           &quot;@type&quot;: &quot;ImageObject&quot;,
@@ -3286,7 +3286,7 @@ body#layout #hidden{display:none!important}
       &quot;position&quot;: <b:eval expr='data:i + 1'/>,
       &quot;url&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;,
       &quot;name&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
-      <b:if cond='data:post.featuredImage.isResizable'>
+      <b:if cond='data:post.featuredImage and data:post.featuredImage.isResizable'>
       &quot;image&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 720, &quot;16:9&quot;).jsonEscaped'/>&quot;
       <b:else/>
       &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
