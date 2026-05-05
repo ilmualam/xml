@@ -1,0 +1,24 @@
+{
+  "name": "ilmualam-blogger-xml",
+  "version": "1.0.0",
+  "description": "Blogger XML Template for ilmualam.com with validation tools",
+  "main": "index.js",
+  "scripts": {
+    "validate": "node scripts/xml-lint.js",
+    "validate:strict": "xmllint --noout asset/xml/ilmualam.xml",
+    "lint": "npm run validate",
+    "test": "npm run validate && echo '✅ All tests passed!'"
+  },
+  "keywords": [
+    "blogger",
+    "xml",
+    "template",
+    "validation"
+  ],
+  "author": "Ilmu Alam",
+  "license": "MIT",
+  "devDependencies": {
+    "xmldom": "^0.6.0",
+    "xpath": "^0.0.32"
+  }
+}
