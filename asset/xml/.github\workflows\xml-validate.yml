@@ -1,0 +1,60 @@
+name: XML Validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install xmllint
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+
+      - name: Validate XML syntax
+        run: |
+          if [ -f "asset/xml/ilmualam.xml" ]; then
+            xmllint --noout asset/xml/ilmualam.xml && echo "✅ XML is valid"
+          else
+            echo "❌ XML file not found"
+            exit 1
+          fi
+
+      - name: Check for duplicate meta tags
+        run: |
+          grep -c "name='theme-color'" asset/xml/ilmualam.xml | awk '{
+            if ($1 > 1) {
+              print "❌ ERROR: Duplicate theme-color meta tags found (" $1 " occurrences)";
+              exit 1;
+            }
+          }'
+
+      - name: Check CDATA balance
+        run: |
+          OPEN=$(grep -o "<!\[CDATA\[" asset/xml/ilmualam.xml | wc -l)
+          CLOSE=$(grep -o "]]>" asset/xml/ilmualam.xml | wc -l)
+          if [ "$OPEN" != "$CLOSE" ]; then
+            echo "❌ ERROR: Unmatched CDATA sections (open: $OPEN, close: $CLOSE)"
+            exit 1
+          fi
+
+      - name: Check for trailing color codes
+        run: |
+          if grep -E "value=\"#[0-9a-fA-F]{6}\"/#[0-9a-fA-F]{6}" asset/xml/ilmualam.xml; then
+            echo "❌ ERROR: Found trailing color code"
+            exit 1
+          fi
+
+      - name: Report results
+        if: success()
+        run: echo "✅ All XML validation checks passed!"
