@@ -1256,25 +1256,34 @@ body#layout #hidden{display:none!important}
 	<!-- OG Image with dimensions -->
 	<b:if cond='data:view.featuredImage'>
 		<meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' property='og:image'/>
+		<meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' property='og:image:secure_url'/>
 		<meta content='1200' property='og:image:width'/>
 		<meta content='630' property='og:image:height'/>
-		<meta content='image/webp' property='og:image:type'/> <b:elseif cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage'/>
+		<meta expr:content='data:view.title.escaped' property='og:image:alt'/> <b:elseif cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage'/>
 		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' property='og:image'/>
+		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' property='og:image:secure_url'/>
 		<meta content='1200' property='og:image:width'/>
-		<meta content='630' property='og:image:height'/> <b:else/>
+		<meta content='630' property='og:image:height'/>
+		<meta expr:content='data:view.title.escaped' property='og:image:alt'/> <b:else/>
 		<meta content='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp' property='og:image'/>
+		<meta content='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp' property='og:image:secure_url'/>
 		<meta content='500' property='og:image:width'/>
-		<meta content='500' property='og:image:height'/> </b:if>
+		<meta content='500' property='og:image:height'/>
+		<meta expr:content='data:view.title.escaped' property='og:image:alt'/> </b:if>
 	<!-- Twitter Card Meta Tags -->
 	<meta content='summary_large_image' name='twitter:card'/>
 	<meta content='@ilmualam' name='twitter:site'/>
 	<meta content='@ilmualam' name='twitter:creator'/>
+	<meta expr:content='data:view.url.canonical' name='twitter:url'/>
 	<meta expr:content='data:view.title.escaped' name='twitter:title'/>
 	<meta expr:content='(data:view.description ?: data:blog.metaDescription).escaped' name='twitter:description'/>
 	<b:if cond='data:view.featuredImage'>
-		<meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' name='twitter:image'/> <b:elseif cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage'/>
-		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' name='twitter:image'/> <b:else/>
-		<meta content='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp' name='twitter:image'/> </b:if>
+		<meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' name='twitter:image'/>
+		<meta expr:content='data:view.title.escaped' name='twitter:image:alt'/> <b:elseif cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage'/>
+		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' name='twitter:image'/>
+		<meta expr:content='data:view.title.escaped' name='twitter:image:alt'/> <b:else/>
+		<meta content='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp' name='twitter:image'/>
+		<meta expr:content='data:view.title.escaped' name='twitter:image:alt'/> </b:if>
 </b:includable>
     <b:includable id='pbt-head'>
       <meta content='blogger' name='generator'/>
@@ -1303,7 +1312,7 @@ body#layout #hidden{display:none!important}
 		</title>
 		<b:if cond='!data:isFeed'>
 			<!-- Meta Description -->
-			<meta expr:content='data:view.description.escaped' name='description'/>
+			<meta expr:content='(data:view.description ?: data:blog.metaDescription).escaped' name='description'/>
 			<!-- Canonical URL -->
 			<link expr:href='data:view.url.canonical' rel='canonical'/>
 			<!-- Adult Content Rating -->
@@ -1691,14 +1700,14 @@ body#layout #hidden{display:none!important}
         <b:with value='data:view.url.canonical' var='shareUrl'>
           <b:with value='data:view.title.escaped' var='shareTitle'>
             <ul class='share-b social color'>
-              <li class='facebook'><a class='bi-facebook window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:shareUrl' rel='nofollow noopener' title='Facebook'/></li>
-              <li class='twitter'><a class='bi-twitter window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:shareUrl + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='X (Twitter)'/></li>
-              <li class='whatsapp'><a class='bi-whatsapp' expr:href='&quot;https://wa.me/?text=&quot; + data:shareTitle.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'/></li>
+              <li class='facebook'><a class='bi-facebook window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Facebook'/></li>
+              <li class='twitter'><a class='bi-twitter window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='X (Twitter)'/></li>
+              <li class='whatsapp'><a class='bi-whatsapp' expr:href='&quot;https://wa.me/?text=&quot; + data:shareUrl.urlEscaped + &quot;%0A%0A&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'/></li>
               <li class='telegram'><a class='bi-telegram' expr:href='&quot;https://t.me/share/url?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' target='_blank' title='Telegram'/></li>
               <li class='linkedin'><a class='bi-linkedin window-open' expr:href='&quot;https://www.linkedin.com/shareArticle?mini=true&amp;url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;title=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='LinkedIn'/></li>
               <li class='reddit'><a class='bi-reddit window-open' expr:href='&quot;https://reddit.com/submit?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;title=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='Reddit'/></li>
               <li class='bluesky'><a class='bi-bluesky window-open' expr:href='&quot;https://bsky.app/intent/compose?text=&quot; + data:shareTitle.urlEscaped + &quot;%20&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Bluesky'/></li>
-              <li class='email'><a class='bi-email' expr:href='&quot;mailto:?subject=&quot; + data:shareTitle.urlEscaped + &quot;&amp;body=&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+              <li class='email'><a class='bi-email' expr:href='&quot;mailto:?subject=&quot; + data:shareTitle.urlEscaped + &quot;&amp;body=&quot; + data:shareTitle.urlEscaped + &quot;%0D%0A%0D%0A&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Email'/></li>
             </ul>
           </b:with>
           <div class='modal-footer'>
@@ -2211,10 +2220,10 @@ body#layout #hidden{display:none!important}
       <div class='post-share'>
         <ul class='share-a social'>
           <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
-          <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
-          <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
-          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.title.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
-          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
+          <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical.urlEscaped + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
+          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical.urlEscaped + &quot;%0A%0A&quot; + data:post.title.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
+          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.title.urlEscaped + &quot;%0D%0A%0D%0A&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
           <li class='show-more'><button class='sl' expr:aria-label='data:messages.showMore'/></li>
         </ul>
       </div>
@@ -3295,10 +3304,10 @@ body#layout #hidden{display:none!important}
       <div class='post-share'>
         <ul class='share-a social'>
           <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
-          <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
-          <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
-          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.title.urlEscaped + &quot;%20%E2%80%94%20&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
-          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
+          <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical.urlEscaped + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
+          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical.urlEscaped + &quot;%0A%0A&quot; + data:post.title.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
+          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.title.urlEscaped + &quot;%0D%0A%0D%0A&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
           <li class='show-more'><button class='sl' expr:aria-label='data:messages.showMore'/></li>
         </ul>
       </div>
