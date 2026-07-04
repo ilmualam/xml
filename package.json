@@ -9,7 +9,8 @@
     "validate": "node scripts/xml-lint.js",
     "validate:custom": "node scripts/xml-lint.js",
     "lint": "npm run validate",
-    "test": "node --test tests/test.js"
+    "test": "node --test tests/*.js",
+    "audit:blogger": "node scripts/blogger-schema-audit.js"
   },
   "keywords": [
     "blogger",

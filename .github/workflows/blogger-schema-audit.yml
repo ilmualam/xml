@@ -1,0 +1,48 @@
+name: Blogger Schema & SERP Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_results:
+        description: Maximum published posts to audit
+        required: false
+        default: '500'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run read-only Blogger audit
+        env:
+          BLOGGER_API_KEY: ${{ secrets.BLOGGER_API_KEY }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_BLOG_URL: ${{ secrets.BLOGGER_BLOG_URL }}
+          BLOGGER_MAX_RESULTS: ${{ inputs.max_results }}
+        run: npm run audit:blogger
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: blogger-schema-serp-audit
+          path: reports/blogger-schema-audit/
+          if-no-files-found: error
+          retention-days: 30
