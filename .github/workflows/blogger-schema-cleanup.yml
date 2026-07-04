@@ -1,0 +1,67 @@
+name: Blogger Schema Cleanup
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: dry-run or apply
+        required: true
+        default: dry-run
+        type: choice
+        options:
+          - dry-run
+          - apply
+      post_ids:
+        description: Optional comma-separated Blogger post IDs
+        required: false
+        default: ''
+      max_posts:
+        description: Maximum posts, 1-5 for apply
+        required: true
+        default: '5'
+      confirm_blog_id:
+        description: Required only for apply; must exactly match BLOGGER_BLOG_ID
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Run guarded cleanup
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          MODE: ${{ inputs.mode }}
+          POST_IDS: ${{ inputs.post_ids }}
+          MAX_POSTS: ${{ inputs.max_posts }}
+          CONFIRM_BLOG_ID: ${{ inputs.confirm_blog_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=("--max=${MAX_POSTS}")
+          if [[ -n "${POST_IDS}" ]]; then args+=("--post-ids=${POST_IDS}"); fi
+          if [[ "${MODE}" == "apply" ]]; then
+            args+=("--apply" "--confirm-blog-id=${CONFIRM_BLOG_ID}")
+          fi
+          node scripts/blogger-schema-cleanup.js "${args[@]}"
+      - name: Upload backups and manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: blogger-schema-cleanup-${{ inputs.mode }}
+          path: reports/blogger-schema-cleanup/
+          if-no-files-found: error
+          retention-days: 90
