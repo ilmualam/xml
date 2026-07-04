@@ -2,12 +2,14 @@
   "name": "ilmualam-blogger-xml",
   "version": "1.0.0",
   "description": "Blogger XML Template for ilmualam.com with validation tools",
-  "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "validate": "node scripts/xml-lint.js",
-    "validate:strict": "xmllint --noout asset/xml/ilmualam.xml",
+    "validate:custom": "node scripts/xml-lint.js",
     "lint": "npm run validate",
-    "test": "npm run validate && echo '✅ All tests passed!'"
+    "test": "node --test tests/test.js"
   },
   "keywords": [
     "blogger",
@@ -18,7 +20,7 @@
   "author": "Ilmu Alam",
   "license": "MIT",
   "devDependencies": {
-    "xmldom": "^0.6.0",
+    "@xmldom/xmldom": "^0.9.10",
     "xpath": "^0.0.32"
   }
 }
