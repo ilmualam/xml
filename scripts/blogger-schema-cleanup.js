@@ -48,10 +48,25 @@ function removeArticleNodes(value) {
   return Object.keys(output).length ? output : undefined;
 }
 
+function serializeJsonLd(value) {
+  const json = JSON.stringify(value);
+  let safe = '';
+  for (const char of json) {
+    if (char === '<') safe += '\\u003c';
+    else if (char === '\u2028') safe += '\\u2028';
+    else if (char === '\u2029') safe += '\\u2029';
+    else safe += char;
+  }
+  if (JSON.stringify(JSON.parse(safe)) !== JSON.stringify(value)) {
+    throw new Error('JSON-LD serialization verification failed');
+  }
+  return safe;
+}
+
 function cleanJsonLd(html) {
   const changes = [];
-  const re = /<script\b[^>]*type\s*=\s*['"]application\/ld\+json['"][^>]*>([\s\S]*?)<\/script>/gi;
-  const cleanedHtml = String(html || '').replace(re, (full, raw) => {
+  const re = /(<script\b[^>]*type\s*=\s*['"]application\/ld\+json['"][^>]*>)([\s\S]*?)(<\/script>)/gi;
+  const cleanedHtml = String(html || '').replace(re, (full, openTag, raw, closeTag) => {
     let parsed;
     try {
       parsed = JSON.parse(raw.trim());
@@ -66,11 +81,13 @@ function cleanJsonLd(html) {
     }
 
     if (JSON.stringify(parsed) !== JSON.stringify(cleaned)) {
+      const serialized = serializeJsonLd(cleaned);
       changes.push({
-        action: 'manual-review',
+        action: 'replace-block',
         reason: 'mixed-schema-block',
         removedTypes: ['Article/BlogPosting/NewsArticle']
       });
+      return `${openTag}${serialized}${closeTag}`;
     }
 
     return full;
@@ -211,4 +228,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { parseArgs, getTypes, removeArticleNodes, cleanJsonLd, ensureApplySafety };
+module.exports = { parseArgs, getTypes, removeArticleNodes, serializeJsonLd, cleanJsonLd, ensureApplySafety };
