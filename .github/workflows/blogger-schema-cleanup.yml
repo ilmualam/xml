@@ -16,9 +16,9 @@ on:
         required: false
         default: ''
       max_posts:
-        description: Maximum posts, 1-5 for apply
+        description: Maximum posts, 1-10 for apply
         required: true
-        default: '5'
+        default: '10'
       confirm_blog_id:
         description: Required only for apply; must exactly match BLOGGER_BLOG_ID
         required: false

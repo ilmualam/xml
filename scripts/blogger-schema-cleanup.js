@@ -164,7 +164,7 @@ function ensureApplySafety(args) {
   if (args.confirmBlogId !== BLOG_ID) {
     throw new Error('Apply blocked: --confirm-blog-id must exactly match BLOGGER_BLOG_ID');
   }
-  if (args.max > 5) throw new Error('First apply is limited to 5 posts');
+  if (args.max > 10) throw new Error('Apply is limited to 10 posts');
 }
 
 async function main() {
