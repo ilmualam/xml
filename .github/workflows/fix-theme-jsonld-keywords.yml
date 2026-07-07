@@ -15,16 +15,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Generate label loop diagnostics
-        run: node scripts/fix-theme-jsonld-keywords.js asset/xml/ilmualam.xml
-      - name: Verify diagnostic files exist
+      - name: Generate fixed XML
+        run: node scripts/fix-theme-jsonld-keywords.js asset/xml/ilmualam.xml reports/theme-jsonld-fix/ilmualam-fixed.xml
+      - name: Verify generated files
         run: |
-          test -s reports/theme-jsonld-fix/label-loops.json
+          test -s reports/theme-jsonld-fix/ilmualam-fixed.xml
           test -s reports/theme-jsonld-fix/report.json
-      - name: Upload diagnostic artifact
+      - name: Upload fixed theme XML
         uses: actions/upload-artifact@v4
         with:
-          name: ilmualam-jsonld-loop-diagnostic
+          name: ilmualam-fixed-theme-xml
           path: reports/theme-jsonld-fix/
           if-no-files-found: error
           retention-days: 30
