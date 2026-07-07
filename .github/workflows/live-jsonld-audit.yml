@@ -1,0 +1,34 @@
+name: Live JSON-LD Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: Comma-separated live URLs to audit
+        required: true
+        default: https://www.ilmualam.com/2026/03/surah-al-kautsar.html
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Audit rendered HTML and JSON-LD
+        env:
+          AUDIT_URLS: ${{ inputs.urls }}
+        run: node scripts/live-jsonld-audit.js
+        continue-on-error: true
+      - name: Upload live audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-jsonld-audit
+          path: reports/live-jsonld-audit/
+          if-no-files-found: error
+          retention-days: 30
