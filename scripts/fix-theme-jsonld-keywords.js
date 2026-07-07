@@ -4,36 +4,33 @@ const fs = require('fs');
 const path = require('path');
 
 const input = path.resolve(process.argv[2] || 'asset/xml/ilmualam.xml');
-const outputDir = path.resolve('reports/theme-jsonld-fix');
+const output = path.resolve(process.argv[3] || 'reports/theme-jsonld-fix/ilmualam-fixed.xml');
+const outputDir = path.dirname(output);
 const xml = fs.readFileSync(input, 'utf8');
 
-fs.mkdirSync(outputDir, { recursive: true });
+const oldBody = '&quot;<data:label.name.jsonEscaped/>&quot;<b:if cond=\'not data:label.isLast\'>,</b:if>';
+const newBody = '<b:if cond=\'data:i != 0\'>,</b:if>&quot;<data:label.name.jsonEscaped/>&quot;';
 
-const loops = [];
-const loopRe = /<b:loop\b([^>]*)>([\s\S]*?)<\/b:loop>/g;
-let match;
-while ((match = loopRe.exec(xml))) {
-  const attrs = match[1];
-  const body = match[2];
-  if (!/values=['"]data:post\.labels['"]/.test(attrs)) continue;
-  if (!/var=['"]label['"]/.test(attrs)) continue;
-
-  const start = Math.max(0, match.index - 500);
-  const end = Math.min(xml.length, loopRe.lastIndex + 500);
-  loops.push({
-    index: loops.length + 1,
-    attrs,
-    body,
-    context: xml.slice(start, end)
-  });
+const occurrences = xml.split(oldBody).length - 1;
+if (occurrences !== 2) {
+  throw new Error(`Expected exactly 2 JSON-LD keyword loops, found ${occurrences}.`);
 }
 
-fs.writeFileSync(path.join(outputDir, 'label-loops.json'), JSON.stringify({ count: loops.length, loops }, null, 2));
-fs.writeFileSync(path.join(outputDir, 'ilmualam-original.xml'), xml);
+const fixed = xml.split(oldBody).join(newBody);
+if (fixed === xml) throw new Error('No XML change was produced.');
+if (fixed.includes("not data:label.isLast")) {
+  throw new Error('Verification failed: unsupported data:label.isLast remains in the XML.');
+}
+
+fs.mkdirSync(outputDir, { recursive: true });
+fs.writeFileSync(output, fixed);
 fs.writeFileSync(path.join(outputDir, 'report.json'), JSON.stringify({
-  mode: 'diagnostic',
-  labelLoopsFound: loops.length,
+  input,
+  output,
+  keywordLoopsChanged: occurrences,
+  originalBytes: Buffer.byteLength(xml),
+  fixedBytes: Buffer.byteLength(fixed),
   generatedAt: new Date().toISOString()
 }, null, 2));
 
-console.log(`Diagnostic generated for ${loops.length} Blogger label loops.`);
+console.log(`Patched ${occurrences} Blogger JSON-LD keyword loops.`);
