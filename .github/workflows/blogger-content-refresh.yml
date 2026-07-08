@@ -1,0 +1,70 @@
+name: Blogger Content Refresh
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run or apply"
+        required: true
+        default: "dry-run"
+        type: choice
+        options:
+          - dry-run
+          - apply
+      manifest:
+        description: "Manifest path"
+        required: true
+        default: "content-refresh/manifest.json"
+        type: string
+      max_posts:
+        description: "Maximum posts in this run (1-5)"
+        required: true
+        default: "1"
+        type: string
+      confirm_blog_id:
+        description: "Required only for apply; must exactly match BLOGGER_BLOG_ID"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Validate mode
+        run: |
+          if [ "${{ inputs.mode }}" != "dry-run" ] && [ "${{ inputs.mode }}" != "apply" ]; then
+            echo "Unsupported mode"
+            exit 1
+          fi
+
+      - name: Generate refresh preview or apply approved update
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          ARGS="--manifest=${{ inputs.manifest }} --max=${{ inputs.max_posts }}"
+          if [ "${{ inputs.mode }}" = "apply" ]; then
+            ARGS="$ARGS --apply --confirm-blog-id=${{ inputs.confirm_blog_id }}"
+          fi
+          node scripts/blogger-content-refresh.js $ARGS
+
+      - name: Upload backup and preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: blogger-content-refresh-${{ inputs.mode }}
+          path: reports/blogger-content-refresh/
+          if-no-files-found: error
+          retention-days: 30
