@@ -1137,7 +1137,7 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .ia-breadcrumb__link{color:var(--meta-color)}
 .ia-breadcrumb__link:hover{color:var(--accent-color)}
 .ia-breadcrumb__item--current{color:var(--title-color);font-weight:500}
-/* --- Post Hero Image (LCP element � single post pages) --- */
+/* --- Post Hero Image (LCP element  single post pages) --- */
 .post-hero{width:100%;margin-bottom:1.5rem;border-radius:var(--rounded);overflow:hidden;background:var(--border-color)}
 .post-hero__img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;max-height:500px}
 /* --- Sidebar Search Form --- */
@@ -1750,7 +1750,7 @@ body#layout #hidden{display:none!important}
       </div>
     </b:includable>
     <b:includable id='pbt-messages'>
-      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga M�s<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>????? ??????<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
+      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga Más<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>????? ??????<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
     </b:includable>
     <b:includable id='pbt-var'>
       <b:tag name='script' type='text/javascript'>const pbt={blogView:<b:if cond='data:blog.view'>&quot;<data:blog.view/>&quot;<b:else/>false</b:if>,isRTL:<b:eval expr='data:blog.languageDirection == &quot;rtl&quot; ? &quot;true&quot; : &quot;false&quot;'/>,isHome:<b:eval expr='data:view.isHomepage ? &quot;true&quot; : &quot;false&quot;'/>,isMultiple:<b:eval expr='data:view.isMultipleItems ? &quot;true&quot; : &quot;false&quot;'/>,isSingle:<b:eval expr='data:view.isSingleItem ? &quot;true&quot; : &quot;false&quot;'/>,isPost:<b:eval expr='data:view.isPost ? &quot;true&quot; : &quot;false&quot;'/>,isPage:<b:eval expr='data:view.isPage ? &quot;true&quot; : &quot;false&quot;'/>,isDark:<b:eval expr='data:skin.vars.darkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,userDarkMode:<b:eval expr='data:skin.vars.userDarkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,stickyMenu:<b:eval expr='data:skin.vars.stickyMenu == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,hasCookie:<b:eval expr='data:widgets.Text any w =&gt; w.sectionId == &quot;cookie&quot; ? &quot;true&quot; : &quot;false&quot;'/>,postAuthor:<b:eval expr='data:widgets.Blog.first.allBylineItems.author ? &quot;true&quot; : &quot;false&quot;'/>,postDate:<b:eval expr='data:widgets.Blog.first.allBylineItems.timestamp ? &quot;true&quot; : &quot;false&quot;'/>,postSummary:&quot;<b:eval expr='data:skin.vars.postSummary == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>&quot;,showMore:&quot;<data:messages.showMore/>&quot;,viewAll:&quot;<data:messages.viewAll/>&quot;,noResults:&quot;<data:messages.noResultsFound/>&quot;,noTitle:&quot;<data:messages.noTitle/>&quot;,noThumb:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG9GA0058_fE7q8dUjkpL56fvlwSQs-DyuNjRG1C3oYBoWDR2PYrDa0SKVYt6iEJ8pssbajfAujp0g51-SQimyZNawn0waVgbe8cwgMzSXRURuiG7bqguOahIkTzTgPOn67eoasTMjKkxPfqXg1ytQ4NMjLEAGpp3zKKtpo-PVacHSnidorgbmaOFlyQ/w72-h72-p-k-no-nu/ptb-nth.webp&quot;}</b:tag>
@@ -2796,15 +2796,15 @@ body#layout #hidden{display:none!important}
               <b:widget-setting name='content'><![CDATA[<section class="hero-ia" lang="ms" dir="ltr">
   <div class="hero-ia__inner">
     <h1>Ilmu Islam Moden: Mudah, Sahih, Pantas</h1>
-    <p class="lead">Baca Al-Qur�an, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
+    <p class="lead">Baca Al-Quran, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
 
     <form class="site-search" action="/search" method="get">
-      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik�" aria-label="Cari ilmu"/>
+      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik" aria-label="Cari ilmu"/>
       <button type="submit">Cari</button>
     </form>
 
     <div class="hero-ia__cta">
-      <a class="btn" href="/p/quran.html">Baca Al-Qur�an</a>
+      <a class="btn" href="/p/quran.html">Baca Al-Quran</a>
       <a class="btn ghost" href="/p/asmaul-husna.html">Asmaul Husna</a>
       <a class="btn ghost" href="/search/label/Doa%20%26%20Zikir">Doa & Zikir</a>
     </div>
@@ -3652,7 +3652,7 @@ body#layout #hidden{display:none!important}
                     <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
                     <b:widget-setting name='displayWidth'>436</b:widget-setting>
                     <b:widget-setting name='link'>https://www.ilmualam.com</b:widget-setting>
-                    <b:widget-setting name='caption'>Ilmu Tanpa Sempadan, Amal Tanpa Batasan, Akhirat Jua Pengakhiran! 🕌</b:widget-setting>
+                    <b:widget-setting name='caption'>Ilmu Tanpa Sempadan, Amal Tanpa Batasan, Akhirat Jua Pengakhiran! ð</b:widget-setting>
                   </b:widget-settings>
                   <b:includable id='main' var='this'>
       <b:include name='widget-title'/>
@@ -3887,28 +3887,46 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
   "use strict";
   $(function(){
     $("#related-posts .HTML").each(function(){
-      var $box=$(this),shortcode=$box.data("shortcode");
-      if(!shortcode) return;
-      $(".related-wrap").each(function(){
-        var $wrap=$(this),$tag=$wrap.find(".related-tag"),
-            postId=$tag.data("id"),postLabel=$tag.data("label"),
-            $content=$wrap.find(".widget-content"),
-            resAttr=getAttr(shortcode,"results"),
-            desktopCount=resAttr?Number(resAttr):6,
-            mobileCount=Math.min(3,desktopCount),
-            labelAttr=getAttr(shortcode,"label"),
-            label=(labelAttr&&labelAttr!=postLabel&&"related"!=labelAttr)?labelAttr:postLabel;
-        if(labelAttr&&labelAttr!=postLabel&&"related"!=labelAttr){
-          $content.parent().find(".title-link").attr("href","/search/label/"+label);
-        }
-        $w.on("load resize scroll",function onScroll(){
-          if($w.scrollTop()+$w.height()<$wrap.offset().top) return;
-          $w.off("load resize scroll",onScroll);
-          $content.html($loader);
-          fetchRelated(label,postId,desktopCount,function(posts){
-            renderRelated($content,posts,mobileCount);
-          });
-        }).trigger("scroll");
+    function readFeed(responseText){
+      var responseDocument=new DOMParser().parseFromString(responseText,"text/html");
+      var dataElement=responseDocument.querySelector("#data");
+      if(!dataElement) return [];
+      try{return JSON.parse(dataElement.textContent).posts||[];}catch(error){return [];}
+    }
+
+    function requestFeed(url,done){
+      var request=new XMLHttpRequest(),settled=false;
+      var timeoutId=window.setTimeout(function(){
+        settled=true;
+        request.abort();
+        done(new Error("feed_timeout"),"");
+      },5000);
+      request.open("GET",url,true);
+      request.onreadystatechange=function(){
+        if(request.readyState!==4||settled) return;
+        settled=true;
+        window.clearTimeout(timeoutId);
+        if(request.status>=200&&request.status<300) done(null,request.responseText);
+        else done(new Error("feed_request_failed"),"");
+      };
+      request.onerror=function(){
+        if(settled) return;
+        settled=true;
+        window.clearTimeout(timeoutId);
+        done(new Error("feed_request_failed"),"");
+      };
+      request.send();
+      requestFeed(getFeedUrl(count+1,label),function(error,responseText){
+        var posts=error?[]:readFeed(responseText).filter(function(post){return post.id!=excludeId;}).slice(0,count);
+        if(posts.length>=count) return done(posts);
+        backfillRecent(posts,excludeId,count,done);
+      requestFeed(getFeedUrl(need+posts.length+1,"recent"),function(error,responseText){
+        if(error) return done(posts);
+        var have={};
+        have[excludeId]=1;
+        posts.forEach(function(post){have[post.id]=1;});
+        var extra=readFeed(responseText).filter(function(post){return !have[post.id];}).slice(0,need);
+        done(posts.concat(extra));
       });
       $box.parent().remove();
     });
