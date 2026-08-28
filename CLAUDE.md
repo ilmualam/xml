@@ -4,7 +4,7 @@
 - **Site**: [ilmualam.com](https://www.ilmualam.com) — Islamic educational content (Malay/ms-MY)
 - **Platform**: Blogger/Blogspot with a fully custom XML template
 - **Template**: `asset/xml/ilmualam.xml` (~3,760 lines) — the single source of truth
-- **Template name**: The Ilmu Alam Green v1.0.0, modified by [thebukitbesi.com](https://thebukitbesi.com/)
+- **Template name**: The Ilmu Alam Green v1.0.0, maintained by Ilmu Alam
 
 ---
 
