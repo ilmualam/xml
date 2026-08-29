@@ -1,7 +1,7 @@
 # BLOGGER_TECHNICAL_SEO_AUDIT
 
 Date: 2026-07-04  
-Repository: `tbbcom/xml`  
+Repository: `ilmualam/xml`
 Template audited: `/home/runner/work/xml/xml/asset/xml/ilmualam.xml`
 
 ## 1. Executive summary
