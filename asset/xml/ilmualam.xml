@@ -1137,7 +1137,7 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .ia-breadcrumb__link{color:var(--meta-color)}
 .ia-breadcrumb__link:hover{color:var(--accent-color)}
 .ia-breadcrumb__item--current{color:var(--title-color);font-weight:500}
-/* --- Post Hero Image (LCP element � single post pages) --- */
+/* --- Post Hero Image (LCP element  single post pages) --- */
 .post-hero{width:100%;margin-bottom:1.5rem;border-radius:var(--rounded);overflow:hidden;background:var(--border-color)}
 .post-hero__img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;max-height:500px}
 /* --- Sidebar Search Form --- */
@@ -1750,7 +1750,7 @@ body#layout #hidden{display:none!important}
       </div>
     </b:includable>
     <b:includable id='pbt-messages'>
-      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga M�s<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>????? ??????<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
+      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga Más<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>????? ??????<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
     </b:includable>
     <b:includable id='pbt-var'>
       <b:tag name='script' type='text/javascript'>const pbt={blogView:<b:if cond='data:blog.view'>&quot;<data:blog.view/>&quot;<b:else/>false</b:if>,isRTL:<b:eval expr='data:blog.languageDirection == &quot;rtl&quot; ? &quot;true&quot; : &quot;false&quot;'/>,isHome:<b:eval expr='data:view.isHomepage ? &quot;true&quot; : &quot;false&quot;'/>,isMultiple:<b:eval expr='data:view.isMultipleItems ? &quot;true&quot; : &quot;false&quot;'/>,isSingle:<b:eval expr='data:view.isSingleItem ? &quot;true&quot; : &quot;false&quot;'/>,isPost:<b:eval expr='data:view.isPost ? &quot;true&quot; : &quot;false&quot;'/>,isPage:<b:eval expr='data:view.isPage ? &quot;true&quot; : &quot;false&quot;'/>,isDark:<b:eval expr='data:skin.vars.darkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,userDarkMode:<b:eval expr='data:skin.vars.userDarkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,stickyMenu:<b:eval expr='data:skin.vars.stickyMenu == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,hasCookie:<b:eval expr='data:widgets.Text any w =&gt; w.sectionId == &quot;cookie&quot; ? &quot;true&quot; : &quot;false&quot;'/>,postAuthor:<b:eval expr='data:widgets.Blog.first.allBylineItems.author ? &quot;true&quot; : &quot;false&quot;'/>,postDate:<b:eval expr='data:widgets.Blog.first.allBylineItems.timestamp ? &quot;true&quot; : &quot;false&quot;'/>,postSummary:&quot;<b:eval expr='data:skin.vars.postSummary == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>&quot;,showMore:&quot;<data:messages.showMore/>&quot;,viewAll:&quot;<data:messages.viewAll/>&quot;,noResults:&quot;<data:messages.noResultsFound/>&quot;,noTitle:&quot;<data:messages.noTitle/>&quot;,noThumb:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG9GA0058_fE7q8dUjkpL56fvlwSQs-DyuNjRG1C3oYBoWDR2PYrDa0SKVYt6iEJ8pssbajfAujp0g51-SQimyZNawn0waVgbe8cwgMzSXRURuiG7bqguOahIkTzTgPOn67eoasTMjKkxPfqXg1ytQ4NMjLEAGpp3zKKtpo-PVacHSnidorgbmaOFlyQ/w72-h72-p-k-no-nu/ptb-nth.webp&quot;}</b:tag>
@@ -2796,15 +2796,15 @@ body#layout #hidden{display:none!important}
               <b:widget-setting name='content'><![CDATA[<section class="hero-ia" lang="ms" dir="ltr">
   <div class="hero-ia__inner">
     <h1>Ilmu Islam Moden: Mudah, Sahih, Pantas</h1>
-    <p class="lead">Baca Al-Qur�an, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
+    <p class="lead">Baca Al-Quran, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
 
     <form class="site-search" action="/search" method="get">
-      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik�" aria-label="Cari ilmu"/>
+      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik" aria-label="Cari ilmu"/>
       <button type="submit">Cari</button>
     </form>
 
     <div class="hero-ia__cta">
-      <a class="btn" href="/p/quran.html">Baca Al-Qur�an</a>
+      <a class="btn" href="/p/quran.html">Baca Al-Quran</a>
       <a class="btn ghost" href="/p/asmaul-husna.html">Asmaul Husna</a>
       <a class="btn ghost" href="/search/label/Doa%20%26%20Zikir">Doa & Zikir</a>
     </div>
@@ -3652,7 +3652,7 @@ body#layout #hidden{display:none!important}
                     <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
                     <b:widget-setting name='displayWidth'>436</b:widget-setting>
                     <b:widget-setting name='link'>https://www.ilmualam.com</b:widget-setting>
-                    <b:widget-setting name='caption'>Ilmu Tanpa Sempadan, Amal Tanpa Batasan, Akhirat Jua Pengakhiran! 🕌</b:widget-setting>
+                    <b:widget-setting name='caption'>Ilmu Tanpa Sempadan, Amal Tanpa Batasan, Akhirat Jua Pengakhiran! ð</b:widget-setting>
                   </b:widget-settings>
                   <b:includable id='main' var='this'>
       <b:include name='widget-title'/>
@@ -3860,78 +3860,110 @@ var a;"use strict";!function(e){e.fn.pbtMenu=function(){return this.each(functio
 })();
 //]]>
 </script>
-<div class='demand-supply' data-ad='ilmualam.com_sticky_mobile_bottom_mobfloat' data-devices='m:1,t:0,d:0'/>
-<div class='demand-supply' data-ad='ilmualam.com_728x90_sticky_display_bottom_desktop' data-devices='m:0,t:1,d:1'/>
-<!-- Reading Time: auto-inject estimated reading duration on post pages -->
-<script type='text/javascript'>
-//<![CDATA[
 (function(){
-  "use strict";
-  function injectReadingTime(){
-    var body=document.querySelector(".post-body");
-    var el=document.querySelector(".ia-reading-time");
-    if(!body||!el) return;
-    var words=(body.innerText||body.textContent||"").trim().split(/\s+/).filter(function(w){return w.length>0;}).length;
-    var mins=Math.max(1,Math.ceil(words/200));
-    el.textContent=mins+(mins===1?" minit bacaan":" minit bacaan");
+
+  function readFeed(responseText){
+    var documentFragment=new DOMParser().parseFromString(responseText,"text/html");
+    var data=documentFragment.getElementById("data");
+    if(!data) return [];
+    try{return JSON.parse(data.textContent).posts||[];}catch(error){return [];}
   }
-  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",injectReadingTime,{once:true,passive:true});}
-  else{injectReadingTime();}
-})();
-//]]>
-</script>
-<!-- Related Posts: responsive count (6 desktop / 3 mobile) with recent-post backfill for sparse labels -->
-<script type='text/javascript'>
-//<![CDATA[
-(function($){
-  "use strict";
-  $(function(){
-    $("#related-posts .HTML").each(function(){
-      var $box=$(this),shortcode=$box.data("shortcode");
-      if(!shortcode) return;
-      $(".related-wrap").each(function(){
-        var $wrap=$(this),$tag=$wrap.find(".related-tag"),
-            postId=$tag.data("id"),postLabel=$tag.data("label"),
-            $content=$wrap.find(".widget-content"),
-            resAttr=getAttr(shortcode,"results"),
-            desktopCount=resAttr?Number(resAttr):6,
-            mobileCount=Math.min(3,desktopCount),
-            labelAttr=getAttr(shortcode,"label"),
-            label=(labelAttr&&labelAttr!=postLabel&&"related"!=labelAttr)?labelAttr:postLabel;
-        if(labelAttr&&labelAttr!=postLabel&&"related"!=labelAttr){
-          $content.parent().find(".title-link").attr("href","/search/label/"+label);
-        }
-        $w.on("load resize scroll",function onScroll(){
-          if($w.scrollTop()+$w.height()<$wrap.offset().top) return;
-          $w.off("load resize scroll",onScroll);
-          $content.html($loader);
-          fetchRelated(label,postId,desktopCount,function(posts){
-            renderRelated($content,posts,mobileCount);
-          });
-        }).trigger("scroll");
-      });
-      $box.parent().remove();
+
+  function requestFeed(label,count){
+    var controller=new AbortController();
+    var timeoutId=setTimeout(function(){controller.abort();},5000);
+    return fetch(getFeedUrl(count,label),{
+      method:"GET",
+      cache:"force-cache",
+      credentials:"same-origin",
+      signal:controller.signal
+    }).then(function(response){
+      if(!response.ok) throw new Error("feed_request_failed");
+      return response.text();
+    }).then(readFeed).finally(function(){clearTimeout(timeoutId);});
+  }
+
+  function backfillRecent(posts,excludeId,count){
+    var needed=count-posts.length;
+    if(needed<=0) return Promise.resolve(posts);
+    return requestFeed("recent",needed+posts.length+1).then(function(recentPosts){
+      var existing={};
+      existing[excludeId]=true;
+      posts.forEach(function(post){existing[post.id]=true;});
+      var extra=recentPosts.filter(function(post){return !existing[post.id];}).slice(0,needed);
+      return posts.concat(extra);
+    }).catch(function(){return posts;});
+  }
+
+  function fetchRelated(label,excludeId,count){
+    return requestFeed(label,count+1).then(function(feedPosts){
+      var posts=feedPosts.filter(function(post){return post.id!=excludeId;}).slice(0,count);
+      return posts.length>=count?posts:backfillRecent(posts,excludeId,count);
+    }).catch(function(){return backfillRecent([],excludeId,count);});
+  }
+
+  function loadThumbnail(element){
+    var source=element.getAttribute("data-src");
+    if(!source) return;
+    var image=new Image();
+    image.onload=function(){
+      element.style.backgroundImage="url('"+this.src+"')";
+      element.classList.add("pbt-lazy");
+    };
+    image.src=source;
+  }
+
+  function renderRelated(content,posts,mobileCount){
+    if(!posts.length){content.innerHTML=msgError("related");return;}
+    var total=posts.length;
+    var html='<div class="related-items">';
+    posts.forEach(function(post,index){
+      html+=getPostContent({type:"related",index:index,total:total,post:post});
     });
+    content.innerHTML=html+"</div>";
+    content.querySelectorAll(".related-items > .post").forEach(function(post,index){
+      if(index>=mobileCount) post.classList.add("is-desktop-only");
+    });
+    content.querySelectorAll(".thumbnail").forEach(loadThumbnail);
+  }
 
-    function readFeed(resp){
-      var $data=$(resp).find("#data");
-      if(!$data.length) return [];
-      try{return JSON.parse($data.text()).posts||[];}catch(e){return [];}
-    }
-
-    function fetchRelated(label,excludeId,count,done){
-      $.ajax({
-        url:getFeedUrl(count+1,label),type:"GET",dataType:"html",cache:true,timeout:5e3,
-        success:function(resp){
-          var posts=readFeed(resp).filter(function(p){return p.id!=excludeId;}).slice(0,count);
-          if(posts.length>=count) return done(posts);
-          backfillRecent(posts,excludeId,count,done);
-        },
-        error:function(){backfillRecent([],excludeId,count,done);}
-      });
-    }
-
-    function backfillRecent(posts,excludeId,count,done){
+  function initializeRelatedPosts(){
+    document.querySelectorAll("#related-posts .HTML").forEach(function(box){
+      var shortcode=box.getAttribute("data-shortcode");
+      document.querySelectorAll(".related-wrap").forEach(function(wrap){
+        var tag=wrap.querySelector(".related-tag");
+        var content=wrap.querySelector(".widget-content");
+        if(!tag||!content) return;
+        var postId=tag.getAttribute("data-id");
+        var postLabel=tag.getAttribute("data-label");
+        var resultsAttribute=getAttr(shortcode,"results");
+        var desktopCount=resultsAttribute?Number(resultsAttribute):6;
+        var mobileCount=Math.min(3,desktopCount);
+        var labelAttribute=getAttr(shortcode,"label");
+        var label=labelAttribute&&labelAttribute!=postLabel&&labelAttribute!="related"?labelAttribute:postLabel;
+        if(labelAttribute&&labelAttribute!=postLabel&&labelAttribute!="related"){
+          var titleLink=content.parentElement.querySelector(".title-link");
+          if(titleLink) titleLink.setAttribute("href","/search/label/"+label);
+        var loadRelated=function(){
+          content.innerHTML=$loader;
+          fetchRelated(label,postId,desktopCount).then(function(posts){
+            renderRelated(content,posts,mobileCount);
+          });
+        };
+        if("IntersectionObserver" in window){
+          var observer=new IntersectionObserver(function(entries){
+            if(!entries[0].isIntersecting) return;
+            observer.disconnect();
+            loadRelated();
+          observer.observe(wrap);
+        }else{
+          loadRelated();
+        }
+      if(box.parentElement) box.parentElement.remove();
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initializeRelatedPosts,{once:true});
+  else initializeRelatedPosts();
+})();
       var need=count-posts.length;
       if(need<=0) return done(posts);
       $.ajax({
