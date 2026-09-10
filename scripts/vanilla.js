@@ -248,6 +248,14 @@
         el.style.backgroundImage = "url('" + this.src + "')";
         el.classList.add('pbt-lazy');
       };
+      img.onerror = function () {
+        if (finalSrc !== pbt.noThumb) {
+          finalSrc = pbt.noThumb;
+          img.src = finalSrc;
+        } else {
+          el.classList.add('pbt-lazy');
+        }
+      };
       img.src = finalSrc;
     }
 
@@ -385,7 +393,7 @@
   function getFeedUrl(num, label) {
     return label === 'recent'
       ? '/search/?by-date=true&max-results=' + num + '&view=json'
-      : '/search/label/' + label + '?by-date=true&max-results=' + num + '&view=json';
+      : '/search/label/' + encodeURIComponent(label) + '?by-date=true&max-results=' + num + '&view=json';
   }
 
   function getPostTitle(ctx, opts) {
@@ -397,25 +405,28 @@
   }
 
   function getPostMeta(ctx, opts) {
+    var labelHtml = ctx.post.author.label ? '<span class="label">' + ctx.post.author.label + '</span>' : '';
+    var avatarHtml = '<div class="entry-avatar"><div class="avatar" data-src="' + ctx.post.author.avatar + '"></div></div>';
     var authorHtml = pbt.postAuthor && opts.author !== 'false'
-      ? '<span class="entry-author"><span class="author-name">' + ctx.post.author + '</span></span>' : '';
+      ? '<div class="entry-author">' + labelHtml + avatarHtml + '<span class="author-name">' + ctx.post.author.name + '</span></div>' : '';
     var dateHtml = pbt.postDate === true && opts.date !== 'false'
-      ? '<span class="entry-time"><time class="published" datetime="' + ctx.post.published.datetime + '">' + ctx.post.published.date + '</time></span>' : '';
+      ? '<div class="entry-time"><time class="published" datetime="' + ctx.post.published.datetime + '">' + ctx.post.published.date + '</time></div>' : '';
     return (authorHtml || dateHtml) ? '<div class="entry-meta">' + authorHtml + dateHtml + '</div>' : '';
   }
 
   function getPostImage(ctx, opts) {
-    var showIcon = opts.icon !== 'false' && (ctx.post.thumbnail.source === 'youtube' || ctx.type === 'video');
+    var showIcon = opts.icon !== 'false' && ctx.post.thumbnail.source === 'youtube';
     var iconHtml = showIcon ? '<span class="yt-img' + (opts.size ? ':x' + opts.size : '') + '"></span>' : '';
+    var categoryHtml = opts.category === 'true' ? getPostTag(ctx) : '';
     var thumbHtml = '<div class="thumbnail" data-src="' + ctx.post.thumbnail.src + '"></div>';
     var targetAttr = ctx.target ? ' target="' + ctx.target + '"' : '';
     return opts.link !== 'false'
-      ? '<a class="entry-thumbnail" href="' + ctx.post.link + '"' + targetAttr + '>' + thumbHtml + iconHtml + '</a>'
-      : '<div class="entry-thumbnail">' + thumbHtml + iconHtml + '</div>';
+      ? '<a class="entry-thumbnail" href="' + ctx.post.link + '"' + targetAttr + '>' + categoryHtml + thumbHtml + iconHtml + '</a>'
+      : '<div class="entry-thumbnail">' + categoryHtml + thumbHtml + iconHtml + '</div>';
   }
 
   function getPostTag(ctx) {
-    return pbt.postCategory && ctx.post.category ? '<span class="entry-tag">' + ctx.post.category + '</span>' : '';
+    return ctx.post.category ? '<span class="entry-tag">' + ctx.post.category + '</span>' : '';
   }
 
   function getPostSummary(ctx) {
@@ -442,36 +453,14 @@
         break;
       case 'featured':
         html = index === 0
-          ? '<div class="row-0 post first"><a class="entry-inner flex-c" href="' + link + '"><div class="container">' + img({ icon: 'false', link: 'false' }) + '<div class="entry-header">' + tag() + title({ link: 'false' }) + meta() + '</div></div></a></div>'
-          : (index === 1 ? '<div class="row-1 flex-c"><div class="container"><div class="grid">' : '') + '<div class="post">' + img({ size: '4' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
-        break;
-      case 'grid':
-      case 'list':
-        html = '<div class="post">' + img() + '<div class="entry-header">' + tag() + title() + summary() + meta() + '</div></div>';
-        break;
-      case 'block1':
-        html = index === 0
-          ? '<div class="post first">' + img() + '<div class="entry-header">' + tag() + title() + summary() + meta() + '</div></div>'
-          : (index === 1 ? '<div class="' + type + '-list">' : '') + '<div class="post">' + img({ size: '3' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
-        break;
-      case 'block2':
-        html = index === 0
-          ? '<div class="post card cs"><a class="entry-inner" href="' + link + '">' + img({ link: 'false' }) + '<div class="entry-header">' + tag() + title({ link: 'false' }) + meta() + '</div></a></div>'
-          : (index === 1 ? '<div class="' + type + '-grid">' : '') + '<div class="post">' + img() + '<div class="entry-header">' + tag() + title() + summary() + meta() + '</div></div>';
-        break;
-      case 'story':
-        html = '<div class="post card cs"><a class="entry-inner" href="' + link + '">' + img({ link: 'false' }) + '<div class="entry-header">' + title({ link: 'false' }) + meta({ author: 'false' }) + '</div></a></div>';
-        break;
-      case 'video':
-        html = index === 0
-          ? '<div class="post first">' + img() + '<div class="entry-header">' + tag() + title() + summary() + meta() + '</div></div>'
-          : (index === 1 ? '<div class="' + type + '-grid">' : '') + '<div class="post">' + img({ size: '3' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
+          ? '<div class="row-0 post first"><a class="entry-inner flex-c" href="' + link + '"><div class="container">' + img({ icon: 'false', link: 'false', category: 'true' }) + '<div class="entry-header">' + title({ link: 'false' }) + meta() + '</div></div></a></div>'
+          : (index === 1 ? '<div class="row-1 flex-c"><div class="container"><div class="grid">' : '') + '<div class="post">' + img({ size: '4', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
         break;
       case 'card':
         html = img({ size: '2' }) + '<div class="entry-header">' + headline + title() + meta() + '</div>';
         break;
       case 'related':
-        html = index !== num - 1 ? '<div class="post">' + img({ size: '2' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>' : '';
+        html = index !== num - 1 ? '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>' : '';
         break;
       case 'side':
         html = '<div class="post">' + img({ size: '3' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
@@ -571,7 +560,7 @@
             target.parentElement.parentElement.classList.remove('loading');
             var viewAll = target.parentElement.querySelector('.view-all');
             if (num < count) {
-              var searchUrl = '/search?q=' + label + '&by-date=true';
+              var searchUrl = '/search?q=' + encodeURIComponent(label) + '&by-date=true';
               if (viewAll) {
                 viewAll.querySelector('a').setAttribute('href', searchUrl);
               } else {
@@ -584,14 +573,6 @@
           case 'featured':
             out = isError ? out : out + '</div></div></div>';
             target.innerHTML = out;
-            break;
-          case 'video':
-            target.innerHTML = out;
-            if (!isError) {
-              var firstThumb = target.querySelector('.first .thumbnail');
-              var bgSrc = firstThumb && firstThumb.dataset.src;
-              if (bgSrc) target.parentElement.style.backgroundImage = "url('" + bgSrc + "')";
-            }
             break;
           default:
             target.innerHTML = out;
@@ -663,7 +644,7 @@
     var value = inputEl.value.trim();
     if (value !== '' && value !== localStorage.search_term) {
       localStorage.search_term = value;
-      getPosts({ t: resultsEl, type: 'search', num: 4, label: value, link: '/search/?q=' + encodeURIComponent(value) + '&max-results=5&view=json' });
+      getPosts({ t: resultsEl, type: 'search', num: 15, label: value, link: '/search/?q=' + encodeURIComponent(value) + '&max-results=16&view=json' });
     }
   }
 
@@ -1208,43 +1189,6 @@
       window.addEventListener('resize', handler);
       window.addEventListener('scroll', handler);
       handler();
-      target.removeAttribute('data-shortcode');
-    }
-  });
-
-  qsa('.content-section .getPosts').forEach(function (el) {
-    var target = el.querySelector('.widget-content');
-    if (!target) return;
-    var shortcode = target.dataset.shortcode;
-    if (shortcode) {
-      var results = getAttr(shortcode, 'results');
-      var label = getAttr(shortcode, 'label');
-      var type = getAttr(shortcode, 'type');
-      var finalLabel = label || 'recent';
-      var finalType = type || 'block1';
-      var num = results || (finalType === 'block2' ? 5 : 4);
-      num = (finalType === 'block1' || finalType === 'video') ? 5 : (finalType === 'story' ? 3 : num);
-
-      if (['grid', 'list', 'block1', 'block2', 'story', 'video'].indexOf(finalType) > -1) {
-        if (finalLabel) {
-          var titleLink = el.parentElement.querySelector('.title-link');
-          if (titleLink) titleLink.setAttribute('href', finalLabel === 'recent' ? '/search' : '/search/label/' + finalLabel);
-        }
-        var handler = function () {
-          if (scrollY() + window.innerHeight >= offsetTop(target)) {
-            window.removeEventListener('load', handler);
-            window.removeEventListener('resize', handler);
-            window.removeEventListener('scroll', handler);
-            getPosts({ t: target, type: finalType, num: num, label: finalLabel });
-          }
-        };
-        window.addEventListener('load', handler);
-        window.addEventListener('resize', handler);
-        window.addEventListener('scroll', handler);
-        handler();
-      } else {
-        target.innerHTML = msgError();
-      }
       target.removeAttribute('data-shortcode');
     }
   });
