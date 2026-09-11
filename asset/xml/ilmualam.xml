@@ -3814,7 +3814,7 @@ body#layout #hidden{display:none!important}
   </b:section>
 </b:if>
 <!-- Site Scripts (vanilla JS, no jQuery) -->
-<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@v1.0.0/scripts/vanilla.js' type='text/javascript'/>
+<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@v1.0.1/scripts/vanilla.js' type='text/javascript'/>
 </b:if>
 <!-- Blogger Scripts -->
 <b:if cond='data:isFeed'>

@@ -459,6 +459,9 @@
       case 'card':
         html = img({ size: '2' }) + '<div class="entry-header">' + headline + title() + meta() + '</div>';
         break;
+      case 'trending':
+        html = '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
+        break;
       case 'related':
         html = index !== num - 1 ? '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>' : '';
         break;
@@ -1260,6 +1263,32 @@
           window.removeEventListener('resize', handler);
           window.removeEventListener('scroll', handler);
           getPosts({ t: target, type: 'featured', num: 4, label: label });
+        }
+      };
+      window.addEventListener('load', handler);
+      window.addEventListener('resize', handler);
+      window.addEventListener('scroll', handler);
+      handler();
+      target.removeAttribute('data-shortcode');
+    }
+  });
+
+  qsa('.trending .getPosts').forEach(function (el) {
+    var target = el.querySelector('.widget-content');
+    if (!target) return;
+    var shortcode = target.dataset.shortcode;
+    if (shortcode) {
+      var results = getAttr(shortcode, 'results');
+      var num = results || 4;
+      var label = getAttr(shortcode, 'label');
+      var titleLink = el.parentElement.querySelector('.title-link');
+      if (titleLink) titleLink.setAttribute('href', label && label !== 'recent' ? '/search/label/' + label : '/search');
+      var handler = function () {
+        if (scrollY() + window.innerHeight >= offsetTop(target)) {
+          window.removeEventListener('load', handler);
+          window.removeEventListener('resize', handler);
+          window.removeEventListener('scroll', handler);
+          getPosts({ t: target, type: 'trending', num: num, label: label });
         }
       };
       window.addEventListener('load', handler);
