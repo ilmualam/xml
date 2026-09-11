@@ -373,10 +373,20 @@
     });
   }
 
+  function closeShare() {
+    document.body.classList.remove('share-on');
+  }
+
   function openShare() {
     cleanSearch();
     document.body.classList.remove('search-on');
     document.body.classList.add('share-on');
+    qsa('.hide-modal, .share-on .overlay-bg').forEach(function (el) {
+      el.addEventListener('click', function () { closeShare(); });
+    });
+    window.addEventListener('keydown', function (e) {
+      if (e.keyCode === 27) closeShare();
+    });
   }
 
   function navShortcuts(selector) {
@@ -1143,6 +1153,38 @@
       window.addEventListener('hashchange', renderPage);
       renderPage();
     }
+  });
+
+  // ---------------------------------------------------------------------
+  // Share link hrefs: built here (not in the XML template) because the
+  // template's .urlEscaped modifier was found to render as an empty
+  // string in this Blogger account, leaving every share link's url/title
+  // query param blank (e.g. WhatsApp opening a message with no link).
+  // Each share container carries the raw post URL/title as data
+  // attributes; this fills in every platform link with a properly
+  // encodeURIComponent()-encoded href.
+  // ---------------------------------------------------------------------
+  var SHARE_URL_TEMPLATES = {
+    facebook: 'https://www.facebook.com/sharer.php?u={u}',
+    twitter: 'https://x.com/intent/tweet?url={u}&text={t}',
+    whatsapp: 'https://wa.me/?text={u}%0A%0A{t}',
+    telegram: 'https://t.me/share/url?url={u}&text={t}',
+    linkedin: 'https://www.linkedin.com/shareArticle?mini=true&url={u}&title={t}',
+    reddit: 'https://reddit.com/submit?url={u}&title={t}',
+    bluesky: 'https://bsky.app/intent/compose?text={t}%20{u}',
+    email: 'mailto:?subject={t}&body={t}%0D%0A%0D%0A{u}'
+  };
+
+  qsa('[data-share-url]').forEach(function (container) {
+    var url = container.dataset.shareUrl;
+    if (!url) return;
+    var encodedUrl = encodeURIComponent(url);
+    var encodedTitle = encodeURIComponent(container.dataset.shareTitle || '');
+    Object.keys(SHARE_URL_TEMPLATES).forEach(function (platform) {
+      var link = container.querySelector('.' + platform + ' a');
+      if (!link) return;
+      link.setAttribute('href', SHARE_URL_TEMPLATES[platform].replace(/\{u\}/g, encodedUrl).replace(/\{t\}/g, encodedTitle));
+    });
   });
 
   qsa('.window-open').forEach(function (el) {

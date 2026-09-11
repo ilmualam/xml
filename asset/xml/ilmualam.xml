@@ -1707,16 +1707,16 @@ body#layout #hidden{display:none!important}
           <button class='hide-modal' expr:aria-label='data:messages.showLess'/>
         </div>
         <b:with value='data:view.url.canonical' var='shareUrl'>
-          <b:with value='data:view.title.escaped' var='shareTitle'>
-            <ul class='share-b social color'>
-              <li class='facebook'><a class='bi-facebook window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Facebook'/></li>
-              <li class='twitter'><a class='bi-twitter window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='X (Twitter)'/></li>
-              <li class='whatsapp'><a class='bi-whatsapp' expr:href='&quot;https://wa.me/?text=&quot; + data:shareUrl.urlEscaped + &quot;%0A%0A&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'/></li>
-              <li class='telegram'><a class='bi-telegram' expr:href='&quot;https://t.me/share/url?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;text=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' target='_blank' title='Telegram'/></li>
-              <li class='linkedin'><a class='bi-linkedin window-open' expr:href='&quot;https://www.linkedin.com/shareArticle?mini=true&amp;url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;title=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='LinkedIn'/></li>
-              <li class='reddit'><a class='bi-reddit window-open' expr:href='&quot;https://reddit.com/submit?url=&quot; + data:shareUrl.urlEscaped + &quot;&amp;title=&quot; + data:shareTitle.urlEscaped' rel='nofollow noopener' title='Reddit'/></li>
-              <li class='bluesky'><a class='bi-bluesky window-open' expr:href='&quot;https://bsky.app/intent/compose?text=&quot; + data:shareTitle.urlEscaped + &quot;%20&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Bluesky'/></li>
-              <li class='email'><a class='bi-email' expr:href='&quot;mailto:?subject=&quot; + data:shareTitle.urlEscaped + &quot;&amp;body=&quot; + data:shareTitle.urlEscaped + &quot;%0D%0A%0D%0A&quot; + data:shareUrl.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <b:with value='data:view.title' var='shareTitle'>
+            <ul class='share-b social color' expr:data-share-title='data:shareTitle' expr:data-share-url='data:shareUrl'>
+              <li class='facebook'><a class='bi-facebook window-open' href='#' rel='nofollow noopener' title='Facebook'/></li>
+              <li class='twitter'><a class='bi-twitter window-open' href='#' rel='nofollow noopener' title='X (Twitter)'/></li>
+              <li class='whatsapp'><a class='bi-whatsapp' href='#' rel='nofollow noopener' target='_blank' title='WhatsApp'/></li>
+              <li class='telegram'><a class='bi-telegram' href='#' rel='nofollow noopener' target='_blank' title='Telegram'/></li>
+              <li class='linkedin'><a class='bi-linkedin window-open' href='#' rel='nofollow noopener' title='LinkedIn'/></li>
+              <li class='reddit'><a class='bi-reddit window-open' href='#' rel='nofollow noopener' title='Reddit'/></li>
+              <li class='bluesky'><a class='bi-bluesky window-open' href='#' rel='nofollow noopener' title='Bluesky'/></li>
+              <li class='email'><a class='bi-email' href='#' rel='nofollow noopener' title='Email'/></li>
             </ul>
           </b:with>
           <div class='modal-footer'>
@@ -2238,12 +2238,12 @@ body#layout #hidden{display:none!important}
     <b:includable id='postShareButtons' var='post'>
       <!-- Post Share Buttons -->
       <div class='post-share'>
-        <ul class='share-a social'>
+        <ul class='share-a social' expr:data-share-title='data:post.title' expr:data-share-url='data:post.url.canonical'>
           <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
-          <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
-          <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical.urlEscaped + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
-          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical.urlEscaped + &quot;%0A%0A&quot; + data:post.title.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
-          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.title.urlEscaped + &quot;%0D%0A%0D%0A&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <li class='facebook has-span'><a class='bi-facebook sl window-open' href='#' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
+          <li class='twitter has-span'><a class='bi-twitter sl window-open' href='#' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
+          <li class='whatsapp has-span'><a class='bi-whatsapp sl' href='#' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
+          <li class='email'><a class='bi-email sl' href='#' rel='nofollow noopener' title='Email'/></li>
           <li class='show-more'><button class='sl' expr:aria-label='data:messages.showMore'/></li>
         </ul>
       </div>
@@ -3333,12 +3333,12 @@ body#layout #hidden{display:none!important}
               <b:includable id='postShareButtons' var='post'>
       <!-- Post Share Buttons -->
       <div class='post-share'>
-        <ul class='share-a social'>
+        <ul class='share-a social' expr:data-share-title='data:post.title' expr:data-share-url='data:post.url.canonical'>
           <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
-          <li class='facebook has-span'><a class='bi-facebook sl window-open' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
-          <li class='twitter has-span'><a class='bi-twitter sl window-open' expr:href='&quot;https://x.com/intent/tweet?url=&quot; + data:post.url.canonical.urlEscaped + &quot;&amp;text=&quot; + data:post.title.urlEscaped' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
-          <li class='whatsapp has-span'><a class='bi-whatsapp sl' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical.urlEscaped + &quot;%0A%0A&quot; + data:post.title.urlEscaped' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
-          <li class='email'><a class='bi-email sl' expr:href='&quot;mailto:?subject=&quot; + data:post.title.urlEscaped + &quot;&amp;body=&quot; + data:post.title.urlEscaped + &quot;%0D%0A%0D%0A&quot; + data:post.url.canonical.urlEscaped' rel='nofollow noopener' title='Email'/></li>
+          <li class='facebook has-span'><a class='bi-facebook sl window-open' href='#' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
+          <li class='twitter has-span'><a class='bi-twitter sl window-open' href='#' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
+          <li class='whatsapp has-span'><a class='bi-whatsapp sl' href='#' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
+          <li class='email'><a class='bi-email sl' href='#' rel='nofollow noopener' title='Email'/></li>
           <li class='show-more'><button class='sl' expr:aria-label='data:messages.showMore'/></li>
         </ul>
       </div>
@@ -3814,7 +3814,7 @@ body#layout #hidden{display:none!important}
   </b:section>
 </b:if>
 <!-- Site Scripts (vanilla JS, no jQuery) -->
-<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@v1.0.1/scripts/vanilla.js' type='text/javascript'/>
+<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@v1.0.2/scripts/vanilla.js' type='text/javascript'/>
 </b:if>
 <!-- Blogger Scripts -->
 <b:if cond='data:isFeed'>
