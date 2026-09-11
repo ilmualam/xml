@@ -641,6 +641,13 @@ table.tr-caption-container td.tr-caption{font-size:0.75rem;padding-top:0.25rem}
 #pbt-toc[data-count="false"] li:before{display:none}
 #pbt-toc li a{color:var(--title-color)}
 #pbt-toc li a:hover{color:var(--header-color);text-decoration:underline}
+.pbt-faq{display:flex;flex-direction:column;gap:0.75rem;width:100%;margin:1.5rem 0}
+.pbt-faq-item{background:var(--widget-bg);border:1px solid var(--border-color);border-radius:var(--rounded);overflow:hidden}
+.pbt-faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%;padding:1rem 1.25rem;background:none;border:0;text-align:start;font-family:var(--title-font);font-weight:var(--title-weight);font-size:1rem;color:var(--header-color);cursor:pointer}
+.pbt-faq-q i{flex-shrink:0;transition:transform .2s ease}
+.pbt-faq-q[aria-expanded="true"] i{transform:rotate(180deg)}
+.pbt-faq-a{padding:0 1.25rem 1.25rem;color:var(--meta-color);line-height:1.6}
+.pbt-faq-a[hidden]{display:none}
 .post-body .contact-form-widget{display:table;width:100%;font-family:var(--body-font);--dynamic-bg:var(--widget-bg)}
 .post-body .contact-form-form{grid-template-columns:repeat(2,minmax(0,1fr))}
 .post-body .contact-form-email-message,.post-body .contact-form-button,.post-body .contact-form-form p{grid-column:1/3}
@@ -1151,7 +1158,7 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .main-search .view-all a{color:var(--meta-color)}
 .main-search .view-all a:hover{color:var(--accent-color)}
 /* --- Telegram share button --- */
-.social .telegram a:before,.social .telegram a{color:#229ED9}
+.social:not(.share-b) .telegram a:before,.social:not(.share-b) .telegram a{color:#229ED9}
 /* --- Sitemap page styles --- */
 .ia-sitemap__year{margin-bottom:2rem}
 .ia-sitemap__year-title{font-size:1.25rem;font-weight:600;color:var(--title-color);padding-bottom:0.5rem;border-bottom:2px solid var(--accent-color);margin-bottom:1rem}
@@ -1268,16 +1275,19 @@ body#layout #hidden{display:none!important}
 		<meta expr:content='resizeImage(data:view.featuredImage, 1200, &quot;1200:630&quot;)' property='og:image:secure_url'/>
 		<meta content='1200' property='og:image:width'/>
 		<meta content='630' property='og:image:height'/>
+		<meta content='image/jpeg' property='og:image:type'/>
 		<meta expr:content='data:view.title.escaped' property='og:image:alt'/> <b:elseif cond='data:view.isMultipleItems and data:widgets.Blog.first.posts[0].featuredImage'/>
 		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' property='og:image'/>
 		<meta expr:content='resizeImage(data:widgets.Blog.first.posts[0].featuredImage, 1200, &quot;1200:630&quot;)' property='og:image:secure_url'/>
 		<meta content='1200' property='og:image:width'/>
 		<meta content='630' property='og:image:height'/>
+		<meta content='image/jpeg' property='og:image:type'/>
 		<meta expr:content='data:view.title.escaped' property='og:image:alt'/> <b:else/>
 		<meta content='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp' property='og:image'/>
 		<meta content='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp' property='og:image:secure_url'/>
 		<meta content='500' property='og:image:width'/>
 		<meta content='500' property='og:image:height'/>
+		<meta content='image/jpeg' property='og:image:type'/>
 		<meta expr:content='data:view.title.escaped' property='og:image:alt'/> </b:if>
 	<!-- Twitter Card Meta Tags -->
 	<meta content='summary_large_image' name='twitter:card'/>
@@ -3410,7 +3420,7 @@ body#layout #hidden{display:none!important}
             <b:tag class='title' cond='data:view.isLayoutMode' name='h4' title='Post Content ADS'/>
             <b:tag class='content-ads' name='div'>
               <b:section cond='data:view.isLayoutMode or (data:view.isSingleItem and ((data:widgets.HTML any w =&gt; w.sectionId == &quot;post-ads-1&quot;) or (data:widgets.Image any w =&gt; w.sectionId == &quot;post-ads-1&quot;) or (data:widgets.AdSense any w =&gt; w.sectionId == &quot;post-ads-1&quot;)))' id='post-ads-1' maxwidgets='1' name='Before Content' showaddelement='yes'>
-                <b:widget id='HTML7' locked='false' title='' type='HTML' visible='true'>
+                <b:widget id='HTML7' locked='false' title='{ads}' type='HTML' visible='true'>
                   <b:widget-settings>
                     <b:widget-setting name='content'><![CDATA[<div class="rr-container"><div data-ad="ilmualam.com_fluid_all_under-title" data-devices="m:1,t:1,d:1"  style="min-height: 280px;" class="demand-supply"></div></div>]]></b:widget-setting>
                   </b:widget-settings>
@@ -3420,7 +3430,7 @@ body#layout #hidden{display:none!important}
                 </b:widget>
               </b:section>
               <b:section cond='data:view.isLayoutMode or (data:view.isSingleItem and ((data:widgets.HTML any w =&gt; w.sectionId == &quot;post-ads-2&quot;) or (data:widgets.Image any w =&gt; w.sectionId == &quot;post-ads-2&quot;) or (data:widgets.AdSense any w =&gt; w.sectionId == &quot;post-ads-2&quot;)))' id='post-ads-2' maxwidgets='1' name='After Content' showaddelement='yes'>
-                <b:widget id='HTML8' locked='false' title='' type='HTML' visible='true'>
+                <b:widget id='HTML8' locked='false' title='{ads}' type='HTML' visible='true'>
                   <b:widget-settings>
                     <b:widget-setting name='content'><![CDATA[<div class="rr-container">
       <div data-ad="ilmualam.com_fluid_all_2025_content_down" data-devices="m:1,t:1,d:1"  style="min-height: 280px;" class="demand-supply"></div></div>]]></b:widget-setting>
@@ -3432,7 +3442,7 @@ body#layout #hidden{display:none!important}
               </b:section>
             </b:tag>
             <b:section cond='data:view.isLayoutMode or (data:view.isSingleItem and ((data:widgets.HTML any w =&gt; w.sectionId == &quot;post-ads-3&quot;) or (data:widgets.Image any w =&gt; w.sectionId == &quot;post-ads-3&quot;) or (data:widgets.AdSense any w =&gt; w.sectionId == &quot;post-ads-3&quot;)))' id='post-ads-3' maxwidgets='1' name='In-Article' showaddelement='yes'>
-              <b:widget id='HTML11' locked='false' title='' type='HTML' visible='true'>
+              <b:widget id='HTML11' locked='false' title='{ads}' type='HTML' visible='true'>
                 <b:widget-settings>
                   <b:widget-setting name='content'><![CDATA[<div class="rr-container"> <div data-ad="ilmualam.com_responsive_r_mid_post" data-devices="m:1,t:1,d:1" style="min-height: 250px;" class="demand-supply"></div> </div>]]></b:widget-setting>
                 </b:widget-settings>
@@ -3467,7 +3477,7 @@ body#layout #hidden{display:none!important}
           <aside class='sidebar-wrap'>
             <b:class cond='data:skin.vars.stickySidebar == &quot;1px&quot;' name='is-sticky'/>
             <b:section class='sidebar' id='sidebar' name='Sidebar' showaddelement='yes'>
-              <b:widget id='HTML4' locked='false' title='' type='HTML' visible='true'>
+              <b:widget id='HTML4' locked='false' title='{ads}' type='HTML' visible='true'>
                 <b:widget-settings>
                   <b:widget-setting name='content'><![CDATA[<div data-ad="ilmualam.com_300x250_sidebar" data-devices="m:1,t:1,d:1" style="min-height: 300px;" class="demand-supply"></div>]]></b:widget-setting>
                 </b:widget-settings>
@@ -3626,7 +3636,7 @@ body#layout #hidden{display:none!important}
     <b:if cond='data:view.isLayoutMode or (data:view.isMultipleItems or data:view.isPost or (data:view.isPage and (data:skin.vars.pageFooterAds == &quot;1px&quot;))) and (data:widgets any w =&gt; w.sectionId == &quot;footer-ads&quot;)'>
       <section class='footer-ads flex-c'>
         <b:section class='container' id='footer-ads' maxwidgets='1' name='Footer ADS' showaddelement='yes'>
-          <b:widget id='HTML3' locked='false' title='' type='HTML' visible='false'>
+          <b:widget id='HTML3' locked='false' title='{ads}' type='HTML' visible='false'>
             <b:widget-settings>
               <b:widget-setting name='content'><![CDATA[<div class="rr-container"><div data-ad="ilmualam.com_responsive_hr_endpost" data-devices="m:1,t:1,d:1"  style="min-height:200px;" class="demand-supply"></div></div>]]></b:widget-setting>
             </b:widget-settings>

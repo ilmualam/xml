@@ -596,7 +596,7 @@
 
   function megaTabs(navItemEl, labels) {
     var nav = '', tabsHtml = '';
-    var count = Math.min(labels.length, 5);
+    var count = Math.min(labels.length, 4);
     for (var r = 0; r < count; r++) {
       if (!labels[r]) continue;
       var activeAttr = r === 0 ? ' class="active"' : '';
@@ -611,7 +611,7 @@
       directLink.removeAttribute('data-shortcode');
       directLink.addEventListener('click', function (ev) { ev.preventDefault(); });
     }
-    var container = navItemEl.parentElement.querySelector('.container');
+    var container = navItemEl.querySelector('.mega');
     if (container) container.innerHTML = markup;
 
     var navLinks = qsa('.nav a', navItemEl);
@@ -1016,6 +1016,83 @@
     }
   });
 
+  // ---------------------------------------------------------------------
+  // FAQ shortcode: <div class="pbt-faq"><h3>Question?</h3><p>Answer.</p>...</div>
+  // Opt-in per post - only runs on posts where an author has added this
+  // markup, so it never touches posts that already carry manually-added
+  // FAQPage JSON-LD. Renders a visible accordion and injects FAQPage
+  // schema, but skips the schema injection if the page already declares
+  // one anywhere (belt-and-braces against double schema on any post).
+  // ---------------------------------------------------------------------
+  function pageHasFaqSchema() {
+    return qsa('script[type="application/ld+json"]').some(function (s) {
+      return /"@type"\s*:\s*"FAQPage"/.test(s.textContent || '');
+    });
+  }
+
+  qsa('#post-body .pbt-faq').forEach(function (block) {
+    if (block.dataset.faqReady) return;
+    block.dataset.faqReady = 'true';
+
+    var questions = qsa(':scope > h2, :scope > h3, :scope > h4', block);
+    var items = [];
+
+    questions.forEach(function (q) {
+      var answerHtml = '';
+      var node = q.nextElementSibling;
+      while (node && questions.indexOf(node) === -1) {
+        answerHtml += node.outerHTML;
+        node = node.nextElementSibling;
+      }
+      var tmp = document.createElement('div');
+      tmp.innerHTML = answerHtml;
+      var answerText = tmp.textContent.trim();
+      var questionText = q.textContent.trim();
+      if (questionText && answerText) {
+        items.push({ questionText: questionText, answerHtml: answerHtml, answerText: answerText });
+      }
+    });
+
+    if (!items.length) return;
+
+    block.innerHTML = items.map(function (item, idx) {
+      return '<div class="pbt-faq-item">' +
+        '<button class="pbt-faq-q" aria-expanded="false" id="pbt-faq-q-' + idx + '">' +
+          '<span>' + item.questionText + '</span><i class="bi bi-chevron-down"></i>' +
+        '</button>' +
+        '<div class="pbt-faq-a" id="pbt-faq-a-' + idx + '" role="region" aria-labelledby="pbt-faq-q-' + idx + '" hidden>' + item.answerHtml + '</div>' +
+      '</div>';
+    }).join('');
+    block.classList.add('pbt-faq-ready');
+
+    qsa('.pbt-faq-q', block).forEach(function (btn) {
+      var answer = qs('#' + btn.id.replace('-q-', '-a-'));
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (answer) answer.hidden = expanded;
+      });
+    });
+
+    if (!pageHasFaqSchema()) {
+      var schema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map(function (item) {
+          return {
+            '@type': 'Question',
+            name: item.questionText,
+            acceptedAnswer: { '@type': 'Answer', text: item.answerText }
+          };
+        })
+      };
+      var ldScript = document.createElement('script');
+      ldScript.type = 'application/ld+json';
+      ldScript.textContent = JSON.stringify(schema);
+      document.head.appendChild(ldScript);
+    }
+  });
+
   qsa('.before-ads').forEach(function (el) { if (qs('#post-ads-1')) pAd('#post-ads-1', el); });
   qsa('.after-ads').forEach(function (el) { if (qs('#post-ads-2')) pAd('#post-ads-2', el); });
   qsa('.article-ads').forEach(function (el) { if (qs('#post-ads-3')) pAd('#post-ads-3', el); });
@@ -1141,7 +1218,7 @@
       navEl.addEventListener('mouseenter', function () {
         if (!navEl.classList.contains('loaded')) {
           navEl.classList.add('loaded');
-          var container = navEl.querySelector('.container');
+          var container = navEl.querySelector('.mega');
           getPosts({ t: container, type: 'mega', num: 5, label: label });
         }
       });
@@ -1153,7 +1230,7 @@
       megaTabs(navEl, parts);
     } else {
       navEl.classList.add('loaded');
-      var container2 = navEl.querySelector('.container');
+      var container2 = navEl.querySelector('.mega');
       if (container2) container2.innerHTML = msgError();
     }
   });
@@ -1467,6 +1544,9 @@
             url = nextLoadMore ? nextLoadMore.dataset.url : undefined;
             if (url) {
               btn.classList.add('visible');
+            } else if (pbt.isHome) {
+              var pager = qs('.blog-pager');
+              if (pager) pager.remove();
             } else {
               btn.classList.remove('visible');
               var noMore = qs('.blog-pager .no-more');
@@ -1475,7 +1555,7 @@
           })
           .finally(function () {
             if (loading) loading.classList.remove('visible');
-            qsa('.blog-posts .thumbnail').forEach(function (thumb) {
+            qsa('.blog-posts .thumbnail, .blog-posts .avatar').forEach(function (thumb) {
               if (!thumb.classList.contains('pbt-lazy')) pbtLazy(thumb);
             });
           });
