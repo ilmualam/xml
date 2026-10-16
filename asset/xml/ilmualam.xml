@@ -40,6 +40,11 @@
 <link as='style' href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;family=Amiri:wght@400;700&amp;display=swap' rel='preload'/>
 <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;family=Amiri:wght@400;700&amp;display=swap' media='print' onload='this.media=&apos;all&apos;' rel='stylesheet'/>
 <noscript><link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;family=Amiri:wght@400;700&amp;display=swap' rel='stylesheet'/></noscript>
+<script type='text/javascript'>
+//<![CDATA[
+try{if(localStorage.dark_mode==="true")document.documentElement.classList.add("is-dark")}catch(e){}
+//]]>
+</script>
 <script data-cfasync='false' defer='defer' src='https://live.demand.supply/up.js' type='text/javascript'/>
 <script type='text/javascript'>
 //<![CDATA[
@@ -149,10 +154,10 @@ Modified by:  https://thebukitbesi.com/
 
 /*-- CSS Variables --*/
 :root{
---body-font:$(body.font.family), sans-serif;
---menu-font:$(body.font.family), sans-serif;
---title-font:$(title.font.family), sans-serif;
---text-font:$(text.font.family), sans-serif;
+--body-font:$(body.font.family), "Inter Fallback", "Inter Fallback R", sans-serif;
+--menu-font:$(body.font.family), "Inter Fallback", "Inter Fallback R", sans-serif;
+--title-font:$(title.font.family), "Inter Fallback", "Inter Fallback R", sans-serif;
+--text-font:$(text.font.family), "Inter Fallback", "Inter Fallback R", sans-serif;
 --icon-font:"bootstrap-icons", bootstrap-icons;
 --body-bg:$(background.color);
 --widget-bg:$(widget.bg);
@@ -199,7 +204,7 @@ Modified by:  https://thebukitbesi.com/
 --container:1240px;
 --sidebar:300px;
 --gap:3rem;
---base:16/10;
+--base:16/9;
 --story:4/5;
 --card:5/4;
 --video:16/9;
@@ -388,7 +393,7 @@ svg{display:inline-block;width:1em;height:1em;font-size:1em;line-height:1;overfl
 .header-inner.is-fixed.show{visibility:visible;opacity:1;transform:translateY(calc(var(--header) * 2))}
 .header-items{position:relative;display:flex;align-items:center;justify-content:space-between;gap:2rem}
 .flex-left{display:flex;align-items:center;gap:2rem}
-.menu-toggle{display:none;align-items:center;height:2.5rem;font-size:1.625rem;color:var(--header-color);padding:0 1.125rem}
+.menu-toggle{display:none;align-items:center;justify-content:center;width:3.875rem;height:2.5rem;font-size:1.625rem;color:var(--header-color);padding:0 1.125rem}
 .menu-toggle:after{content:"\f479"}
 .menu-toggle:hover{color:var(--header-hover-color)}
 .main-logo{display:flex;align-items:center;flex-shrink:0;height:var(--header);overflow:hidden}
@@ -572,7 +577,7 @@ svg{display:inline-block;width:1em;height:1em;font-size:1em;line-height:1;overfl
 .post-body h1{font-size:2.25rem}
 .post-body h2{font-size:1.875rem}
 .post-body h3{font-size:1.5rem}
-.post-body img{height:auto!important;border-radius:var(--rounded);max-width:100%;aspect-ratio:attr(width)/attr(height);}
+.post-body img{height:auto!important;border-radius:var(--rounded);max-width:100%}
 blockquote{position:relative;background:#f0fcf7;color:var(--header-color);font-size:0.875rem;line-height:1.525em;font-style:normal;padding:1.5rem;margin-bottom:1.5rem;border-radius:var(--rounded);border:1px dashed;border-color:#40916c;}
 blockquote:before{position:absolute;top:0.75rem;inset-inline-start:0.75rem;content:"\f6b0";font-size:3rem;color:var(--header-color);font-style:normal;line-height:1;opacity:.05}
 .post-body ul,.post-body ol{padding-inline-start:1.5rem;margin:0}
@@ -1018,8 +1023,8 @@ ins.adsbygoogle-noablate[data-anchor-shown="true"]{z-index:990!important}
 .slide-menu{display:flex}
 .menu-on .overlay-bg{visibility:visible;opacity:1}
 .flex-right{gap:0}
-.flex-right button{width:auto}
-.flex-right .search-toggle{padding:0 1.25rem}
+.flex-right button{width:2.25rem;justify-content:center}
+.flex-right .search-toggle{width:3.875rem;padding:0 1.25rem}
 .featured-items{grid-template-columns:minmax(0,1fr)}
 .trending-items{grid-template-columns:repeat(2,minmax(0,1fr))}
 .content-wrap{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"main""sidebar"!important}
@@ -1125,9 +1130,6 @@ ins.adsbygoogle-noablate[data-anchor-shown="true"]{z-index:990!important}
 .ibtnx {display:block !important; width:100%; box-sizing:border-box; margin:4px 0 !important; white-space:normal; padding:9px 12px !important; font-size:13px !important;}
 .icta-files {font-size:0.85rem;}}
 
-.post-body img:not(.lcp-image) {aspect-ratio:auto; max-width:100%; height:auto; content-visibility:auto;}
-.post-body img.lcp-image {aspect-ratio:auto; max-width:100%; height:auto;}
-.thumbnail {contain:layout style paint; content-visibility:auto; contain-intrinsic-size:72px 72px;}
 /* --- CLS Prevention for Sulvo/Ad units --- */
 .demand-supply{display:block;min-height:100px;width:100%}
 .rr-container .demand-supply{min-height:280px}
@@ -1144,7 +1146,7 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .ia-breadcrumb__link{color:var(--meta-color)}
 .ia-breadcrumb__link:hover{color:var(--accent-color)}
 .ia-breadcrumb__item--current{color:var(--title-color);font-weight:500}
-/* --- Post Hero Image (LCP element � single post pages) --- */
+/* --- Post Hero Image (LCP element - single post pages) --- */
 .post-hero{width:100%;margin-bottom:1.5rem;border-radius:var(--rounded);overflow:hidden;background:var(--border-color)}
 .post-hero__img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;max-height:500px}
 /* --- Sidebar Search Form --- */
@@ -1171,6 +1173,53 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .ia-sitemap__page{display:flex;align-items:center;justify-content:center;min-width:2.25rem;height:2.25rem;background:var(--widget-bg);border:1px solid var(--border-color);border-radius:var(--rounded);font-size:0.875rem;color:var(--title-color);cursor:pointer}
 .ia-sitemap__page:hover{background:var(--accent-color);color:#fff;border-color:var(--accent-color)}
 .ia-sitemap__page--active{background:var(--accent-color);color:#fff;border-color:var(--accent-color);font-weight:600}
+/* --- Font fallback metrics: Inter swaps in without reflow (CLS) --- */
+@font-face{font-family:"Inter Fallback";src:local("Arial"),local("ArialMT"),local("Helvetica");size-adjust:107.12%;ascent-override:90.44%;descent-override:22.52%;line-gap-override:0%}
+@font-face{font-family:"Inter Fallback R";src:local("Roboto"),local("Roboto-Regular");size-adjust:108.6%;ascent-override:89.2%;descent-override:22.3%;line-gap-override:0%}
+/* --- Sitemap-style post cards (home, label, search, trending, related) --- */
+:root{--card-radius:1rem;--card-border:#e3efe7;--card-shadow:0 1px 2px rgba(16,24,40,.04),0 4px 16px rgba(16,24,40,.06);--pill-bg:#e8f5ec;--pill-color:var(--accent-color);--card-head:9.25rem}
+:root.is-dark{--card-border:var(--border-color);--card-shadow:none;--pill-bg:rgba(36,151,73,.18);--pill-color:#7bd39f}
+.grid-items .post,.trending-items .post,.related-items .post,.featured-items .md{display:flex;flex-direction:column;background:var(--widget-bg);border:1px solid var(--card-border);border-radius:var(--card-radius);box-shadow:var(--card-shadow);overflow:hidden;transition:box-shadow .2s ease}
+.grid-items .post:hover,.trending-items .post:hover,.related-items .post:hover,.featured-items .md:hover{box-shadow:0 8px 24px rgba(16,24,40,.1)}
+.grid-items .entry-thumbnail,.trending-items .entry-thumbnail,.related-items .entry-thumbnail,.featured-items .md .entry-thumbnail{width:100%;aspect-ratio:16/9;border-radius:0}
+.grid-items .entry-header,.trending-items .entry-header,.related-items .entry-header,.featured-items .md .entry-header{display:flex;flex-direction:column;align-items:flex-start;gap:0.625rem;padding:1rem 1.25rem 1.25rem}
+.entry-header > .entry-tag{position:static;flex-shrink:0;max-width:100%;height:1.5rem;background:var(--pill-bg);-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--pill-color);font-size:0.75rem;font-weight:600;letter-spacing:0.02em;line-height:1.5rem;white-space:nowrap;text-overflow:ellipsis;padding:0 0.75rem;border-radius:var(--rounded-full)}
+.grid-items .entry-title,.trending-items .entry-title,.related-items .entry-title,.featured-items .md .entry-title{width:100%;font-size:1.25rem;font-weight:600;line-height:1.4;letter-spacing:-0.01em}
+.grid-items .entry-title a{--line-clamp:3}
+.trending-items .entry-title,.related-items .entry-title{font-size:1.0625rem}
+.trending-items .entry-title a,.related-items .entry-title a,.featured-items .md .entry-title a{--line-clamp:2}
+.grid-items .entry-meta,.trending-items .entry-meta,.related-items .entry-meta,.featured-items .md .entry-meta{font-size:0.8125rem;line-height:1rem}
+.grid-items .entry-time:before,.trending-items .entry-time:before,.related-items .entry-time:before,.featured-items .md .entry-time:before{content:"\1F4C5";font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:0.875rem;line-height:1}
+.entry-thumbnail img.thumbnail{width:100%;height:100%;max-width:none;object-fit:cover;opacity:1}
+/* --- Zero-CLS JS widgets: space for one card row is reserved before the feed loads --- */
+.trending .widget-content,.related-wrap .widget-content{display:grid;--cw:calc((100% - 4.5rem) / 4)}
+.related-wrap .widget-content{--cw:calc((100% - 3rem) / 3)}
+.trending .widget-content:before,.related-wrap .widget-content:before{content:"";grid-area:1/1;display:block;width:var(--cw);aspect-ratio:16/9;box-sizing:content-box;padding-bottom:calc(var(--card-head) + 2px);visibility:hidden;pointer-events:none}
+.trending .widget-content > *,.related-wrap .widget-content > *{grid-area:1/1;min-width:0}
+.trending .loader,.related-wrap .loader{height:auto}
+.trending-items .entry-header,.related-items .entry-header{height:var(--card-head);overflow:hidden}
+.trending-items .post,.related-items .post{align-self:stretch}
+.featured-items .md .entry-header{flex:1}
+/* --- Ad slots filled by JS: reserve their box up front --- */
+.before-ads,.after-ads{min-height:calc(280px + var(--gap))}
+.post-footer-ads{min-height:250px}
+.blog-posts .inline-ad{min-height:280px}
+@media (max-width: 1024px) {
+.trending .widget-content,.related-wrap .widget-content{--cw:calc(50% - 0.75rem)}
+.trending-items,.related-items{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:var(--cw);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.trending-items::-webkit-scrollbar,.related-items::-webkit-scrollbar{display:none}
+.trending-items .post,.related-items .post{scroll-snap-align:start}
+}
+@media (max-width: 680px) {
+.trending .widget-content,.related-wrap .widget-content{--cw:82%}
+.trending-items,.related-items{gap:1rem}
+.grid-items{gap:1.25rem}
+.grid-items .entry-title{font-size:1.125rem}
+}
+@media (max-width: 500px) and (orientation: portrait) {
+.before-ads,.after-ads{min-height:calc(100vw + var(--gap))}
+.post-footer-ads{min-height:100vw}
+}
 ]]></b:skin>
 </b:if>
 <b:if cond='data:view.isLayoutMode'>
@@ -1403,7 +1452,7 @@ body#layout #hidden{display:none!important}
         <b:tag name='script' type='text/javascript'>const noThumbnail = &quot;<b:eval expr='resizeImage(data:sourceUrl, 72, &quot;1:1&quot;)'/>&quot;;</b:tag>
         <b:elseif cond='data:widget.sectionId == &quot;main-logo&quot;'/>
         <a class='logo-img' expr:href='data:blog.homepageUrl.canonical' rel='home'>
-          <img expr:alt='data:blog.title' expr:data-src='data:sourceUrl' expr:height='data:height' expr:src='data:sourceUrl' expr:width='data:width' fetchpriority='high' loading='eager'>
+          <img expr:alt='data:blog.title' expr:data-src='data:sourceUrl' expr:height='data:height' expr:src='data:sourceUrl' expr:width='data:width' loading='eager'>
             <b:attr cond='data:link and (data:link contains &quot;googleusercontent.com&quot;)' expr:value='data:link' name='data-dark-src'/>
           </img>
           <b:if cond='data:view.isMultipleItems'><h1 id='h1-off'><data:blog.title/></h1></b:if>
@@ -1552,7 +1601,13 @@ body#layout #hidden{display:none!important}
     <b:includable id='post-thumbnail'>
 	<b:tag class='entry-thumbnail' expr:name='data:hasLink == false ? &quot;div&quot; : &quot;a&quot;'> <b:attr cond='data:hasLink != false' expr:value='data:post.url.canonical' name='href'/> <b:include cond='data:showCategory == true' name='post-category'/>
 		<b:if cond='data:showCounter == true'> <span class='entry-count'><b:eval expr='data:i + 1'/></span> </b:if>
-		<div class='thumbnail' expr:aria-label='data:post.title.escaped' expr:data-alt='data:post.title.escaped' expr:data-src='data:post.featuredImage ? (data:post.featuredImage.isYouTube ? resizeImage(data:post.featuredImage.youtubeMaxResDefaultUrl.jsonEscaped, 72, &quot;1:1&quot;) : resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;)) : &quot;https://resources.blogblog.com/img/blank.gif&quot;' role='img'/> <b:tag cond='data:post.featuredImage and data:post.featuredImage.isYouTube and data:showIcon != false' expr:class='data:iconSize ? (&quot;yt-img:x&quot; + data:iconSize) : &quot;yt-img&quot;' name='div'/> </b:tag>
+		<b:with value='data:isLcp == true or (data:lcpCandidate == true and data:i == 0 and not (data:view.isHomepage and (data:widgets any w =&gt; w.sectionId == &quot;featured&quot;)))' var='eagerImg'>
+		<b:if cond='data:eagerImg and data:post.featuredImage and not data:post.featuredImage.isYouTube'>
+		<img class='thumbnail pbt-lazy' decoding='async' expr:alt='data:post.title.escaped' expr:sizes='data:isLcp == true ? &quot;(max-width: 680px) 100vw, 620px&quot; : &quot;(max-width: 680px) 100vw, 400px&quot;' expr:src='resizeImage(data:post.featuredImage, 640, &quot;16:9&quot;)' expr:srcset='sourceSet(data:post.featuredImage, [360, 480, 640, 800, 1024], &quot;16:9&quot;)' fetchpriority='high' height='360' loading='eager' width='640'/>
+		<b:else/>
+		<div class='thumbnail' expr:aria-label='data:post.title.escaped' expr:data-alt='data:post.title.escaped' expr:data-src='data:post.featuredImage ? (data:post.featuredImage.isYouTube ? resizeImage(data:post.featuredImage.youtubeMaxResDefaultUrl.jsonEscaped, 72, &quot;1:1&quot;) : resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;)) : &quot;https://resources.blogblog.com/img/blank.gif&quot;' role='img'/>
+		</b:if>
+		</b:with> <b:tag cond='data:post.featuredImage and data:post.featuredImage.isYouTube and data:showIcon != false' expr:class='data:iconSize ? (&quot;yt-img:x&quot; + data:iconSize) : &quot;yt-img&quot;' name='div'/> </b:tag>
 </b:includable>
     <b:includable id='post-title'> 
       <b:tag class='entry-title' expr:name='data:tagName ? data:tagName : &quot;h2&quot;'>
@@ -1598,7 +1653,7 @@ body#layout #hidden{display:none!important}
         <b:if cond='data:i == 0'>
           <div class='post card cs'>
             <a class='entry-inner flex-c' expr:href='data:post.url.canonical'>
-              <b:include data='{ hasLink: false, showCategory: true }' name='post-thumbnail'/>
+              <b:include data='{ hasLink: false, showCategory: true, isLcp: true }' name='post-thumbnail'/>
               <div class='entry-header'>
                 <b:include data='{ hasLink: false, textWrap: true }' name='post-title'/>
                 <b:include name='post-meta'/>
@@ -1607,8 +1662,9 @@ body#layout #hidden{display:none!important}
           </div>
           <b:elseif cond='data:i == 1 or data:i == 2'/>
           <div class='post md'>
-            <b:include data='{ showCategory: true, iconSize: 2 }' name='post-thumbnail'/>
+            <b:include data='{ iconSize: 2 }' name='post-thumbnail'/>
             <div class='entry-header'>
+              <b:include name='post-category'/>
               <b:include name='post-title'/>
               <b:include data='{ showAuthor: false }' name='post-meta'/>
             </div>
@@ -1760,7 +1816,7 @@ body#layout #hidden{display:none!important}
       </div>
     </b:includable>
     <b:includable id='pbt-messages'>
-      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga M�s<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>????? ??????<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
+      <b:switch var='data:message'><b:case value='loadMorePosts'/><b:if cond='data:blog.locale.language == &quot;en&quot;'>Load More<b:elseif cond='data:blog.locale.language == &quot;es&quot;'/>Carga Más<b:elseif cond='data:blog.locale.language == &quot;pt&quot;'/>Carregar Mais<b:elseif cond='data:blog.locale.language == &quot;ar&quot;'/>????? ??????<b:else/><data:messages.loadMorePosts/></b:if></b:switch>
     </b:includable>
     <b:includable id='pbt-var'>
       <b:tag name='script' type='text/javascript'>const pbt={blogView:<b:if cond='data:blog.view'>&quot;<data:blog.view/>&quot;<b:else/>false</b:if>,isRTL:<b:eval expr='data:blog.languageDirection == &quot;rtl&quot; ? &quot;true&quot; : &quot;false&quot;'/>,isHome:<b:eval expr='data:view.isHomepage ? &quot;true&quot; : &quot;false&quot;'/>,isMultiple:<b:eval expr='data:view.isMultipleItems ? &quot;true&quot; : &quot;false&quot;'/>,isSingle:<b:eval expr='data:view.isSingleItem ? &quot;true&quot; : &quot;false&quot;'/>,isPost:<b:eval expr='data:view.isPost ? &quot;true&quot; : &quot;false&quot;'/>,isPage:<b:eval expr='data:view.isPage ? &quot;true&quot; : &quot;false&quot;'/>,isDark:<b:eval expr='data:skin.vars.darkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,userDarkMode:<b:eval expr='data:skin.vars.userDarkMode == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,stickyMenu:<b:eval expr='data:skin.vars.stickyMenu == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>,hasCookie:<b:eval expr='data:widgets.Text any w =&gt; w.sectionId == &quot;cookie&quot; ? &quot;true&quot; : &quot;false&quot;'/>,postAuthor:<b:eval expr='data:widgets.Blog.first.allBylineItems.author ? &quot;true&quot; : &quot;false&quot;'/>,postDate:<b:eval expr='data:widgets.Blog.first.allBylineItems.timestamp ? &quot;true&quot; : &quot;false&quot;'/>,postSummary:&quot;<b:eval expr='data:skin.vars.postSummary == &quot;1px&quot; ? &quot;true&quot; : &quot;false&quot;'/>&quot;,showMore:&quot;<data:messages.showMore/>&quot;,viewAll:&quot;<data:messages.viewAll/>&quot;,noResults:&quot;<data:messages.noResultsFound/>&quot;,noTitle:&quot;<data:messages.noTitle/>&quot;,noThumb:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG9GA0058_fE7q8dUjkpL56fvlwSQs-DyuNjRG1C3oYBoWDR2PYrDa0SKVYt6iEJ8pssbajfAujp0g51-SQimyZNawn0waVgbe8cwgMzSXRURuiG7bqguOahIkTzTgPOn67eoasTMjKkxPfqXg1ytQ4NMjLEAGpp3zKKtpo-PVacHSnidorgbmaOFlyQ/w72-h72-p-k-no-nu/ptb-nth.webp&quot;}</b:tag>
@@ -1946,8 +2002,9 @@ body#layout #hidden{display:none!important}
       <b:include cond='not data:view.search.label and not data:view.search.query and not data:view.isArchive' data='post' name='inlineAd'/>
       <!-- Index Post Content -->
       <div class='post'>
-        <b:include data='{ showCategory: true }' name='post-thumbnail'/>
+        <b:include data='{ lcpCandidate: true }' name='post-thumbnail'/>
         <div class='entry-header'>
+          <b:include name='post-category'/>
           <b:include name='post-title'/>
           <b:include name='post-meta'/>
         </div>
@@ -2133,8 +2190,7 @@ body#layout #hidden{display:none!important}
       &quot;@type&quot;: &quot;Article&quot;,
       &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#article&quot;,
       &quot;mainEntityOfPage&quot;: {
-        &quot;@type&quot;: &quot;WebPage&quot;,
-        &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;
+        &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#webpage&quot;
       },
       &quot;headline&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
       &quot;description&quot;: &quot;<b:eval expr='data:post.snippets.short ? data:post.snippets.short.jsonEscaped : data:blog.metaDescription.jsonEscaped'/>&quot;,
@@ -2193,43 +2249,6 @@ body#layout #hidden{display:none!important}
 }
 </script>
       </b:if>
-      <b:if cond='data:blog.searchLabel'>
-<script type='application/ld+json'>
-{
-  &quot;@context&quot;: &quot;https://schema.org&quot;,
-  &quot;@graph&quot;: [
-    {
-      &quot;@type&quot;: &quot;CollectionPage&quot;,
-      &quot;@id&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>#collectionpage&quot;,
-      &quot;url&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>&quot;,
-      &quot;name&quot;: &quot;Artikel <data:blog.searchLabel.jsonEscaped/> - Ilmu Alam&quot;,
-      &quot;description&quot;: &quot;Koleksi artikel kategori <data:blog.searchLabel.jsonEscaped/> dari Ilmu Alam&quot;,
-      &quot;inLanguage&quot;: &quot;ms-MY&quot;,
-      &quot;isPartOf&quot;: { &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot; },
-      &quot;mainEntity&quot;: {
-        &quot;@type&quot;: &quot;ItemList&quot;,
-        &quot;numberOfItems&quot;: <data:posts.size/>,
-        &quot;itemListElement&quot;: [
-          <b:loop values='data:posts' var='post' index='i'>
-          {
-            &quot;@type&quot;: &quot;ListItem&quot;,
-            &quot;position&quot;: <b:eval expr='data:i + 1'/>,
-            &quot;url&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;,
-            &quot;name&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
-            <b:if cond='data:post.featuredImage and data:post.featuredImage.isResizable'>
-            &quot;image&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 720, &quot;16:9&quot;).jsonEscaped'/>&quot;
-            <b:else/>
-            &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
-            </b:if>
-          }<b:if cond='not data:post.isLast'>,</b:if>
-          </b:loop>
-        ]
-      }
-    }
-  ]
-}
-</script>
-</b:if>
     </b:includable>
     <b:includable id='postMetadataJSONImage'/>
     <b:includable id='postMetadataJSONPublisher'/>
@@ -2581,7 +2600,7 @@ body#layout #hidden{display:none!important}
     <b:include cond='data:blog.analyticsAccountNumber' data='blog' name='google-analytics'/>
   </b:if>
 <script type='application/ld+json'>
-{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@graph&quot;:[{&quot;@type&quot;:&quot;Organization&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;,&quot;name&quot;:&quot;Ilmu Alam&quot;,&quot;alternateName&quot;:&quot;Ilmu Alam - Motivasi Islamik&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com&quot;,&quot;logo&quot;:{&quot;@type&quot;:&quot;ImageObject&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#logo&quot;,&quot;url&quot;:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;,&quot;width&quot;:500,&quot;height&quot;:500,&quot;caption&quot;:&quot;Ilmu Alam Logo&quot;},&quot;image&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#logo&quot;},&quot;description&quot;:&quot;Platform perkongsian motivasi Islamik, hukum syarak, kisah teladan, dan panduan ibadah berdasarkan Al-Quran dan As-Sunnah untuk umat Islam Malaysia.&quot;,&quot;foundingDate&quot;:&quot;2017&quot;,&quot;slogan&quot;:&quot;Ilmu Membawa Cahaya, Amal Membawa Pahala&quot;,&quot;founder&quot;:{&quot;@type&quot;:&quot;Person&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#founder&quot;,&quot;name&quot;:&quot;Aiman Asyraf&quot;,&quot;jobTitle&quot;:&quot;Islamic Content Creator &amp; Developer&quot;,&quot;knowsAbout&quot;:[&quot;Islamic Education&quot;,&quot;Quranic Studies&quot;,&quot;Islamic Jurisprudence&quot;,&quot;Malaysian Islamic Culture&quot;,&quot;Digital Islamic Tools&quot;],&quot;hasCredential&quot;:{&quot;@type&quot;:&quot;EducationalOccupationalCredential&quot;,&quot;credentialCategory&quot;:&quot;Islamic Studies&quot;,&quot;name&quot;:&quot;Islamic Knowledge Practitioner&quot;}},&quot;sameAs&quot;:[&quot;https://facebook.com/ilmualamcom&quot;,&quot;https://youtube.com/@theilmualam&quot;,&quot;https://twitter.com/alam_ilmu&quot;,&quot;https://instagram.com/imualamcom&quot;],&quot;contactPoint&quot;:{&quot;@type&quot;:&quot;ContactPoint&quot;,&quot;contactType&quot;:&quot;Customer Service&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com/p/contact.html&quot;,&quot;availableLanguage&quot;:[&quot;ms-MY&quot;,&quot;en-US&quot;],&quot;areaServed&quot;:&quot;MY&quot;,&quot;hoursAvailable&quot;:{&quot;@type&quot;:&quot;OpeningHoursSpecification&quot;,&quot;dayOfWeek&quot;:[&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;,&quot;Sunday&quot;],&quot;opens&quot;:&quot;00:00&quot;,&quot;closes&quot;:&quot;23:59&quot;}},&quot;publishingPrinciples&quot;:&quot;https://www.ilmualam.com/p/about.html&quot;,&quot;ethicsPolicy&quot;:&quot;https://www.ilmualam.com/p/disclaimer.html&quot;,&quot;funding&quot;:{&quot;@type&quot;:&quot;MonetaryGrant&quot;,&quot;funder&quot;:{&quot;@type&quot;:&quot;Organization&quot;,&quot;name&quot;:&quot;Google AdSense&quot;},&quot;description&quot;:&quot;Monetization melalui iklan etika untuk menyokong kandungan pendidikan Islam percuma&quot;},&quot;audience&quot;:{&quot;@type&quot;:&quot;Audience&quot;,&quot;audienceType&quot;:&quot;Malaysian Muslim Community&quot;,&quot;geographicArea&quot;:{&quot;@type&quot;:&quot;Country&quot;,&quot;name&quot;:&quot;Malaysia&quot;}},&quot;knowsAbout&quot;:[&quot;Islamic Education&quot;,&quot;Quran Recitation&quot;,&quot;Islamic Law (Fiqh)&quot;,&quot;Islamic History&quot;,&quot;Prayer Times Malaysia&quot;,&quot;Zakat Calculation&quot;,&quot;Islamic Motivation&quot;]},{&quot;@type&quot;:&quot;WebSite&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#website&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com&quot;,&quot;name&quot;:&quot;Ilmu Alam&quot;,&quot;alternateName&quot;:&quot;Portal Motivasi Islamik Malaysia&quot;,&quot;publisher&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;},&quot;inLanguage&quot;:&quot;ms-MY&quot;,&quot;copyrightYear&quot;:2017,&quot;copyrightHolder&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;},&quot;potentialAction&quot;:[{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:{&quot;@type&quot;:&quot;EntryPoint&quot;,&quot;urlTemplate&quot;:&quot;https://www.ilmualam.com/search?q={search_term_string}&quot;},&quot;query-input&quot;:{&quot;@type&quot;:&quot;PropertyValueSpecification&quot;,&quot;valueRequired&quot;:true,&quot;valueName&quot;:&quot;search_term_string&quot;}},{&quot;@type&quot;:&quot;ReadAction&quot;,&quot;target&quot;:{&quot;@type&quot;:&quot;EntryPoint&quot;,&quot;urlTemplate&quot;:&quot;https://www.ilmualam.com&quot;,&quot;actionPlatform&quot;:[&quot;http://schema.org/DesktopWebPlatform&quot;,&quot;http://schema.org/MobileWebPlatform&quot;,&quot;http://schema.org/IOSPlatform&quot;,&quot;http://schema.org/AndroidPlatform&quot;]},&quot;expectsAcceptanceOf&quot;:{&quot;@type&quot;:&quot;Offer&quot;,&quot;price&quot;:&quot;0&quot;,&quot;priceCurrency&quot;:&quot;MYR&quot;,&quot;availability&quot;:&quot;https://schema.org/InStock&quot;}}]},{&quot;@type&quot;:&quot;WebPage&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#webpage&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com&quot;,&quot;inLanguage&quot;:&quot;ms-MY&quot;,&quot;name&quot;:&quot;Ilmu Alam&quot;,&quot;isPartOf&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#website&quot;},&quot;about&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;},&quot;speakable&quot;:{&quot;@type&quot;:&quot;SpeakableSpecification&quot;,&quot;cssSelector&quot;:[&quot;.post-body&quot;,&quot;.entry-title&quot;,&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;],&quot;xpath&quot;:[&quot;/html/head/title&quot;,&quot;/html/body//article//h1&quot;,&quot;/html/body//article//p[position() &lt; 4]&quot;]}}]}
+{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@graph&quot;:[{&quot;@type&quot;:&quot;Organization&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;,&quot;name&quot;:&quot;Ilmu Alam&quot;,&quot;alternateName&quot;:&quot;Ilmu Alam - Motivasi Islamik&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com&quot;,&quot;logo&quot;:{&quot;@type&quot;:&quot;ImageObject&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#logo&quot;,&quot;url&quot;:&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;,&quot;width&quot;:500,&quot;height&quot;:500,&quot;caption&quot;:&quot;Ilmu Alam Logo&quot;},&quot;image&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#logo&quot;},&quot;description&quot;:&quot;Platform perkongsian motivasi Islamik, hukum syarak, kisah teladan, dan panduan ibadah berdasarkan Al-Quran dan As-Sunnah untuk umat Islam Malaysia.&quot;,&quot;foundingDate&quot;:&quot;2017&quot;,&quot;slogan&quot;:&quot;Ilmu Membawa Cahaya, Amal Membawa Pahala&quot;,&quot;founder&quot;:{&quot;@type&quot;:&quot;Person&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#founder&quot;,&quot;name&quot;:&quot;Aiman Asyraf&quot;,&quot;jobTitle&quot;:&quot;Islamic Content Creator &amp; Developer&quot;,&quot;knowsAbout&quot;:[&quot;Islamic Education&quot;,&quot;Quranic Studies&quot;,&quot;Islamic Jurisprudence&quot;,&quot;Malaysian Islamic Culture&quot;,&quot;Digital Islamic Tools&quot;],&quot;hasCredential&quot;:{&quot;@type&quot;:&quot;EducationalOccupationalCredential&quot;,&quot;credentialCategory&quot;:&quot;Islamic Studies&quot;,&quot;name&quot;:&quot;Islamic Knowledge Practitioner&quot;}},&quot;sameAs&quot;:[&quot;https://facebook.com/ilmualamcom&quot;,&quot;https://youtube.com/@theilmualam&quot;,&quot;https://twitter.com/alam_ilmu&quot;,&quot;https://instagram.com/imualamcom&quot;],&quot;contactPoint&quot;:{&quot;@type&quot;:&quot;ContactPoint&quot;,&quot;contactType&quot;:&quot;Customer Service&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com/p/contact.html&quot;,&quot;availableLanguage&quot;:[&quot;ms-MY&quot;,&quot;en-US&quot;],&quot;areaServed&quot;:&quot;MY&quot;,&quot;hoursAvailable&quot;:{&quot;@type&quot;:&quot;OpeningHoursSpecification&quot;,&quot;dayOfWeek&quot;:[&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,&quot;Thursday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;,&quot;Sunday&quot;],&quot;opens&quot;:&quot;00:00&quot;,&quot;closes&quot;:&quot;23:59&quot;}},&quot;publishingPrinciples&quot;:&quot;https://www.ilmualam.com/p/about.html&quot;,&quot;ethicsPolicy&quot;:&quot;https://www.ilmualam.com/p/disclaimer.html&quot;,&quot;audience&quot;:{&quot;@type&quot;:&quot;Audience&quot;,&quot;audienceType&quot;:&quot;Malaysian Muslim Community&quot;,&quot;geographicArea&quot;:{&quot;@type&quot;:&quot;Country&quot;,&quot;name&quot;:&quot;Malaysia&quot;}},&quot;knowsAbout&quot;:[&quot;Islamic Education&quot;,&quot;Quran Recitation&quot;,&quot;Islamic Law (Fiqh)&quot;,&quot;Islamic History&quot;,&quot;Prayer Times Malaysia&quot;,&quot;Zakat Calculation&quot;,&quot;Islamic Motivation&quot;]},{&quot;@type&quot;:&quot;WebSite&quot;,&quot;@id&quot;:&quot;https://www.ilmualam.com/#website&quot;,&quot;url&quot;:&quot;https://www.ilmualam.com&quot;,&quot;name&quot;:&quot;Ilmu Alam&quot;,&quot;alternateName&quot;:&quot;Portal Motivasi Islamik Malaysia&quot;,&quot;publisher&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;},&quot;inLanguage&quot;:&quot;ms-MY&quot;,&quot;copyrightYear&quot;:2017,&quot;copyrightHolder&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;},&quot;potentialAction&quot;:[{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:{&quot;@type&quot;:&quot;EntryPoint&quot;,&quot;urlTemplate&quot;:&quot;https://www.ilmualam.com/search?q={search_term_string}&quot;},&quot;query-input&quot;:{&quot;@type&quot;:&quot;PropertyValueSpecification&quot;,&quot;valueRequired&quot;:true,&quot;valueName&quot;:&quot;search_term_string&quot;}},{&quot;@type&quot;:&quot;ReadAction&quot;,&quot;target&quot;:{&quot;@type&quot;:&quot;EntryPoint&quot;,&quot;urlTemplate&quot;:&quot;https://www.ilmualam.com&quot;,&quot;actionPlatform&quot;:[&quot;http://schema.org/DesktopWebPlatform&quot;,&quot;http://schema.org/MobileWebPlatform&quot;,&quot;http://schema.org/IOSPlatform&quot;,&quot;http://schema.org/AndroidPlatform&quot;]},&quot;expectsAcceptanceOf&quot;:{&quot;@type&quot;:&quot;Offer&quot;,&quot;price&quot;:&quot;0&quot;,&quot;priceCurrency&quot;:&quot;MYR&quot;,&quot;availability&quot;:&quot;https://schema.org/InStock&quot;}}]},{&quot;@type&quot;:&quot;<b:eval expr='data:view.search.label ? &quot;CollectionPage&quot; : (data:view.search.query ? &quot;SearchResultsPage&quot; : &quot;WebPage&quot;)'/>&quot;,&quot;@id&quot;:&quot;<data:view.url.canonical.jsonEscaped/>#webpage&quot;,&quot;url&quot;:&quot;<data:view.url.canonical.jsonEscaped/>&quot;,&quot;name&quot;:&quot;<data:view.title.jsonEscaped/>&quot;,&quot;description&quot;:&quot;<b:eval expr='data:view.description ? data:view.description.jsonEscaped : data:blog.metaDescription.jsonEscaped'/>&quot;,&quot;inLanguage&quot;:&quot;ms-MY&quot;,&quot;isPartOf&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#website&quot;}<b:if cond='data:view.isHomepage'>,&quot;about&quot;:{&quot;@id&quot;:&quot;https://www.ilmualam.com/#organization&quot;}</b:if><b:if cond='data:view.isPost and data:widgets.Blog.first.posts[0].featuredImage'>,&quot;primaryImageOfPage&quot;:{&quot;@id&quot;:&quot;<data:view.url.canonical.jsonEscaped/>#primaryimage&quot;}</b:if><b:if cond='data:view.search.label and data:widgets.Blog.first.posts'>,&quot;mainEntity&quot;:{&quot;@type&quot;:&quot;ItemList&quot;,&quot;itemListElement&quot;:[<b:loop index='i' values='data:widgets.Blog.first.posts' var='post'><b:if cond='data:i != 0'>,</b:if>{&quot;@type&quot;:&quot;ListItem&quot;,&quot;position&quot;:<b:eval expr='data:i + 1'/>,&quot;url&quot;:&quot;<data:post.url.canonical.jsonEscaped/>&quot;,&quot;name&quot;:&quot;<data:post.title.jsonEscaped/>&quot;}</b:loop>]}</b:if>}]}
 </script>
 </b:if>
 </head>
@@ -2806,15 +2825,15 @@ body#layout #hidden{display:none!important}
               <b:widget-setting name='content'><![CDATA[<section class="hero-ia" lang="ms" dir="ltr">
   <div class="hero-ia__inner">
     <h1>Ilmu Islam Moden: Mudah, Sahih, Pantas</h1>
-    <p class="lead">Baca Al-Qur�an, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
+    <p class="lead">Baca Al-Qur'an, hadis, doa & tazkirah - dengan carian pintar dan audio. Sesuai untuk semua peringkat.</p>
 
     <form class="site-search" action="/search" method="get">
-      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik�" aria-label="Cari ilmu"/>
+      <input type="text" name="q" placeholder="Cari surah, doa, hadis, topik..." aria-label="Cari ilmu"/>
       <button type="submit">Cari</button>
     </form>
 
     <div class="hero-ia__cta">
-      <a class="btn" href="/p/quran.html">Baca Al-Qur�an</a>
+      <a class="btn" href="/p/quran.html">Baca Al-Qur'an</a>
       <a class="btn ghost" href="/p/asmaul-husna.html">Asmaul Husna</a>
       <a class="btn ghost" href="/search/label/Doa%20%26%20Zikir">Doa & Zikir</a>
     </div>
@@ -3041,8 +3060,9 @@ body#layout #hidden{display:none!important}
       <b:include cond='not data:view.search.label and not data:view.search.query and not data:view.isArchive' data='post' name='inlineAd'/>
       <!-- Index Post Content -->
       <div class='post'>
-        <b:include data='{ showCategory: true }' name='post-thumbnail'/>
+        <b:include data='{ lcpCandidate: true }' name='post-thumbnail'/>
         <div class='entry-header'>
+          <b:include name='post-category'/>
           <b:include name='post-title'/>
           <b:include name='post-meta'/>
         </div>
@@ -3228,8 +3248,7 @@ body#layout #hidden{display:none!important}
       &quot;@type&quot;: &quot;Article&quot;,
       &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#article&quot;,
       &quot;mainEntityOfPage&quot;: {
-        &quot;@type&quot;: &quot;WebPage&quot;,
-        &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;
+        &quot;@id&quot;: &quot;<data:post.url.canonical.jsonEscaped/>#webpage&quot;
       },
       &quot;headline&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
       &quot;description&quot;: &quot;<b:eval expr='data:post.snippets.short ? data:post.snippets.short.jsonEscaped : data:blog.metaDescription.jsonEscaped'/>&quot;,
@@ -3288,43 +3307,6 @@ body#layout #hidden{display:none!important}
 }
 </script>
       </b:if>
-      <b:if cond='data:blog.searchLabel and data:post.id == data:posts.first.id'>
-<script type='application/ld+json'>
-{
-  &quot;@context&quot;: &quot;https://schema.org&quot;,
-  &quot;@graph&quot;: [
-    {
-      &quot;@type&quot;: &quot;CollectionPage&quot;,
-      &quot;@id&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>#collectionpage&quot;,
-      &quot;url&quot;: &quot;<data:blog.url.canonical.jsonEscaped/>&quot;,
-      &quot;name&quot;: &quot;Artikel <data:blog.searchLabel.jsonEscaped/> - Ilmu Alam&quot;,
-      &quot;description&quot;: &quot;Koleksi artikel kategori <data:blog.searchLabel.jsonEscaped/> dari Ilmu Alam&quot;,
-      &quot;inLanguage&quot;: &quot;ms-MY&quot;,
-      &quot;isPartOf&quot;: { &quot;@id&quot;: &quot;https://www.ilmualam.com/#website&quot; },
-      &quot;mainEntity&quot;: {
-        &quot;@type&quot;: &quot;ItemList&quot;,
-        &quot;numberOfItems&quot;: <data:posts.size/>,
-        &quot;itemListElement&quot;: [
-          <b:loop index='i' values='data:posts' var='post'><b:if cond='data:i != 0'>,</b:if>
-          {
-            &quot;@type&quot;: &quot;ListItem&quot;,
-            &quot;position&quot;: <b:eval expr='data:i + 1'/>,
-            &quot;url&quot;: &quot;<data:post.url.canonical.jsonEscaped/>&quot;,
-            &quot;name&quot;: &quot;<data:post.title.jsonEscaped/>&quot;,
-            <b:if cond='data:post.featuredImage and data:post.featuredImage.isResizable'>
-            &quot;image&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 720, &quot;16:9&quot;).jsonEscaped'/>&quot;
-            <b:else/>
-            &quot;image&quot;: &quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1c-bMIMKMSmf7Br0d08NY6qGke7Vnj-3_UmnJ0z5yb-VptIjz_7yXd1gFiHxS9N8p5CMptCoSGl1yg88i3Uxwc_kGWDDa8pbbrxQaWHreZyq77qkvaLwLoOp4XJF8LDMRRGKcN4qBRf9y9WeVDRC56WSzRJW_M_fSmBiUPeOOpnaQn-FsHRi6XtecWOc/s1600/favicon.webp&quot;
-            </b:if>
-          }
-          </b:loop>
-        ]
-      }
-    }
-  ]
-}
-</script>
-</b:if>         
     </b:includable>
               <b:includable id='postMetadataJSONImage'/>
               <b:includable id='postMetadataJSONPublisher'/>
@@ -3814,7 +3796,7 @@ body#layout #hidden{display:none!important}
   </b:section>
 </b:if>
 <!-- Site Scripts (vanilla JS, no jQuery) -->
-<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@v1.0.2/scripts/vanilla.js' type='text/javascript'/>
+<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@38c69a83f42a4978760a6e7c6623680d28b2df7e/scripts/vanilla.js' type='text/javascript'/>
 </b:if>
 <!-- Blogger Scripts -->
 <b:if cond='data:isFeed'>
@@ -3825,9 +3807,6 @@ body#layout #hidden{display:none!important}
 //<![CDATA[
 "serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("https://ilmualam.pages.dev/sw.js",{scope:"/"}).then(e=>console.log("? SW scope:",e.scope)).catch(e=>console.error("? SW failed:",e))},{once:!0,passive:!0});
 //]]>
-</script>
-<script>
-//<![CDATA[!function(){"use strict";function e(){for(var e=document.querySelectorAll(".post-body img"),t=e.length,o=0;o<t;o++){var d=e[o];d.loading||(d.loading="lazy"),d.decoding||(d.decoding="async");var a=d.src;a&&(a.indexOf("blogger.googleusercontent.com")>-1||a.indexOf("bp.blogspot.com")>-1)&&(/\/s\d+(-[a-z])?\//.test(a)?d.src=a.replace(/\/s\d+(-[a-z])?\//,"/w800-rw/"):/\/w\d+-h\d+\//.test(a)&&(d.src=a.replace(/\/w\d+-h\d+\//,"/w800-rw/"))),d.width||d.height||d.style.aspectRatio||(d.style.aspectRatio="16/9",d.style.width="100%",d.style.height="auto")}}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0,passive:!0}):"requestIdleCallback"in window?requestIdleCallback(e,{timeout:100}):setTimeout(e,0)}();//]]>
 </script>
 <script type='text/javascript'>
 //<![CDATA[
@@ -3882,90 +3861,6 @@ body#layout #hidden{display:none!important}
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",injectReadingTime,{once:true,passive:true});}
   else{injectReadingTime();}
 })();
-//]]>
-</script>
-<!-- Related Posts: responsive count (6 desktop / 3 mobile) with recent-post backfill for sparse labels -->
-<script type='text/javascript'>
-//<![CDATA[
-(function($){
-  "use strict";
-  $(function(){
-    $("#related-posts .HTML").each(function(){
-      var $box=$(this),shortcode=$box.data("shortcode");
-      if(!shortcode) return;
-      $(".related-wrap").each(function(){
-        var $wrap=$(this),$tag=$wrap.find(".related-tag"),
-            postId=$tag.data("id"),postLabel=$tag.data("label"),
-            $content=$wrap.find(".widget-content"),
-            resAttr=getAttr(shortcode,"results"),
-            desktopCount=resAttr?Number(resAttr):6,
-            mobileCount=Math.min(3,desktopCount),
-            labelAttr=getAttr(shortcode,"label"),
-            label=(labelAttr&&labelAttr!=postLabel&&"related"!=labelAttr)?labelAttr:postLabel;
-        if(labelAttr&&labelAttr!=postLabel&&"related"!=labelAttr){
-          $content.parent().find(".title-link").attr("href","/search/label/"+label);
-        }
-        $w.on("load resize scroll",function onScroll(){
-          if($w.scrollTop()+$w.height()<$wrap.offset().top) return;
-          $w.off("load resize scroll",onScroll);
-          $content.html($loader);
-          fetchRelated(label,postId,desktopCount,function(posts){
-            renderRelated($content,posts,mobileCount);
-          });
-        }).trigger("scroll");
-      });
-      $box.parent().remove();
-    });
-
-    function readFeed(resp){
-      var $data=$(resp).find("#data");
-      if(!$data.length) return [];
-      try{return JSON.parse($data.text()).posts||[];}catch(e){return [];}
-    }
-
-    function fetchRelated(label,excludeId,count,done){
-      $.ajax({
-        url:getFeedUrl(count+1,label),type:"GET",dataType:"html",cache:true,timeout:5e3,
-        success:function(resp){
-          var posts=readFeed(resp).filter(function(p){return p.id!=excludeId;}).slice(0,count);
-          if(posts.length>=count) return done(posts);
-          backfillRecent(posts,excludeId,count,done);
-        },
-        error:function(){backfillRecent([],excludeId,count,done);}
-      });
-    }
-
-    function backfillRecent(posts,excludeId,count,done){
-      var need=count-posts.length;
-      if(need<=0) return done(posts);
-      $.ajax({
-        url:getFeedUrl(need+posts.length+1,"recent"),type:"GET",dataType:"html",cache:true,timeout:5e3,
-        success:function(resp){
-          var have={};
-          have[excludeId]=1;
-          posts.forEach(function(p){have[p.id]=1;});
-          var extra=readFeed(resp).filter(function(p){return !have[p.id];}).slice(0,need);
-          done(posts.concat(extra));
-        },
-        error:function(){done(posts);}
-      });
-    }
-
-    function renderRelated($content,posts,mobileCount){
-      if(!posts.length){$content.html(msgError("related"));return;}
-      var total=posts.length,html='<div class="related-items">';
-      posts.forEach(function(post,index){
-        html+=getPostContent({type:"related",index:index,total:total,post:post});
-      });
-      html+="</div>";
-      $content.html(html);
-      $content.find(".related-items > .post").each(function(i){
-        if(i>=mobileCount) $(this).addClass("is-desktop-only");
-      });
-      $content.find(".thumbnail").pbtLazy({onScroll:false});
-    }
-  });
-})(jQuery);
 //]]>
 </script>
 <!-- Sitemap Engine: auto-activates when #ia-sitemap-posts exists on the page -->

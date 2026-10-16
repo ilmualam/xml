@@ -175,6 +175,16 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 - **Duplicate theme-color** — Removed hard-coded `<meta name='theme-color' content='#249749'>` from top of `<head>`; dynamic one inside `pbt-head` is the correct single source.
 - **og:image wrong dimensions** — Changed `resizeImage 1200` to `resizeImage(src, 1200, "1200:630")` for both OG and Twitter image tags to ensure proper 1200×630 crop matches declared width/height metadata.
 
+- **Cropped thumbnails** — `--base` was 16/10, cropping the site's 16:9 thumbnails. Now 16/9; cards (home/label/search, Trending, Related, Featured md) use the sitemap-style layout: image → green label pill → title → 📅 date.
+- **CLS: Trending/Related** — JS-loaded widgets grew from a 12rem loader to full cards. A hidden `:before` placeholder now reserves exactly one card row (one row on desktop, horizontal scroll-snap on tablet/mobile). Card header height is fixed via `--card-head`.
+- **CLS: post images** — `aspect-ratio:auto` + `content-visibility:auto` on `.post-body img` cancelled the width/height-attribute ratio and collapsed off-screen images. Removed.
+- **CLS: JS-moved ad slots** — `.before-ads/.after-ads/.post-footer-ads/.inline-ad` now reserve their height (100vw on portrait mobile, matching the rr-container script).
+- **CLS: font swap / header icons** — metric-matched `Inter Fallback` faces; header icon buttons have fixed widths.
+- **LCP** — first label/search list card and the first Featured card render a real `<img fetchpriority=high>` (srcset via `sourceSet`) instead of a JS background; logo no longer `fetchpriority=high`.
+- **Dead/broken scripts removed** — jQuery related-posts block (`jQuery is not defined` on every page) and a post-image script that sat entirely on a `//` comment line.
+- **Schema** — global `WebPage` is now per-page (`<canonical>#webpage`, CollectionPage + ItemList on label pages, SearchResultsPage on search); `Article.mainEntityOfPage` points at it; the never-rendered label block in `postMeta` and the misleading `funding: Google AdSense` claim were removed.
+- **vanilla.js** is loaded from jsDelivr pinned to a commit SHA. After changing `scripts/vanilla.js`, commit it first, then update the SHA in the XML `<b:tag name='script' ... vanilla.js>` line.
+
 ---
 
 ## Development Rules
