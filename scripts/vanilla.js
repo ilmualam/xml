@@ -482,16 +482,31 @@
     return html;
   }
 
-  // Synchronous fallback fetch (mirrors the old async:false jQuery call) -
-  // callers rely on the fallback post list being available immediately.
-  function getRecentPostsData(num) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', getFeedUrl(num, 'recent'), false);
-    xhr.send(null);
-    var doc = new DOMParser().parseFromString(xhr.responseText, 'text/html');
-    var dataEl = doc.getElementById('data');
-    var parsed = JSON.parse(dataEl ? dataEl.textContent : '{}');
-    return parsed.posts;
+  function parseFeedData(html) {
+    var dataEl = new DOMParser().parseFromString(html, 'text/html').getElementById('data');
+    if (!dataEl) return null;
+    try { return JSON.parse(dataEl.textContent); } catch (e) { return null; }
+  }
+
+  // Labels with fewer posts than requested are topped up with recent posts,
+  // so widgets always fill their grid (and their reserved space).
+  var BACKFILL_TYPES = { side: 1, trending: 1, related: 1 };
+  function backfillPosts(posts, num, label, type) {
+    if (!posts || !BACKFILL_TYPES[type] || label === 'recent' || posts.length >= num) {
+      return Promise.resolve(posts);
+    }
+    return fetch(getFeedUrl(num + 1, 'recent'), { credentials: 'same-origin' })
+      .then(function (res) { return res.text(); })
+      .then(function (html) {
+        var extra = (parseFeedData(html) || {}).posts || [];
+        var seen = {};
+        posts.forEach(function (p) { seen[p.id] = 1; });
+        extra.forEach(function (p) {
+          if (!seen[p.id] && posts.length < num) { seen[p.id] = 1; posts.push(p); }
+        });
+        return posts;
+      })
+      .catch(function () { return posts; });
   }
 
   function getPosts(opts) {
@@ -524,6 +539,11 @@
     fetch(url, { credentials: 'same-origin' })
       .then(function (res) { return res.text(); })
       .then(function (html) {
+        var parsed = parseFeedData(html);
+        var posts = parsed ? (type !== 'card' ? parsed.posts : parsed.postData) : null;
+        return backfillPosts(posts, num, label, type);
+      })
+      .then(function (posts) {
         var out = '';
         var count = 0;
         var isError = false;
@@ -543,24 +563,16 @@
             out = '<div class="' + type + '-items">';
         }
 
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var dataEl = doc.getElementById('data');
-        if (dataEl) {
-          var parsed = JSON.parse(dataEl.textContent);
-          var posts = type !== 'card' ? parsed.posts : parsed.postData;
-          if (posts) {
-            if (type === 'related') {
-              if (posts.length === 1 && label !== 'recent') posts = getRecentPostsData(num);
-              var total = posts.length;
-              for (var m = 0; m < total; m++) {
-                if (posts.length !== 1 && parsed.posts[m].id === id) { posts.splice(m, 1); break; }
-              }
+        if (posts && posts.length) {
+          if (type === 'related') {
+            for (var m = 0; m < posts.length; m++) {
+              if (posts.length !== 1 && posts[m].id === id) { posts.splice(m, 1); break; }
             }
-            for (var v = 0; v < posts.length; v++) {
-              out += getPostContent({ type: type, index: v, post: posts[v], num: num, headline: headline, target: pageTarget });
-            }
-            count = posts.length;
-          } else isError = true;
+          }
+          for (var v = 0; v < posts.length; v++) {
+            out += getPostContent({ type: type, index: v, post: posts[v], num: num, headline: headline, target: pageTarget });
+          }
+          count = posts.length;
         } else isError = true;
 
         out += '</div>';
