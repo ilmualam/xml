@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -n 't\\\\.on\\\\|w\\\\.on.*input\\\\|$w\\\\.on' asset/xml/ilmualam.xml)"
-      "Bash(grep -n 't\\\\.on\\\\|$w\\\\.on' asset/xml/ilmualam.xml)"
-    ]
-  }
-}

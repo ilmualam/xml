@@ -4,18 +4,13 @@
 <b:with value='data:view.isSearch and (data:blog.view == &quot;json&quot;)' var='isFeed'>
 <head>
 <b:include name='pbt-head'/>
-<link href='https://fonts.googleapis.com' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://googleads.g.doubleclick.net' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://securepubads.g.doubleclick.net' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://tpc.googlesyndication.com' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://live.demand.supply' rel='preconnect'/>
-<link href='https://live.demand.supply' rel='dns-prefetch'/>
-<link crossorigin='anonymous' href='https://server8.mp3quran.net' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://cdn.islamic.network' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://api.alquran.cloud' rel='preconnect'/>
-<link crossorigin='anonymous' href='https://apis.quran.foundation' rel='preconnect'/>
-<link crossorigin='use-credentials' href='https://ilmualam.github.io/pwa/manifest.json' rel='manifest'/>
+<link href='https://live.demand.supply' rel='preconnect'/>
+<link href='https://googleads.g.doubleclick.net' rel='dns-prefetch'/>
+<link href='https://securepubads.g.doubleclick.net' rel='dns-prefetch'/>
+<link href='https://tpc.googlesyndication.com' rel='dns-prefetch'/>
+<link href='https://cdn.islamic.network' rel='dns-prefetch'/>
+<link href='https://apis.quran.foundation' rel='dns-prefetch'/>
+<link href='https://ilmualam.github.io/pwa/manifest.json' rel='manifest'/>
 <meta content='#249749' name='msapplication-navbutton-color'/>
 <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'/>
 <meta content='yes' name='apple-mobile-web-app-capable'/>
@@ -57,7 +52,6 @@ try{if(localStorage.dark_mode==="true")document.documentElement.classList.add("i
 Blogger Template Style
 Name:         The Ilmu Alam Green
 Version:      1.0.0
-Modified by:  https://thebukitbesi.com/
 -----------------------------------------------*/
 
 /*-- Customize Options (Start) --
@@ -1220,6 +1214,24 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .before-ads,.after-ads{min-height:calc(100vw + var(--gap))}
 .post-footer-ads{min-height:100vw}
 }
+/* --- Zero-CLS sidebar getPosts (4 posts = 2 rows) and related (6 posts = 2 rows on desktop) --- */
+:root{--side-head:5.5rem}
+.side-items .entry-title{font-size:1rem;line-height:1.3em}
+.side-items .entry-title a{--line-clamp:3}
+.side-items .entry-header{height:var(--side-head);overflow:hidden}
+.sidebar .getPosts .widget-content{display:grid;--cw:calc((100% - 1.5rem) / 2)}
+.sidebar .getPosts .widget-content:before{content:"";grid-area:1/1;display:block;width:calc(var(--cw) * 2);aspect-ratio:16/9;box-sizing:content-box;padding-bottom:calc((0.75rem + var(--side-head)) * 2 + 1.5rem);visibility:hidden;pointer-events:none}
+.sidebar .getPosts .widget-content > *{grid-area:1/1;min-width:0}
+.sidebar .getPosts .loader{height:auto}
+@media (min-width: 1025px) {
+.related-wrap .widget-content:before{width:calc(var(--cw) * 2);padding-bottom:calc((var(--card-head) + 2px) * 2 + 1.5rem)}
+}
+@media (max-width: 768px) {
+.sidebar .getPosts .widget-content{--cw:calc((100% - 3rem) / 3)}
+}
+@media (max-width: 680px) {
+.sidebar .getPosts .widget-content{--cw:calc((100% - 1.5rem) / 2)}
+}
 ]]></b:skin>
 </b:if>
 <b:if cond='data:view.isLayoutMode'>
@@ -2233,7 +2245,7 @@ body#layout #hidden{display:none!important}
       },
       <b:if cond='data:post.labels'>
       &quot;articleSection&quot;: &quot;<data:post.labels.first.name.jsonEscaped/>&quot;,
-      &quot;keywords&quot;: [<b:loop values='data:post.labels' var='label'>&quot;<data:label.name.jsonEscaped/>&quot;<b:if cond='not data:label.isLast'>,</b:if></b:loop>],
+      &quot;keywords&quot;: [<b:loop index='i' values='data:post.labels' var='label'><b:if cond='data:i != 0'>,</b:if>&quot;<data:label.name.jsonEscaped/>&quot;</b:loop>],
       </b:if>
       &quot;speakable&quot;: {
         &quot;@type&quot;: &quot;SpeakableSpecification&quot;,
@@ -2713,7 +2725,7 @@ body#layout #hidden{display:none!important}
                         <b:widget-setting name='link-8'>/p/contact.html</b:widget-setting>
                         <b:widget-setting name='link-5'>#</b:widget-setting>
                         <b:widget-setting name='link-6'>/p/kalkulator-faraid.html</b:widget-setting>
-                        <b:widget-setting name='link-3'>/p/al-quran-online.html</b:widget-setting>
+                        <b:widget-setting name='link-3'>https://quran.ilmualam.com/</b:widget-setting>
                         <b:widget-setting name='link-4'>/p/waktu-solat-malaysia.html</b:widget-setting>
                         <b:widget-setting name='text-1'>About</b:widget-setting>
                         <b:widget-setting name='text-0'>Home</b:widget-setting>
@@ -2759,7 +2771,7 @@ body#layout #hidden{display:none!important}
               <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
               <b:widget-setting name='showThumbnails'>true</b:widget-setting>
               <b:widget-setting name='showSnippets'>true</b:widget-setting>
-              <b:widget-setting name='timeRange'>LAST_WEEK</b:widget-setting>
+              <b:widget-setting name='timeRange'>LAST_MONTH</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main' var='this'>
       <b:include name='widget-title'/>
@@ -3291,7 +3303,7 @@ body#layout #hidden{display:none!important}
       },
       <b:if cond='data:post.labels'>
       &quot;articleSection&quot;: &quot;<data:post.labels.first.name.jsonEscaped/>&quot;,
-      &quot;keywords&quot;: [<b:loop values='data:post.labels' var='label'>&quot;<data:label.name.jsonEscaped/>&quot;<b:if cond='not data:label.isLast'>,</b:if></b:loop>],
+      &quot;keywords&quot;: [<b:loop index='i' values='data:post.labels' var='label'><b:if cond='data:i != 0'>,</b:if>&quot;<data:label.name.jsonEscaped/>&quot;</b:loop>],
       </b:if>
       &quot;speakable&quot;: {
         &quot;@type&quot;: &quot;SpeakableSpecification&quot;,
@@ -3542,7 +3554,7 @@ body#layout #hidden{display:none!important}
               </b:widget>
               <b:widget id='PopularPosts2' locked='false' title='Motivasi Diri' type='PopularPosts' visible='true'>
                 <b:widget-settings>
-                  <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
+                  <b:widget-setting name='numItemsToShow'>4</b:widget-setting>
                   <b:widget-setting name='showThumbnails'>true</b:widget-setting>
                   <b:widget-setting name='showSnippets'>true</b:widget-setting>
                   <b:widget-setting name='timeRange'>LAST_MONTH</b:widget-setting>
@@ -3796,18 +3808,12 @@ body#layout #hidden{display:none!important}
   </b:section>
 </b:if>
 <!-- Site Scripts (vanilla JS, no jQuery) -->
-<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@38c69a83f42a4978760a6e7c6623680d28b2df7e/scripts/vanilla.js' type='text/javascript'/>
+<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@f1572511fd9816e526e277aa74e485ec40defacb/scripts/vanilla.js' type='text/javascript'/>
 </b:if>
 <!-- Blogger Scripts -->
 <b:if cond='data:isFeed'>
   <b:eval expr='&quot;&lt;!--&quot;'/>
 </b:if>
-<!-- Register Service Worker -->
-<script type='text/javascript'>
-//<![CDATA[
-"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("https://ilmualam.pages.dev/sw.js",{scope:"/"}).then(e=>console.log("? SW scope:",e.scope)).catch(e=>console.error("? SW failed:",e))},{once:!0,passive:!0});
-//]]>
-</script>
 <script type='text/javascript'>
 //<![CDATA[
 !function(){"use strict";function e(){if("IntersectionObserver"in window){var e=new IntersectionObserver(function(e,t){e.forEach(function(e){if(e.isIntersecting){var r=e.target,o="https:"+r.getAttribute("data-src"),a=document.createElement("iframe");a.src=o,a.setAttribute("frameborder","0"),a.setAttribute("allowfullscreen","true"),a.setAttribute("allow","accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"),a.setAttribute("loading","lazy"),r.parentNode.replaceChild(a,r),t.unobserve(r)}})},{rootMargin:"200px 0px",threshold:0});document.querySelectorAll(".video-youtube[data-src]").forEach(function(t){e.observe(t)})}else for(var t=document.querySelectorAll(".video-youtube[data-src]"),r=0;r<t.length;r++){var o=t[r],a="https:"+o.getAttribute("data-src"),i=document.createElement("iframe");i.src=a,i.setAttribute("frameborder","0"),i.setAttribute("allowfullscreen","true"),i.setAttribute("allow","accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"),o.parentNode.replaceChild(i,o)}}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e,{once:!0,passive:!0}):requestAnimationFrame(e)}();
