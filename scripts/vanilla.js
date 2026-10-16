@@ -470,10 +470,10 @@
         html = img({ size: '2' }) + '<div class="entry-header">' + headline + title() + meta() + '</div>';
         break;
       case 'trending':
-        html = '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
+        html = '<div class="post">' + img({ size: '2' }) + '<div class="entry-header">' + tag() + title() + meta({ author: 'false' }) + '</div></div>';
         break;
       case 'related':
-        html = index !== num - 1 ? '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>' : '';
+        html = index !== num - 1 ? '<div class="post">' + img({ size: '2' }) + '<div class="entry-header">' + tag() + title() + meta({ author: 'false' }) + '</div></div>' : '';
         break;
       case 'side':
         html = '<div class="post">' + img({ size: '3' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
