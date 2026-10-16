@@ -77,7 +77,7 @@ Version:      1.0.0
     <Variable name="color" description="Color" type="color" default="#247b49" value="#247b49"/>
     <Variable name="hover.color" description="Hover Color" type="color" default="#3f3f46" value="#3f3f46"/>
     <Variable name="text.color" description="Text Color" type="color" default="#09090b"  value="#09090b"/>
-    <Variable name="meta.color" description="Meta Color" type="color" default="#71717a" value="#71717a"/>
+    <Variable name="meta.color" description="Meta Color" type="color" default="#66666e" value="#66666e"/>
 </Group>
 <Group description="Header" selector=".site-header">
     <Variable name="header.bg" description="Background" type="color" default="#ffffff" value="#ffffff"/>
@@ -88,7 +88,7 @@ Version:      1.0.0
     <Variable name="submenu.bg" description="Background" type="color" default="#ffffff" value="#ffffff"/>
     <Variable name="submenu.color" description="Color" type="color" default="$(color)" value="#09090b"/>
     <Variable name="submenu.hover.color" description="Hover Color" type="color" default="$(hover.color)" value="#3f3f46"/>
-    <Variable name="submenu.meta.color" description="Meta Color" type="color" default="$(meta.color)" value="#71717a"/>
+    <Variable name="submenu.meta.color" description="Meta Color" type="color" default="$(meta.color)" value="#66666e"/>
     <Variable name="submenu.gray.bg" description="Gray Background" type="color" default="$(gray)" value="#fafafa"/>
 </Group>
 <Group description="Post Page" selector="body">
@@ -1110,9 +1110,9 @@ ins.adsbygoogle-noablate[data-anchor-shown="true"]{z-index:990!important}
 /* ==== CTA UTAMA (.icta) ==== */
 .icta {max-width:440px; margin:20px auto; background:#0b7b5a; color:#ffffff; padding:16px 20px; border-radius:16px; text-align:center; border:1px solid rgba(0, 0, 0, 0.18); box-shadow:0 4px 14px rgba(0, 0, 0, 0.2);}
 .icta h3 {margin:0 0 12px; font-size:1.05rem; font-weight:700; line-height:1.4;}
-.ibtnx {display:inline-block !important; background:#10b981 !important; color:#ffffff !important; padding:8px 16px !important; margin:4px 5px !important; font-size:14px !important; font-weight:600; border-radius:999px !important; border:1px solid #059669 !important; text-decoration:none !important; cursor:pointer; line-height:1.3; white-space:nowrap; box-shadow:0 2px 6px rgba(0,0,0,0.15); transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;}
+.ibtnx {display:inline-block !important; background:#047857 !important; color:#ffffff !important; padding:8px 16px !important; margin:4px 5px !important; font-size:14px !important; font-weight:600; border-radius:999px !important; border:1px solid #059669 !important; text-decoration:none !important; cursor:pointer; line-height:1.3; white-space:nowrap; box-shadow:0 2px 6px rgba(0,0,0,0.15); transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;}
 .ibtnx span {color:inherit !important;}
-.ibtnx:hover, .ibtnx:focus-visible {background:#0ea972 !important; box-shadow:0 3px 10px rgba(0,0,0,0.25); transform:translateY(-1px);}
+.ibtnx:hover, .ibtnx:focus-visible {background:#065f46 !important; box-shadow:0 3px 10px rgba(0,0,0,0.25); transform:translateY(-1px);}
 .ismall {margin-top:12px; opacity:0.95; font-size:12px; line-height:1.5;}
 .ismall span {color:#fdfdfd;}
 .icta-files {margin:10px auto 8px; font-size:0.9rem;}
@@ -1613,9 +1613,9 @@ body#layout #hidden{display:none!important}
     <b:includable id='post-thumbnail'>
 	<b:tag class='entry-thumbnail' expr:name='data:hasLink == false ? &quot;div&quot; : &quot;a&quot;'> <b:attr cond='data:hasLink != false' expr:value='data:post.url.canonical' name='href'/> <b:include cond='data:showCategory == true' name='post-category'/>
 		<b:if cond='data:showCounter == true'> <span class='entry-count'><b:eval expr='data:i + 1'/></span> </b:if>
-		<b:with value='data:isLcp == true or (data:lcpCandidate == true and data:i == 0 and not (data:view.isHomepage and (data:widgets any w =&gt; w.sectionId == &quot;featured&quot;)))' var='eagerImg'>
+		<b:with value='data:isLcp == true' var='eagerImg'>
 		<b:if cond='data:eagerImg and data:post.featuredImage and not data:post.featuredImage.isYouTube'>
-		<img class='thumbnail pbt-lazy' decoding='async' expr:alt='data:post.title.escaped' expr:sizes='data:isLcp == true ? &quot;(max-width: 680px) 100vw, 620px&quot; : &quot;(max-width: 680px) 100vw, 400px&quot;' expr:src='resizeImage(data:post.featuredImage, 640, &quot;16:9&quot;)' expr:srcset='sourceSet(data:post.featuredImage, [360, 480, 640, 800, 1024], &quot;16:9&quot;)' fetchpriority='high' height='360' loading='eager' width='640'/>
+		<img class='thumbnail pbt-lazy' decoding='async' expr:alt='data:post.title.escaped' sizes='(max-width: 680px) 100vw, 620px' expr:src='resizeImage(data:post.featuredImage, 640, &quot;16:9&quot;)' expr:srcset='sourceSet(data:post.featuredImage, [360, 480, 640, 800, 1024], &quot;16:9&quot;)' fetchpriority='high' height='360' loading='eager' width='640'/>
 		<b:else/>
 		<div class='thumbnail' expr:aria-label='data:post.title.escaped' expr:data-alt='data:post.title.escaped' expr:data-src='data:post.featuredImage ? (data:post.featuredImage.isYouTube ? resizeImage(data:post.featuredImage.youtubeMaxResDefaultUrl.jsonEscaped, 72, &quot;1:1&quot;) : resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;)) : &quot;https://resources.blogblog.com/img/blank.gif&quot;' role='img'/>
 		</b:if>
@@ -2014,7 +2014,8 @@ body#layout #hidden{display:none!important}
       <b:include cond='not data:view.search.label and not data:view.search.query and not data:view.isArchive' data='post' name='inlineAd'/>
       <!-- Index Post Content -->
       <div class='post'>
-        <b:include data='{ lcpCandidate: true }' name='post-thumbnail'/>
+        <b:include cond='data:post.id == data:posts.first.id and not (data:view.isHomepage and (data:widgets any w =&gt; w.sectionId == &quot;featured&quot;))' data='{ isLcp: true }' name='post-thumbnail'/>
+        <b:include cond='data:post.id != data:posts.first.id or (data:view.isHomepage and (data:widgets any w =&gt; w.sectionId == &quot;featured&quot;))' name='post-thumbnail'/>
         <div class='entry-header'>
           <b:include name='post-category'/>
           <b:include name='post-title'/>
@@ -2183,7 +2184,7 @@ body#layout #hidden{display:none!important}
       <b:if cond='data:post.labels'>
         <div class='entry-labels'>
           <b:if cond='data:allBylineItems.labels.label'>
-            <span class='labels-label' expr:aria-label='data:allBylineItems.labels.label'/>
+            <span class='labels-label' expr:aria-label='data:allBylineItems.labels.label' role='img'/>
           </b:if>
           <b:loop values='data:post.labels' var='label'>
             <a class='label-link' expr:href='data:label.url.canonical' rel='tag'><data:label.name/></a>
@@ -2270,7 +2271,7 @@ body#layout #hidden{display:none!important}
       <!-- Post Share Buttons -->
       <div class='post-share'>
         <ul class='share-a social' expr:data-share-title='data:post.title' expr:data-share-url='data:post.url.canonical'>
-          <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
+          <li class='share-label'><span class='sl' expr:aria-label='data:messages.share' role='img'><i/></span></li>
           <li class='facebook has-span'><a class='bi-facebook sl window-open' href='#' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
           <li class='twitter has-span'><a class='bi-twitter sl window-open' href='#' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
           <li class='whatsapp has-span'><a class='bi-whatsapp sl' href='#' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
@@ -3072,7 +3073,8 @@ body#layout #hidden{display:none!important}
       <b:include cond='not data:view.search.label and not data:view.search.query and not data:view.isArchive' data='post' name='inlineAd'/>
       <!-- Index Post Content -->
       <div class='post'>
-        <b:include data='{ lcpCandidate: true }' name='post-thumbnail'/>
+        <b:include cond='data:post.id == data:posts.first.id and not (data:view.isHomepage and (data:widgets any w =&gt; w.sectionId == &quot;featured&quot;))' data='{ isLcp: true }' name='post-thumbnail'/>
+        <b:include cond='data:post.id != data:posts.first.id or (data:view.isHomepage and (data:widgets any w =&gt; w.sectionId == &quot;featured&quot;))' name='post-thumbnail'/>
         <div class='entry-header'>
           <b:include name='post-category'/>
           <b:include name='post-title'/>
@@ -3241,7 +3243,7 @@ body#layout #hidden{display:none!important}
       <b:if cond='data:post.labels'>
         <div class='entry-labels'>
           <b:if cond='data:allBylineItems.labels.label'>
-            <span class='labels-label' expr:aria-label='data:allBylineItems.labels.label'/>
+            <span class='labels-label' expr:aria-label='data:allBylineItems.labels.label' role='img'/>
           </b:if>
           <b:loop values='data:post.labels' var='label'>
             <a class='label-link' expr:href='data:label.url.canonical' rel='tag'><data:label.name/></a>
@@ -3328,7 +3330,7 @@ body#layout #hidden{display:none!important}
       <!-- Post Share Buttons -->
       <div class='post-share'>
         <ul class='share-a social' expr:data-share-title='data:post.title' expr:data-share-url='data:post.url.canonical'>
-          <li class='share-label'><span class='sl' expr:aria-label='data:messages.share'><i/></span></li>
+          <li class='share-label'><span class='sl' expr:aria-label='data:messages.share' role='img'><i/></span></li>
           <li class='facebook has-span'><a class='bi-facebook sl window-open' href='#' rel='nofollow noopener' title='Facebook'><span>Facebook</span></a></li>
           <li class='twitter has-span'><a class='bi-twitter sl window-open' href='#' rel='nofollow noopener' title='X (Twitter)'><span>Twitter</span></a></li>
           <li class='whatsapp has-span'><a class='bi-whatsapp sl' href='#' rel='nofollow noopener' target='_blank' title='WhatsApp'><span>WhatsApp</span></a></li>
@@ -3719,7 +3721,7 @@ body#layout #hidden{display:none!important}
                 </b:widget>
                 <b:widget id='HTML12' locked='false' title='Don&apos;t Miss the Latest Posts' type='HTML' visible='true'>
                   <b:widget-settings>
-                    <b:widget-setting name='content'><![CDATA[<div class="fi-wrap"><form class="fi-form" action="https://api.follow.it/subscription-form/VFRvUWpkRzRWMGNHOHdrcDl2elF5NER6cHZlY3dTdHUyalM4SE1hWHRWZUI1VzJvVGRuSUV1TFpLRUlZeWt5R3graUFhdUZZRTBQNmxCM2ptcUYyMW5QMWVrTGFITHptZjBGU0syaUhzVkVQTmJLb3QxWW5qczBLa3NuNVY0VS98VWg3Q2swa1hZbUV6WnF6T0JLL1kzbEY2akJFWDl0a2FDbmpuWEpibEJmST0=/8" method="post" target="_blank"><h2 class="fi-title">Get new posts by email</h2><label class="fi-label" for="fi-email">Email address</label><input id="fi-email" class="fi-input" type="email" name="email" autocomplete="email" placeholder="Enter your email" required="required"/><input class="fi-company" name="company" type="text" tabindex="-1" autocomplete="off" value=""/><button class="fi-btn" type="submit">Subscribe</button><p class="fi-note">No spam. Unsubscribe anytime.</p></form></div>]]></b:widget-setting>
+                    <b:widget-setting name='content'><![CDATA[<div class="fi-wrap"><form class="fi-form" action="https://api.follow.it/subscription-form/VFRvUWpkRzRWMGNHOHdrcDl2elF5NER6cHZlY3dTdHUyalM4SE1hWHRWZUI1VzJvVGRuSUV1TFpLRUlZeWt5R3graUFhdUZZRTBQNmxCM2ptcUYyMW5QMWVrTGFITHptZjBGU0syaUhzVkVQTmJLb3QxWW5qczBLa3NuNVY0VS98VWg3Q2swa1hZbUV6WnF6T0JLL1kzbEY2akJFWDl0a2FDbmpuWEpibEJmST0=/8" method="post" target="_blank"><h2 class="fi-title">Get new posts by email</h2><label class="fi-label" for="fi-email">Email address</label><input id="fi-email" class="fi-input" type="email" name="email" autocomplete="email" placeholder="Enter your email" required="required"/><input class="fi-company" aria-hidden="true" aria-label="Company" name="company" type="text" tabindex="-1" autocomplete="off" value=""/><button class="fi-btn" type="submit">Subscribe</button><p class="fi-note">No spam. Unsubscribe anytime.</p></form></div>]]></b:widget-setting>
                   </b:widget-settings>
                   <b:includable id='main'>
       <b:include name='html-content'/>
