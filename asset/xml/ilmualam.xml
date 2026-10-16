@@ -1404,9 +1404,9 @@ body#layout #hidden{display:none!important}
 			<meta expr:content='data:skin.vars.browser_bg' name='theme-color'/>
 			<!-- Open Graph & Twitter Meta --><b:include name='customOpenGraphMetaData'/>
 			<!-- Feed Links -->
-			<b:if cond='data:blog.feedLinks'>
-				<data:blog.feedLinks/>
-				<data:blog.meTag/> </b:if>
+			<!-- Main feed only: data:blog.feedLinks also linked each post's comment feed, which Google reported as duplicate pages -->
+			<link href='https://www.ilmualam.com/feeds/posts/default' expr:title='data:blog.title + &quot; - Atom&quot;' rel='alternate' type='application/atom+xml'/>
+			<link href='https://www.ilmualam.com/feeds/posts/default?alt=rss' expr:title='data:blog.title + &quot; - RSS&quot;' rel='alternate' type='application/rss+xml'/>
         <!-- Google Fonts (LTR fonts loaded async in head; RTL: Cairo async) -->
     <b:if cond='data:blog.languageDirection == &quot;rtl&quot;'>
       <link as='style' href='https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&amp;display=swap' rel='preload'/>
