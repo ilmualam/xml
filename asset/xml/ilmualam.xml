@@ -40,11 +40,6 @@ try{if(localStorage.dark_mode==="true")document.documentElement.classList.add("i
 //]]>
 </script>
 <script data-cfasync='false' defer='defer' src='https://live.demand.supply/up.js' type='text/javascript'/>
-<script type='text/javascript'>
-//<![CDATA[
-!function(){function n(){var n=document.getElementsByClassName("rr-container"),e=window.innerWidth||screen.width;if(!(e>500||window.innerHeight<window.innerWidth))for(var t=0;t<n.length;t++)n[t].style.minHeight=e+"px"}"loading"!==document.readyState?n():document.addEventListener("DOMContentLoaded",n,{once:!0,passive:!0})}();
-//]]>
-</script>
 <b:if cond='!data:view.isLayoutMode and !data:isFeed'>
 <b:skin version='2.2.0'><![CDATA[/*
 -----------------------------------------------
@@ -807,6 +802,7 @@ pre:where(.code-box,.post-body *){direction:ltr;display:block;background:var(--w
 .cf-on .comments .comment-replybox-thread:not(:has(iframe)){display:none}
 #comment-editor[height="230px"],#comment-editor[height="1142px"]{height:5.25rem}
 #comment-editor{min-height:5.25rem;max-height:fit-content}
+.cf-on #comment-editor[src]{height:290px}
 #post-ads-1,#post-ads-2,#post-ads-3,#post-ads-4{display:none}
 .before-ads .widget{margin-bottom:var(--gap)}
 .after-ads .widget{margin-top:var(--gap)}
@@ -822,7 +818,7 @@ html:has(.header-inner.is-fixed.show) .sidebar-wrap.is-sticky .widget:last-child
 .sidebar .social{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
 .sidebar .social a{display:flex;align-items:center;gap:0.5rem;width:100%;height:3rem;background:var(--widget-bg);font-size:1.375rem;color:var(--title-color);padding:0 1rem;border-radius:var(--rounded)}
 .sidebar .social a:hover{color:var(--title-hover-color)}
-.sidebar .social span{font-size:1rem}
+.sidebar .social span{font-size:1rem;font-family:var(--body-font);font-weight:500;text-transform:capitalize}
 .sidebar .loader{height:12rem}
 .popular-items{display:grid;gap:1.5rem}
 .popular-items .post{display:flex;align-items:start;gap:1rem}
@@ -1197,23 +1193,21 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .featured-items .md .entry-header{flex:1}
 /* --- Ad slots filled by JS: reserve their box up front --- */
 .before-ads,.after-ads{min-height:calc(280px + var(--gap))}
-.post-footer-ads{min-height:250px}
 .blog-posts .inline-ad{min-height:280px}
 @media (max-width: 1024px) {
-.trending .widget-content,.related-wrap .widget-content{--cw:calc(50% - 0.75rem)}
-.trending-items,.related-items{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:var(--cw);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.trending-items::-webkit-scrollbar,.related-items::-webkit-scrollbar{display:none}
-.trending-items .post,.related-items .post{scroll-snap-align:start}
+.trending .widget-content{--cw:calc(50% - 0.75rem)}
+.trending-items{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:var(--cw);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.trending-items::-webkit-scrollbar{display:none}
+.trending-items .post{scroll-snap-align:start}
 }
 @media (max-width: 680px) {
-.trending .widget-content,.related-wrap .widget-content{--cw:82%}
-.trending-items,.related-items{gap:1rem}
+.trending .widget-content{--cw:82%}
+.trending-items{gap:1rem}
 .grid-items{gap:1.25rem}
 .grid-items .entry-title{font-size:1.125rem}
 }
-@media (max-width: 500px) and (orientation: portrait) {
-.before-ads,.after-ads{min-height:calc(100vw + var(--gap))}
-.post-footer-ads{min-height:100vw}
+@media (max-width: 1024px) {
+.sidebar .is-ad,.sidebar .widget:has(.demand-supply){display:none}
 }
 /* --- Zero-CLS sidebar getPosts (4 posts = 2 rows) and related (6 posts = 2 rows on desktop) --- */
 :root{--side-head:5.5rem}
@@ -1224,8 +1218,18 @@ ins.adsbygoogle[data-ad-slot]{display:block}
 .sidebar .getPosts .widget-content:before{content:"";grid-area:1/1;display:block;width:calc(var(--cw) * 2);aspect-ratio:16/9;box-sizing:content-box;padding-bottom:calc((0.75rem + var(--side-head)) * 2 + 1.5rem);visibility:hidden;pointer-events:none}
 .sidebar .getPosts .widget-content > *{grid-area:1/1;min-width:0}
 .sidebar .getPosts .loader{height:auto}
-@media (min-width: 1025px) {
+/* Related posts: 3x2 grid (6) on tablet/desktop, 2x2 grid (4) on phones; space for 2 rows reserved */
+.related-items{grid-template-columns:repeat(3,minmax(0,1fr))}
 .related-wrap .widget-content:before{width:calc(var(--cw) * 2);padding-bottom:calc((var(--card-head) + 2px) * 2 + 1.5rem)}
+@media (max-width: 680px) {
+.related-wrap{--card-head:7.75rem}
+.related-wrap .widget-content{--cw:calc((100% - 0.875rem) / 2)}
+.related-wrap .widget-content:before{padding-bottom:calc((var(--card-head) + 2px) * 2 + 0.875rem)}
+.related-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:0.875rem}
+.related-items .post:nth-child(n+5){display:none}
+.related-items .entry-header{gap:0.5rem;padding:0.75rem 0.875rem 0.875rem}
+.related-items .entry-title{font-size:0.9375rem}
+.related-items .entry-header > .entry-tag{font-size:0.6875rem;padding:0 0.625rem}
 }
 @media (max-width: 768px) {
 .sidebar .getPosts .widget-content{--cw:calc((100% - 3rem) / 3)}
@@ -1532,7 +1536,7 @@ body#layout #hidden{display:none!important}
               <ul class='social'>
                 <b:loop values='data:links' var='link'>
                   <b:if cond='!(data:link.name contains &quot;getSocial&quot;)'>
-                    <li expr:class='data:link.name'><a expr:class='&quot;bi-&quot; + data:link.name' expr:href='data:link.target' expr:title='data:link.name' rel='nofollow noopener' target='_blank'/></li>
+                    <li expr:class='data:link.name'><a expr:class='&quot;bi-&quot; + data:link.name' expr:href='data:link.target' expr:title='data:link.name' rel='nofollow noopener' target='_blank'><b:if cond='data:widget.sectionId == &quot;sidebar&quot;'><span><data:link.name/></span></b:if></a></li>
                   </b:if>
                 </b:loop>
               </ul>
@@ -1929,7 +1933,7 @@ body#layout #hidden{display:none!important}
         <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
         <data:post.cmtfpIframe/>
         <b:tag name='script' type='text/javascript'>
-          BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+          if (typeof BLOG_CMT_createIframe === &#39;function&#39;) BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
         </b:tag>
       </div>
     </b:includable>
@@ -2974,7 +2978,7 @@ body#layout #hidden{display:none!important}
         <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
         <data:post.cmtfpIframe/>
         <b:tag name='script' type='text/javascript'>
-          BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+          if (typeof BLOG_CMT_createIframe === &#39;function&#39;) BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
         </b:tag>
       </div>
     </b:includable>
@@ -3464,14 +3468,6 @@ body#layout #hidden{display:none!important}
             </b:widget>
           </b:section>
           <b:section cond='data:view.isLayoutMode or (data:view.isPost and ((data:widgets.HTML any w =&gt; w.sectionId == &quot;post-ads-4&quot;) or (data:widgets.Image any w =&gt; w.sectionId == &quot;post-ads-4&quot;) or (data:widgets.AdSense any w =&gt; w.sectionId == &quot;post-ads-4&quot;)))' id='post-ads-4' maxwidgets='1' name='Post Footer ADS' showaddelement='yes'>
-            <b:widget id='HTML15' locked='false' title='' type='HTML' visible='true'>
-              <b:widget-settings>
-                <b:widget-setting name='content'><![CDATA[<div class="rr-container"><div data-ad="ilmualam.com_fluid_all_under-title" data-devices="m:1,t:1,d:1"  style="min-height:250px;" class="demand-supply"></div></div>]]></b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main'>
-      <b:include name='html-content'/>
-    </b:includable>
-            </b:widget>
           </b:section>
         </main>
         <b:if cond='(data:view.isMultipleItems or ((data:view.isPost and (data:skin.vars.postSidebar == &quot;1px&quot;)) or (data:view.isPage and (data:skin.vars.pageSidebar == &quot;1px&quot;)) and (data:widgets any w =&gt; w.sectionId == &quot;sidebar&quot;))) and not(data:isFeed or data:view.isError)'>
@@ -3480,7 +3476,7 @@ body#layout #hidden{display:none!important}
             <b:section class='sidebar' id='sidebar' name='Sidebar' showaddelement='yes'>
               <b:widget id='HTML4' locked='false' title='{ads}' type='HTML' visible='true'>
                 <b:widget-settings>
-                  <b:widget-setting name='content'><![CDATA[<div data-ad="ilmualam.com_300x250_sidebar" data-devices="m:1,t:1,d:1" style="min-height: 300px;" class="demand-supply"></div>]]></b:widget-setting>
+                  <b:widget-setting name='content'><![CDATA[<div data-ad="ilmualam.com_300x250_sidebar" data-devices="m:0,t:0,d:1" style="min-height: 300px;" class="demand-supply"></div>]]></b:widget-setting>
                 </b:widget-settings>
                 <b:includable id='main'>
       <b:include name='html-content'/>
@@ -3621,7 +3617,7 @@ body#layout #hidden{display:none!important}
               </b:widget>
               <b:widget id='HTML13' locked='false' title='Advertisement' type='HTML' visible='true'>
                 <b:widget-settings>
-                  <b:widget-setting name='content'><![CDATA[<div class="rr-container"><div data-ad="ilmualam.com_fluid_all_side_bar_sticky" data-devices="m:1,t:1,d:1"  style="min-height: 600px;" class="demand-supply"></div> </div>]]></b:widget-setting>
+                  <b:widget-setting name='content'><![CDATA[<div class="rr-container"><div data-ad="ilmualam.com_fluid_all_side_bar_sticky" data-devices="m:0,t:0,d:1"  style="min-height: 600px;" class="demand-supply"></div> </div>]]></b:widget-setting>
                 </b:widget-settings>
                 <b:includable id='main'>
       <b:include name='html-content'/>
@@ -3815,7 +3811,7 @@ body#layout #hidden{display:none!important}
   </b:section>
 </b:if>
 <!-- Site Scripts (vanilla JS, no jQuery) -->
-<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@f1572511fd9816e526e277aa74e485ec40defacb/scripts/vanilla.js' type='text/javascript'/>
+<b:tag name='script' defer='defer' src='https://cdn.jsdelivr.net/gh/ilmualam/xml@bdeaf9d13882f3525a7f6e73d1cb7ac126270c5b/scripts/vanilla.js' type='text/javascript'/>
 </b:if>
 <!-- Blogger Scripts -->
 <b:if cond='data:isFeed'>
