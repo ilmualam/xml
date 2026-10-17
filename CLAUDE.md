@@ -3,19 +3,25 @@
 ## Overview
 - **Site**: [ilmualam.com](https://www.ilmualam.com) — Islamic educational content (Malay/ms-MY)
 - **Platform**: Blogger/Blogspot with a fully custom XML template
-- **Template**: `asset/xml/ilmualam.xml` (~3,760 lines) — the single source of truth
-- **Template name**: The Ilmu Alam Green v1.0.0, modified by [thebukitbesi.com](https://thebukitbesi.com/)
+- **Template**: `asset/xml/ilmualam.xml` (~4,000 lines) — the single source of truth
+- **Template name**: The Ilmu Alam Green v1.0.0 (based on Pro Blogger Templates Core 2.2.0)
+- **Site JS**: `scripts/vanilla.js` (no jQuery), served via jsDelivr pinned to a commit SHA
 
 ---
 
 ## File Structure
 ```
 xml/
-├── CLAUDE.md                  ← this file
-├── README.md
-├── LICENSE                    ← MIT
-└── asset/xml/
-    └── ilmualam.xml           ← complete Blogger template
+├── CLAUDE.md                     ← this file
+├── asset/xml/ilmualam.xml        ← complete Blogger template (upload this)
+├── asset/audit-input/            ← Search Console exports (evidence)
+├── scripts/vanilla.js            ← site JS, loaded by the template from jsDelivr
+├── scripts/xml-lint.js           ← `npm run validate`
+├── scripts/blogger-*.js          ← Blogger API tools (manual GitHub Actions)
+├── scripts/live-jsonld-audit.js  ← live JSON-LD audit (manual GitHub Action)
+├── content-refresh/              ← post refresh manifests for blogger-content-refresh
+├── docs/                         ← Blogger API setup notes
+└── tests/                        ← `npm test`
 ```
 
 ---
@@ -23,15 +29,7 @@ xml/
 ## Template Architecture
 
 ### Key Sections (in order)
-| Lines | Section |
-|-------|---------|
-| 1–57 | `<head>` — preconnects, fonts, Ad Supply script, rr-container inline script |
-| 58–1190 | `<b:skin>` — all CSS (inside `<![CDATA[...]]>`) |
-| 1191–2412 | `<b:defaultmarkups>` — default widget markup overrides |
-| 2413–2425 | Miscellaneous (AdSense, Analytics, global Organization+WebSite JSON-LD) |
-| 2426–3696 | `<body>` — layout sections, all widget instances |
-| 3697–3755 | Site scripts (jQuery, search JS, Service Worker, Quran API, lazy video) |
-| 3756–3761 | Footer close tags |
+`<head>` (preconnects, fonts, early dark-mode script) → `<b:skin>` (all CSS, CDATA) → `<b:defaultmarkups>` → global JSON-LD (end of head) → `<body>` layout sections and widgets → small inline scripts (lazy video, Quran API, reading time, sitemap engine) + deferred `vanilla.js`.
 
 ### Blogger Namespace
 - `b:if / b:elseif / b:else` — conditionals
@@ -77,14 +75,7 @@ Only ONE set per page — the global schema at the end of `<head>` (outside `b:d
 - Closes on: `.close` click, overlay click, or **Esc**
 
 ### Event Listener (important)
-The input event listener is on **the input element `t`**, not on `$w` (window):
-```js
-t.on("input", function(e) {  // ← correct: t is e.find("input")
-  clearTimeout(o);
-  o = setTimeout(() => getSearch(t, s), 500);
-});
-```
-> **Bug history**: Was incorrectly `$w.on("input", ...)` — window doesn't receive input events from child inputs. Fixed to `t.on("input", ...)`.
+The input listener is on the search **input element** (`input.addEventListener('input', …)`), never on `window`.
 
 ### Search API
 - Recent posts: `/search/?by-date=true&max-results=N&view=json`
@@ -117,7 +108,7 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 ## JavaScript Conventions
 
 ### Global State
-- `$w = $(window)`, `$d = $(document)`, `$h = $("html")`, `$b = $("body")`
+- Helpers in vanilla.js: `qs`, `qsa`, `scrollY()`, `offsetTop()`, `getAttr(shortcode, key)`
 - `pbt` object — template config (isDark, stickyMenu, postAuthor, etc.) from `pbt-var` includable
 - `localStorage.dark_mode` — user dark mode preference (`"true"` / `"false"`)
 - `localStorage.search_term` — last search query (debounce dedup)
@@ -130,7 +121,7 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 | `getSearch(input, container)` | Debounced search trigger |
 | `openSearch()` / `closeSearch()` | Search modal open/close |
 | `darkModeLogo(val)` | Swap logo src for dark mode |
-| `pbtLazy()` | jQuery plugin — lazy-load thumbnails/avatars |
+| `pbtLazy(el)` | Lazy-load thumbnail/avatar backgrounds (skips elements with `.pbt-lazy`) |
 | `getPostContent(opts)` | Generate post card HTML by type |
 | `megaTabs(el, tabs)` | Mega menu tab builder |
 | `disqusComments(shortname)` | Inject Disqus embed |
@@ -157,7 +148,6 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 ## External Integrations
 | Service | Purpose |
 |---------|---------|
-| jQuery 3.6.0 (cdnjs) | Core JS framework |
 | Bootstrap Icons 1.13.1 (cdnjs) | Icon font |
 | Google Fonts (Inter, Noto Naskh Arabic, Amiri) | Typography |
 | Google AdSense | Monetization |
@@ -165,7 +155,7 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 | Follow.it | Email newsletter |
 | Al Quran Cloud API | Quran content (`window.Quran` global) |
 | Tanzil (jsDelivr) | Fallback Quran data |
-| Service Worker (ilmualam.pages.dev/sw.js) | PWA/offline support |
+| PWA manifest (ilmualam.github.io/pwa) | Web app manifest |
 
 ---
 
@@ -174,6 +164,19 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 - **Search not working** — Fixed: `$w.on("input", ...)` → `t.on("input", ...)` so input events on the search box are captured correctly.
 - **Duplicate theme-color** — Removed hard-coded `<meta name='theme-color' content='#249749'>` from top of `<head>`; dynamic one inside `pbt-head` is the correct single source.
 - **og:image wrong dimensions** — Changed `resizeImage 1200` to `resizeImage(src, 1200, "1200:630")` for both OG and Twitter image tags to ensure proper 1200×630 crop matches declared width/height metadata.
+
+- **Cropped thumbnails** — `--base` was 16/10, cropping the site's 16:9 thumbnails. Now 16/9; cards (home/label/search, Trending, Related, Featured md) use the sitemap-style layout: image → green label pill → title → 📅 date.
+- **CLS: Trending/Related** — JS-loaded widgets grew from a 12rem loader to full cards. A hidden `:before` placeholder now reserves exactly one card row (one row on desktop, horizontal scroll-snap on tablet/mobile). Card header height is fixed via `--card-head`.
+- **CLS: post images** — `aspect-ratio:auto` + `content-visibility:auto` on `.post-body img` cancelled the width/height-attribute ratio and collapsed off-screen images. Removed.
+- **CLS: JS-moved ad slots** — `.before-ads/.after-ads/.post-footer-ads/.inline-ad` now reserve their height (100vw on portrait mobile, matching the rr-container script).
+- **CLS: font swap / header icons** — metric-matched `Inter Fallback` faces; header icon buttons have fixed widths.
+- **LCP** — first label/search list card and the first Featured card render a real `<img fetchpriority=high>` (srcset via `sourceSet`) instead of a JS background; logo no longer `fetchpriority=high`.
+- **Dead/broken scripts removed** — jQuery related-posts block (`jQuery is not defined` on every page) and a post-image script that sat entirely on a `//` comment line.
+- **Schema** — global `WebPage` is now per-page (`<canonical>#webpage`, CollectionPage + ItemList on label pages, SearchResultsPage on search); `Article.mainEntityOfPage` points at it; the never-rendered label block in `postMeta` and the misleading `funding: Google AdSense` claim were removed.
+- **Sync XHR / short labels** — related, sidebar and trending widgets top up from recent posts asynchronously when a label has too few posts (no more blocking `XMLHttpRequest`).
+- **Invalid Article keywords** — `data:label.isLast` is unsupported in Blogger; keyword loops now use `index='i'`.
+- **Console errors** — removed cross-origin Service Worker registration (SW must be same-origin) and `crossorigin='use-credentials'` on the manifest.
+- **vanilla.js** is loaded from jsDelivr pinned to a commit SHA. After changing `scripts/vanilla.js`, commit it first, then update the SHA in the XML `<b:tag name='script' ... vanilla.js>` line.
 
 ---
 
@@ -185,7 +188,7 @@ t.on("input", function(e) {  // ← correct: t is e.find("input")
 4. **JSON-LD @ids must be unique per page** — use `#article`, `#breadcrumb`, `#primaryimage` etc. scoped to `data:post.url.canonical`.
 5. **All JSON inside `<script type='application/ld+json'>` must use `&quot;` for quotes** in Blogger XML context.
 6. **CSS goes inside `<b:skin>` CDATA block** — do not add `<style>` tags elsewhere.
-7. **JS goes in the main `<b:tag name='script'>` CDATA block** at end of body — preserve the `//` `<![CDATA[` / `//]]>` wrappers.
+7. **Site JS goes in `scripts/vanilla.js`** — commit it, then update the pinned SHA in the template. Small inline scripts keep the `//<![CDATA[` / `//]]>` wrappers on their own lines.
 8. **Robots**: Search/archive/error pages must remain `noindex` — do not change the robots `b:if` logic.
 9. **Images**: Always use `resizeImage(src, width, "ratio")` for OG images to get proper crop.
 10. **Dark mode** state is in `localStorage.dark_mode` and CSS class `is-dark` on `<html>`.

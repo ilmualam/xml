@@ -400,10 +400,60 @@
     return '<span class="error-msg">' + (type !== 'search' ? '<b>Error:</b>&nbsp;' : '') + pbt.noResults + '</span>';
   }
 
+  // Summary feed: Blogger truncates /search?view=json pages when posts are long
+  // (5 requested -> 1 returned); the summary feed always returns the full count.
   function getFeedUrl(num, label) {
-    return label === 'recent'
-      ? '/search/?by-date=true&max-results=' + num + '&view=json'
-      : '/search/label/' + encodeURIComponent(label) + '?by-date=true&max-results=' + num + '&view=json';
+    return '/feeds/posts/summary' + (label === 'recent' ? '' : '/-/' + encodeURIComponent(label)) +
+      '?alt=json&max-results=' + num;
+  }
+
+  function getSearchFeedUrl(query, num) {
+    return '/feeds/posts/summary?alt=json&max-results=' + num + '&q=' + encodeURIComponent(query);
+  }
+
+  function escHtml(str) {
+    return String(str || '').replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function feedEntryToPost(e) {
+    var link = '';
+    (e.link || []).forEach(function (l) { if (l.rel === 'alternate') link = l.href; });
+    var thumb = e.media$thumbnail ? e.media$thumbnail.url : '';
+    var isYouTube = thumb.indexOf('img.youtube.com') > -1 || thumb.indexOf('ytimg.com') > -1;
+    if (thumb && !isYouTube) thumb = thumb.replace(/\/s\d+(-c)?\//, '/w72-h72-p-k-no-nu/').replace(/=s\d+(-c)?$/, '=w72-h72-p-k-no-nu');
+    var d = new Date(e.published.$t);
+    var author = (e.author && e.author[0]) || {};
+    return {
+      id: (e.id.$t.match(/post-(\d+)/) || [])[1],
+      title: escHtml(e.title.$t),
+      link: link,
+      category: e.category && e.category[0] ? escHtml(e.category[0].term) : '',
+      summary: escHtml(e.summary ? e.summary.$t : ''),
+      thumbnail: { src: thumb || 'https://resources.blogblog.com/img/blank.gif', source: isYouTube ? 'youtube' : 'blogger' },
+      author: {
+        name: escHtml(author.name ? author.name.$t : ''),
+        avatar: author.gd$image && author.gd$image.src ? author.gd$image.src : ''
+      },
+      published: {
+        date: (d.getMonth() + 1) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear(),
+        datetime: e.published.$t
+      }
+    };
+  }
+
+  // Accepts either the summary feed (JSON) or a Blogger page with a #data block
+  function parsePostsResponse(text, type) {
+    var t = text.replace(/^\s+/, '');
+    if (t.charAt(0) === '{') {
+      try {
+        var feed = JSON.parse(t).feed || {};
+        return (feed.entry || []).map(feedEntryToPost);
+      } catch (e) { return null; }
+    }
+    var parsed = parseFeedData(text);
+    return parsed ? (type !== 'card' ? parsed.posts : parsed.postData) : null;
   }
 
   function getPostTitle(ctx, opts) {
@@ -470,10 +520,10 @@
         html = img({ size: '2' }) + '<div class="entry-header">' + headline + title() + meta() + '</div>';
         break;
       case 'trending':
-        html = '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
+        html = '<div class="post">' + img({ size: '2' }) + '<div class="entry-header">' + tag() + title() + meta({ author: 'false' }) + '</div></div>';
         break;
       case 'related':
-        html = index !== num - 1 ? '<div class="post">' + img({ size: '2', category: 'true' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>' : '';
+        html = index !== num - 1 ? '<div class="post">' + img({ size: '2' }) + '<div class="entry-header">' + tag() + title() + meta({ author: 'false' }) + '</div></div>' : '';
         break;
       case 'side':
         html = '<div class="post">' + img({ size: '3' }) + '<div class="entry-header">' + title() + meta({ author: 'false' }) + '</div></div>';
@@ -482,16 +532,42 @@
     return html;
   }
 
-  // Synchronous fallback fetch (mirrors the old async:false jQuery call) -
-  // callers rely on the fallback post list being available immediately.
-  function getRecentPostsData(num) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', getFeedUrl(num, 'recent'), false);
-    xhr.send(null);
-    var doc = new DOMParser().parseFromString(xhr.responseText, 'text/html');
-    var dataEl = doc.getElementById('data');
-    var parsed = JSON.parse(dataEl ? dataEl.textContent : '{}');
-    return parsed.posts;
+  function parseFeedData(html) {
+    var dataEl = new DOMParser().parseFromString(html, 'text/html').getElementById('data');
+    if (!dataEl) return null;
+    try { return JSON.parse(dataEl.textContent); } catch (e) { return null; }
+  }
+
+  // Labels with fewer posts than requested are topped up with recent posts,
+  // so widgets always fill their grid (and their reserved space).
+  var BACKFILL_TYPES = { side: 1, trending: 1, related: 1 };
+  function backfillPosts(posts, num, label, type) {
+    if (!posts || !BACKFILL_TYPES[type] || label === 'recent' || posts.length >= num) {
+      return Promise.resolve(posts);
+    }
+    return fetch(getFeedUrl(num + 1, 'recent'), { credentials: 'same-origin' })
+      .then(function (res) { return res.text(); })
+      .then(function (text) {
+        var extra = parsePostsResponse(text, 'recent') || [];
+        var seen = {};
+        posts.forEach(function (p) { seen[p.id] = 1; });
+        extra.forEach(function (p) {
+          if (!seen[p.id] && posts.length < num) { seen[p.id] = 1; posts.push(p); }
+        });
+        return posts;
+      })
+      .catch(function () { return posts; });
+  }
+
+  // The first card of each list page is an <img data-src> that an inline script
+  // activates; inline scripts don't run when load-more inserts HTML, so do it here.
+  function activateThumbImgs(root) {
+    qsa('img.thumbnail[data-src]', root || document).forEach(function (img) {
+      if (img.getAttribute('src')) return;
+      var rw = function (u) { return (u || '').replace(/-p-k-no-nu\//g, '-p-k-no-nu-rw/'); };
+      if (img.dataset.srcset) img.srcset = rw(img.dataset.srcset);
+      img.src = rw(img.dataset.src);
+    });
   }
 
   function getPosts(opts) {
@@ -524,6 +600,9 @@
     fetch(url, { credentials: 'same-origin' })
       .then(function (res) { return res.text(); })
       .then(function (html) {
+        return backfillPosts(parsePostsResponse(html, type), num, label, type);
+      })
+      .then(function (posts) {
         var out = '';
         var count = 0;
         var isError = false;
@@ -543,24 +622,16 @@
             out = '<div class="' + type + '-items">';
         }
 
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var dataEl = doc.getElementById('data');
-        if (dataEl) {
-          var parsed = JSON.parse(dataEl.textContent);
-          var posts = type !== 'card' ? parsed.posts : parsed.postData;
-          if (posts) {
-            if (type === 'related') {
-              if (posts.length === 1 && label !== 'recent') posts = getRecentPostsData(num);
-              var total = posts.length;
-              for (var m = 0; m < total; m++) {
-                if (posts.length !== 1 && parsed.posts[m].id === id) { posts.splice(m, 1); break; }
-              }
+        if (posts && posts.length) {
+          if (type === 'related') {
+            for (var m = 0; m < posts.length; m++) {
+              if (posts.length !== 1 && posts[m].id === id) { posts.splice(m, 1); break; }
             }
-            for (var v = 0; v < posts.length; v++) {
-              out += getPostContent({ type: type, index: v, post: posts[v], num: num, headline: headline, target: pageTarget });
-            }
-            count = posts.length;
-          } else isError = true;
+          }
+          for (var v = 0; v < posts.length; v++) {
+            out += getPostContent({ type: type, index: v, post: posts[v], num: num, headline: headline, target: pageTarget });
+          }
+          count = posts.length;
         } else isError = true;
 
         out += '</div>';
@@ -657,7 +728,7 @@
     var value = inputEl.value.trim();
     if (value !== '' && value !== localStorage.search_term) {
       localStorage.search_term = value;
-      getPosts({ t: resultsEl, type: 'search', num: 15, label: value, link: '/search/?q=' + encodeURIComponent(value) + '&max-results=16&view=json' });
+      getPosts({ t: resultsEl, type: 'search', num: 15, label: value, link: getSearchFeedUrl(value, 16) });
     }
   }
 
@@ -1440,6 +1511,13 @@
         beautiAvatar('.avatar-image-container img');
     }
 
+    // b:js='false' means Blogger's BLOG_CMT_createIframe never loads, so the
+    // comment iframe has no src; point it at the form URL when it is opened.
+    var loadCommentForm = function () {
+      var frame = qs('#comment-editor');
+      var src = qs('#comment-editor-src');
+      if (frame && src && !frame.getAttribute('src')) frame.setAttribute('src', src.href);
+    };
     var replyLinks = qsa('.comments .comment-reply', el);
     var topContinue = el.querySelector('.comments #top-continue');
     var showCf = el.querySelector('.show-cf');
@@ -1448,6 +1526,7 @@
       link.addEventListener('click', function (ev) {
         ev.preventDefault();
         el.classList.add('cf-on');
+        loadCommentForm();
         if (topContinue) topContinue.style.display = '';
         if (showCf) showCf.remove();
       });
@@ -1461,6 +1540,7 @@
     if (showCf) {
       showCf.addEventListener('click', function () {
         el.classList.add('cf-on');
+        loadCommentForm();
         showCf.remove();
       });
     }
@@ -1470,6 +1550,7 @@
   // Init - runs once the DOM is fully ready
   // ---------------------------------------------------------------------
   ready(function () {
+    activateThumbImgs();
     qsa('.entry-thumbnail .thumbnail, .entry-avatar .avatar').forEach(function (el) {
       if (!el.classList.contains('pbt-lazy')) pbtLazy(el);
     });
@@ -1609,7 +1690,10 @@
                 post.classList.add('fadeInUp');
                 post.setAttribute('style', 'animation-delay:' + (0.1 * idx).toFixed(1) + 's;');
               });
-              if (blogPosts) blogPosts.insertAdjacentHTML('beforeend', newPosts.innerHTML);
+              if (blogPosts) {
+                blogPosts.insertAdjacentHTML('beforeend', newPosts.innerHTML);
+                activateThumbImgs(blogPosts);
+              }
             }
             var nextLoadMore = doc.querySelector('#load-more');
             url = nextLoadMore ? nextLoadMore.dataset.url : undefined;
