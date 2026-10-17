@@ -567,9 +567,10 @@ svg{display:inline-block;width:1em;height:1em;font-size:1em;line-height:1;overfl
 .post-body{position:relative;font-family:var(--text-font);font-size:1rem;color:var(--text-color);line-height:1.625em}
 .post-body > p:not(:where(:last-child)){margin-bottom:1.5rem}
 .post-body :where(h1,h2,h3,h4){font-size:1.125rem;margin-bottom:1rem}
-.post-body h1{font-size:2.25rem}
-.post-body h2{font-size:1.875rem}
-.post-body h3{font-size:1.5rem}
+.post-body :where(h1,h2,h3){line-height:1.25;letter-spacing:-0.01em}
+.post-body h1{font-size:clamp(1.625rem,1.3rem + 1.6vw,2.25rem)}
+.post-body h2{font-size:clamp(1.375rem,1.15rem + 1.1vw,1.75rem)}
+.post-body h3{font-size:clamp(1.1875rem,1.05rem + 0.7vw,1.375rem)}
 .post-body img{height:auto!important;border-radius:var(--rounded);max-width:100%}
 blockquote{position:relative;background:#f0fcf7;color:var(--header-color);font-size:0.875rem;line-height:1.525em;font-style:normal;padding:1.5rem;margin-bottom:1.5rem;border-radius:var(--rounded);border:1px dashed;border-color:#40916c;}
 blockquote:before{position:absolute;top:0.75rem;inset-inline-start:0.75rem;content:"\f6b0";font-size:3rem;color:var(--header-color);font-style:normal;line-height:1;opacity:.05}
@@ -1128,6 +1129,7 @@ ins.adsbygoogle-noablate[data-anchor-shown="true"]{z-index:990!important}
 
 /* --- CLS Prevention for Sulvo/Ad units --- */
 .demand-supply{display:block;min-height:100px;width:100%}
+body > .demand-supply{min-height:0}
 .rr-container .demand-supply{min-height:280px}
 ins.adsbygoogle[data-ad-format="auto"]{display:block;min-height:100px}
 ins.adsbygoogle[data-ad-slot]{display:block}
