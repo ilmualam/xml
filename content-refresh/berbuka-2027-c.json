@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-penang.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Penang 2026",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Pulau Pinang 2027",
+      "searchDescription": "Waktu berbuka puasa & imsak Pulau Pinang Ramadan 2027 (1448H) bagi zon PNG01 JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-penang.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-perlis.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Negeri Perlis 2026",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Perlis 2027",
+      "searchDescription": "Waktu berbuka puasa & imsak Perlis Ramadan 2027 (1448H) bagi zon PLS01 JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-perlis.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-sabah.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Sabah 2026 - 7 Zon",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Sabah 2027 (9 Zon)",
+      "searchDescription": "Waktu berbuka puasa & imsak Sabah Ramadan 2027 (1448H) bagi semua 9 zon JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-sabah.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-sarawak.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Sarawak 2026 - 6 Zon",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Sarawak 2027 (9 Zon)",
+      "searchDescription": "Waktu berbuka puasa & imsak Sarawak Ramadan 2027 (1448H) bagi semua 9 zon JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-sarawak.html"
+    }
+  ]
+}
