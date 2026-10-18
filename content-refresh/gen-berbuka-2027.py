@@ -59,7 +59,9 @@ def build(slug, st, name, s, AREA):
     zrows = "".join(f"<tr><td><strong>{z[0]}</strong><br><small>{e(AREA[z[0]])}</small></td><td>{hm(tt[z[0]][0][0][2][0])}</td><td><strong>{hm(tt[z[0]][0][0][2][5])}</strong></td><td>{hm(tt[z[0]][0][-1][2][0])}</td><td><strong>{hm(tt[z[0]][0][-1][2][5])}</strong></td></tr>" for z in zones)
 
     def month(z):
-        rows = "".join(f"<tr{' class=\"ilmx-lq\"' if k >= 21 and k % 2 else ''}><td>{k}{' ★' if k >= 21 and k % 2 else ''}</td><td>{P.dshort(d)}</td><td>{hm(t[0])}</td><td>{hm(t[1])}</td><td><strong>{hm(t[5])}</strong></td><td>{hm(t[6])}</td></tr>" for k, d, t in tt[z[0]][0])
+        # night 21, 23 ... 29 begins at Maghrib of the day before, so the star sits on day 20, 22 ... 28
+        lqn = lambda k: 20 <= k <= 28 and k % 2 == 0
+        rows = "".join(f"<tr{' class=\"ilmx-lq\"' if lqn(k) else ''}><td>{k}{f' ★ malam {k + 1}' if lqn(k) else ''}</td><td>{P.dshort(d)}</td><td>{hm(t[0])}</td><td>{hm(t[1])}</td><td><strong>{hm(t[5])}</strong></td><td>{hm(t[6])}</td></tr>" for k, d, t in tt[z[0]][0])
         return (f"<details class=\"ilmx-zone\"{' open' if z[0] == capz else ''}><summary>Zon {z[0]}: {e(AREA[z[0]])}</summary>"
                 f"<div class=\"ilmx-table-wrap\"><table><thead><tr><th>Ramadan</th><th>Tarikh</th><th>Imsak</th><th>Subuh</th><th>Berbuka</th><th>Isyak</th></tr></thead><tbody>{rows}</tbody></table></div></details>")
     first = sorted((tt[z[0]][0][0][2][5], z[0]) for z in zones)
@@ -112,7 +114,7 @@ def build(slug, st, name, s, AREA):
   <p class="ilmx-small">{src}</p>
 
   <h2>Jadual Imsak &amp; Berbuka Puasa {e(name)} {yr} (30 Hari)</h2>
-  <p>{"Tekan nama zon untuk membuka jadualnya. " if nz > 1 else ""}★ menandakan malam ganjil 10 malam terakhir (malam bermula pada Maghrib hari sebelumnya).</p>
+  <p>{"Tekan nama zon untuk membuka jadualnya. " if nz > 1 else ""}★ menandakan hari yang Maghribnya memulakan malam ganjil 10 malam terakhir (malam 21, 23, 25, 27 dan 29).</p>
   {"".join(month(z) for z in zones)}
 
   <h2>Tarikh Penting Ramadan {y}H</h2>
