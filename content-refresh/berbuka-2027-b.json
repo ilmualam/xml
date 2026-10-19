@@ -1,0 +1,39 @@
+{
+  "posts": [
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-kelantan.html",
+      "expectedCurrentTitle": "Jadual Imsak & Waktu Berbuka Puasa Kelantan 2026M-1447H",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Kelantan 2027 (2 Zon)",
+      "searchDescription": "Waktu berbuka puasa & imsak Kelantan Ramadan 2027 (1448H) bagi semua 2 zon JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-kelantan.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-terengganu.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Terengganu (2026M-1447H)",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Terengganu 2027 (4 Zon)",
+      "searchDescription": "Waktu berbuka puasa & imsak Terengganu Ramadan 2027 (1448H) bagi semua 4 zon JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-terengganu.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-pahang.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Negeri Pahang 2026",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Pahang 2027 (7 Zon)",
+      "searchDescription": "Waktu berbuka puasa & imsak Pahang Ramadan 2027 (1448H) bagi semua 7 zon JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-pahang.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-negeri-sembilan.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Negeri Sembilan 2026 (3 Zon)",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Negeri Sembilan 2027 (3 Zon)",
+      "searchDescription": "Waktu berbuka puasa & imsak Negeri Sembilan Ramadan 2027 (1448H) bagi semua 3 zon JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-negeri-sembilan.html"
+    },
+    {
+      "url": "https://www.ilmualam.com/2022/03/waktu-berbuka-puasa-melaka.html",
+      "expectedCurrentTitle": "Jadual Waktu Berbuka Puasa & Imsak Negeri Melaka 2026",
+      "newTitle": "Jadual Waktu Berbuka Puasa & Imsak Melaka 2027",
+      "searchDescription": "Waktu berbuka puasa & imsak Melaka Ramadan 2027 (1448H) bagi zon MLK01 JAKIM: jadual 30 hari, tarikh penting, niat dan doa berbuka.",
+      "contentFile": "berbuka-2027/waktu-berbuka-puasa-melaka.html"
+    }
+  ]
+}
