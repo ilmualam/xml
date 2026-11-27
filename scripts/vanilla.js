@@ -422,7 +422,7 @@
     (e.link || []).forEach(function (l) { if (l.rel === 'alternate') link = l.href; });
     var thumb = e.media$thumbnail ? e.media$thumbnail.url : '';
     var isYouTube = thumb.indexOf('img.youtube.com') > -1 || thumb.indexOf('ytimg.com') > -1;
-    if (thumb && !isYouTube) thumb = thumb.replace(/\/s\d+(-c)?\//, '/w72-h72-p-k-no-nu/').replace(/=s\d+(-c)?$/, '=w72-h72-p-k-no-nu');
+    if (thumb && !isYouTube) thumb = thumb.replace(/\/s\d+(-c)?\//, '/w72-h72-p-k-no-nu/').replace(/=[^=\/]*$/, '=w72-h72-p-k-no-nu');
     var d = new Date(e.published.$t);
     var author = (e.author && e.author[0]) || {};
     return {
